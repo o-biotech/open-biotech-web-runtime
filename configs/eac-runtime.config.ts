@@ -1,12 +1,8 @@
-import {
-  DefaultEaCConfig,
-  defineEaCConfig,
-  EaCRuntime,
-  FathymDemoPlugin,
-} from '@fathym/eac/runtime';
+import { DefaultEaCConfig, defineEaCConfig, EaCRuntime } from '@fathym/eac/runtime';
+import OpenBiotechWebPlugin from '../src/plugins/OpenBiotechWebPlugin.ts';
 
 export const config = defineEaCConfig({
-  Plugins: [new FathymDemoPlugin(), ...(DefaultEaCConfig.Plugins || [])],
+  Plugins: [...(DefaultEaCConfig.Plugins || []), new OpenBiotechWebPlugin()],
 });
 
 export function configure(_rt: EaCRuntime): Promise<void> {
