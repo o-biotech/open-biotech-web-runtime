@@ -7,7 +7,6 @@ import { CloudPhaseTypes } from '../state/CloudPhaseTypes.ts';
 import { DevicesPhaseTypes } from '../state/DevicesPhaseTypes.ts';
 import { DataPhaseTypes } from '../state/DataPhaseTypes.ts';
 import { loadJwtConfig } from '@fathym/eac/mod.ts';
-import { loadEaCSvc } from '@fathym/eac/api';
 
 export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<OpenBiotechWebState> {
   return async (req, ctx: EaCRuntimeContext<OpenBiotechWebState>) => {

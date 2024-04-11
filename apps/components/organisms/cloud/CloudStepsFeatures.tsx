@@ -29,6 +29,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
       currentForm = (
         <CloudConnectForms
           action='/api/o-biotech/eac/clouds'
+          data-eac-bypass-base
           subs={props.subs}
           class='px-4'
         />
@@ -39,6 +40,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
       currentForm = (
         <CloudCALZForm
           action='/api/o-biotech/eac/clouds/resource-groups'
+          data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
           locations={props.locations}
@@ -50,6 +52,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
       currentForm = (
         <CloudIoTForm
           action='/api/o-biotech/eac/clouds/iot-infrastructure'
+          data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
           hasGitHubAuth={props.hasGitHubAuth}

@@ -11,6 +11,7 @@ export default function DevicesDashboardForm(props: DevicesDashboardFormProps) {
     <form
       method='post'
       action='/api/o-biotech/eac/iot/dashboards'
+      data-eac-bypass-base
       {...props}
       class={classSet(
         ['-:w-full -:max-w-sm -:md:max-w-md -:mx-auto -:p-3 -:mt-8'],

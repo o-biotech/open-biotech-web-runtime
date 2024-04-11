@@ -15,7 +15,7 @@ export function CloudConnectForms(props: CloudConnectFormsProps) {
 
   return (
     <div class='flex flex-col justify-center'>
-      <EaCManageCloudForm action='/api/eac/clouds' {...props} />
+      <EaCManageCloudForm action='/api/o-biotech/eac/clouds' data-eac-bypass-base {...props} />
       {
         /* {isManaged
         ? <CloudConnectManagedForm {...props} />

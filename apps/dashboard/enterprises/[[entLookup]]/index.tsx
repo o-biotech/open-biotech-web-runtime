@@ -123,6 +123,7 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
 
       <EaCManageForm
         action='/api/o-biotech/eac'
+        data-eac-bypass-base
         entLookup={Data.manageEaC?.EnterpriseLookup}
         entName={Data.manageEaC?.Details?.Name || undefined}
         entDescription={Data.manageEaC?.Details?.Description || undefined}

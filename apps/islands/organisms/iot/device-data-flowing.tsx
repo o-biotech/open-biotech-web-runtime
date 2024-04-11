@@ -7,13 +7,13 @@ import { classSet } from '@o-biotech/atomic';
 
 export const IsIsland = true;
 
-export type DeviceDataFlowingProps = IconProps & {
+export type DeviceDataFlowingProps = {
   children: ComponentChildren;
 
   jwt: string;
 
   waitingText?: string;
-};
+} & IconProps;
 
 export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
   const renewIcon = (
@@ -52,8 +52,6 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
 
       const hasData = primaryResult?.length > 0;
 
-      console.log('has device data');
-      console.log(hasData);
       setHasDeviceData(hasData);
 
       return hasData;
@@ -74,7 +72,7 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
 
   // console.log(props.children);
 
-  return hasDeviceData ? props.children : renewIcon;
+  return <>{hasDeviceData ? props.children : renewIcon}</>;
   // <>
   //   <div class={!hasDeviceData ? 'hidden' : ''}>{props.children}</div>
 

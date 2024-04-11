@@ -49,7 +49,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
   if (!Data.HasEaC) {
     currentHero = <CreateEaCHero isFirst={Data.UserEaCs!.length > 0} />;
 
-    initialSteps = <EaCManageForm action='/api/o-biotech/eac' />;
+    initialSteps = <EaCManageForm action='/api/o-biotech/eac' data-eac-bypass-base />;
   } else {
     initialSteps = <BiotechStepsFeatures setupPhase={Data!.SetupPhase} />;
 

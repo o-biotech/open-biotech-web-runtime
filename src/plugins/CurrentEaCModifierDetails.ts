@@ -1,6 +1,6 @@
 import { EaCModifierDetails, isEaCModifierDetails } from '@fathym/eac';
 
-export type CurrentEaCModifierDetails = {} & EaCModifierDetails<'CurrentEaC'>;
+export type CurrentEaCModifierDetails = EaCModifierDetails<'CurrentEaC'>;
 
 export function isCurrentEaCModifierDetails(
   details: unknown,

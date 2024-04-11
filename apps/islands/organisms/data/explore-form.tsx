@@ -105,7 +105,8 @@ export default function DataExploreForm(props: DataExploreFormProps) {
   return (
     <form
       method='post'
-      action='/api/eac/data/explore'
+      action='/api/o-biotech/eac/data/explore'
+      data-eac-bypass-base
       {...props}
       class={classSet(['-:w-full -:mx-auto -:p-3 -:mt-8'], props)}
     >

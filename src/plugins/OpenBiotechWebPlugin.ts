@@ -13,7 +13,6 @@ import {
   EaCDenoKVCacheModifierDetails,
   EaCDenoKVDatabaseDetails,
   EaCESMDistributedFileSystem,
-  EaCGitHubAppProviderDetails,
   EaCJWTValidationModifierDetails,
   EaCKeepAliveModifierDetails,
   EaCLocalDistributedFileSystem,

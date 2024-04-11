@@ -14,7 +14,8 @@ export default function InviteTeamMemberForm(props: InviteTeamMemberFormProps) {
   return (
     <form
       method='post'
-      action='/api/eac/users'
+      action='/api/o-biotech/eac/users'
+      data-eac-bypass-base
       {...props}
       class={classSet(['-:w-full -:mx-auto -:p-3 -:mt-8'], props)}
     >

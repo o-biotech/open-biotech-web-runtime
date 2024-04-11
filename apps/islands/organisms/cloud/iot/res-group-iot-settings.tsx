@@ -78,6 +78,7 @@ export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettings
         <>
           <CloudIoTForm
             action={props.action}
+            data-eac-bypass-base
             class='px-4'
             cloudLookup={props.cloudLookup!}
             hasGitHubAuth={props.hasGitHubAuth}

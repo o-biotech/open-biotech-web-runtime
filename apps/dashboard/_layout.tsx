@@ -82,12 +82,11 @@ export default function MainLayout({
       </head>
 
       <body class='bg-slate-50 dark:bg-slate-900 text-black dark:text-white'>
-        {
-          /* <BasicLayout
-          class="min-h-[100vh]"
+        <BasicLayout
+          class='min-h-[100vh]'
           header={
             <BiotechHeader
-              class="h-[64px]"
+              class='h-[64px]'
               currentUrl={Data.CurrentURLPath}
               setupPhase={Data.Phase}
               hasApis={!!Data.CloudLookup && !!Data.ResourceGroupLookup}
@@ -98,7 +97,7 @@ export default function MainLayout({
           footer={<BiotechFooter />}
         >
           <SideBar
-            class="top-[64px] left-0"
+            class='top-[64px] left-0'
             menuItems={menuItems}
             phase={Data.Phase}
             eac={Data.EaC}
@@ -107,13 +106,10 @@ export default function MainLayout({
             devicesPhase={Data.DevicesPhase}
             userEaCs={Data.UserEaCs}
             // disableToggle={true}
-          > */
-        }
-        <Component />
-        {
-          /* </SideBar>
-        </BasicLayout> */
-        }
+          >
+            <Component />
+          </SideBar>
+        </BasicLayout>
       </body>
     </html>
   );

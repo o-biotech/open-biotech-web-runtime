@@ -129,40 +129,15 @@ export const handler: EaCRuntimeHandlerResult<
 export default function Data({ Data }: PageProps<DataPageData>) {
   return (
     <div>
-      {
-        /* <Hero
-        title="Data Flows, Dashboards and APIs"
-        callToAction="Get device data flowing, explore through default dashboards and share with downstream analytics, alerts or ML services."
-        class="[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center"
+      <Hero
+        title='Data Flows, Dashboards and APIs'
+        callToAction='Get device data flowing, explore through default dashboards and share with downstream analytics, alerts or ML services.'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
-      /> */
-      }
+      />
 
-      <DeviceDataFlowing
-        jwt={Data.jwt}
-        waitingText='Waiting for device data (this can take several minutes after posting your data)...'
-        class='w-20 h-20'
-      >
-        <ActionGroup class='mt-8 flex-col'>
-          <>
-            <Action
-              type='submit'
-              class={classSet(
-                [
-                  'w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg',
-                ],
-                callToActionStyles.props,
-              )}
-            >
-              Move to Explore Data
-            </Action>
-          </>
-        </ActionGroup>
-      </DeviceDataFlowing>
-
-      {
-        /* <DataStepsFeatures
+      <DataStepsFeatures
         dashboardTypes={Data!.dashboardTypes}
         dataPhase={Data!.dataPhase}
         deviceKeys={Data!.deviceKeys}
@@ -171,8 +146,7 @@ export default function Data({ Data }: PageProps<DataPageData>) {
         kustoCluster={Data!.kustoCluster}
         kustoLocation={Data!.kustoLocation}
         resGroupLookup={Data!.resGroupLookup}
-      /> */
-      }
+      />
     </div>
   );
 }

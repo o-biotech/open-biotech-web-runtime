@@ -11,7 +11,8 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
   return (
     <form
       method='post'
-      action='/api/eac/data/develop'
+      action='/api/o-biotech/eac/data/develop'
+      data-eac-bypass-base
       {...props}
       class={classSet(
         ['-:w-full -:max-w-sm -:md:max-w-md -:mx-auto -:p-3 -:mt-8'],

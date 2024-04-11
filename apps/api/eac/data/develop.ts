@@ -12,6 +12,6 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
 
     await ctx.State.OBiotechKV.set(['EaC', entLookup, 'Current', 'Developed'], flowing);
 
-    return redirectRequest('/', false, false);
+    return redirectRequest('/dashboard', false, false);
   },
 };

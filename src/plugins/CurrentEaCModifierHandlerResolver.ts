@@ -1,8 +1,5 @@
 import { EaCRuntimeHandler, ModifierHandlerResolver } from '@fathym/eac/runtime';
-import {
-  CurrentEaCModifierDetails,
-  isCurrentEaCModifierDetails,
-} from './CurrentEaCModifierDetails.ts';
+import { isCurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
 import { establishCurrentEaCMiddleware } from '../middleware/establishCurrentEaCMiddleware.ts';
 
 export const CurrentEaCModifierHandlerResolver: ModifierHandlerResolver = {
@@ -13,7 +10,7 @@ export const CurrentEaCModifierHandlerResolver: ModifierHandlerResolver = {
       );
     }
 
-    const details = modifier.Details as CurrentEaCModifierDetails;
+    // const details = modifier.Details as CurrentEaCModifierDetails;
 
     return Promise.resolve(
       establishCurrentEaCMiddleware() as EaCRuntimeHandler | undefined,

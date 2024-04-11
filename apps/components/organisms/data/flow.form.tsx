@@ -2,7 +2,7 @@ import { JSX } from 'preact';
 import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import IoTHubKeySimulatorDisplay from '../../../islands/organisms/iot/hub-key-simulator.tsx';
-import DeviceDataFlowing from '../../../islands/organisms/iot/device-data-flowing.tsx';
+import DeviceDataFlowingContinue from '../../../islands/organisms/iot/device-data-flowing-continue.tsx';
 
 export type DataFlowFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   deviceKeys: Record<string, string>;
@@ -17,8 +17,9 @@ export type DataFlowFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
 export function DataFlowForm(props: DataFlowFormProps) {
   return (
     <form
-      method='post'
-      action='/api/eac/data/flow'
+      method='POST'
+      action='/api/o-biotech/eac/data/flow'
+      data-eac-bypass-base
       {...props}
       class={classSet(
         ['-:w-full -:max-w-sm -:md:max-w-md -:mx-auto -:p-3 -:mt-8'],
@@ -52,27 +53,7 @@ export function DataFlowForm(props: DataFlowFormProps) {
         />
       </div>
 
-      <DeviceDataFlowing
-        jwt={props.jwt}
-        waitingText='Waiting for device data (this can take several minutes after posting your data)...'
-        class='w-20 h-20'
-      >
-        <ActionGroup class='mt-8 flex-col'>
-          <>
-            <Action
-              type='submit'
-              class={classSet(
-                [
-                  'w-full md:w-auto text-white font-bold m-1 py-2 px-4 rounded focus:outline-none shadow-lg',
-                ],
-                callToActionStyles.props,
-              )}
-            >
-              Move to Explore Data
-            </Action>
-          </>
-        </ActionGroup>
-      </DeviceDataFlowing>
+      <DeviceDataFlowingContinue jwt={props.jwt} />
     </form>
   );
 }

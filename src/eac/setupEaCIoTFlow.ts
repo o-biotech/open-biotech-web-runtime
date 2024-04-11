@@ -78,7 +78,7 @@ export function setupEaCIoTFlow(
           CloudLookup: cloudLookup,
           Location: resGroupLocation,
           Name: resGroupLookup,
-          PrincipalID: '', // TODO: Pass in user email (email used to login to OpenBiotech must match one used for Azure)
+          PrincipalID: '', // TODO(mcgear): Pass in user email (email used to login to OpenBiotech must match one used for Azure)
           ResourceLookup: `${resLookup}-warm`,
           ServicePrincipalID: servicePrincipalId,
           ShortName: shortName,
@@ -138,7 +138,7 @@ export function setupEaCIoTFlow(
                     CloudLookup: cloudLookup,
                     Location: resGroupLocation,
                     Name: resGroupLookup,
-                    PrincipalID: '', // TODO: Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
+                    PrincipalID: '', // TODO(mcgear): Pass in actual principal ID (maybe retrievable from MSAL account record? I think can just be the email?)
                     ResourceLookup: resLookup,
                     ServicePrincipalID: servicePrincipalId,
                     ShortName: shortName,
