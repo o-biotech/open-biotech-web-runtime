@@ -17,8 +17,8 @@
   },
   "imports": {
     "@case": "https://deno.land/x/case@2.2.0/mod.ts",
-    "@fathym/atomic-icons": "../../fathym-deno/atomic-icons/mod.ts",
-    // "@fathym/atomic-icons": "https://deno.land/x/fathym_atomic_icons@v0.0.34/mod.ts",
+    // "@fathym/atomic-icons": "../../fathym-deno/atomic-icons/mod.ts",
+    "@fathym/atomic-icons": "https://deno.land/x/fathym_atomic_icons@v0.0.34/mod.ts",
     "@fathym/atomic-icons/browser": "https://deno.land/x/fathym_atomic_icons@v0.0.34/browser.ts",
     "@fathym/atomic-icons/plugin": "../../fathym-deno/atomic-icons/plugin.ts",
     // "@fathym/atomic-icons/plugin": "https://deno.land/x/fathym_atomic_icons@v0.0.34/plugin.ts",
