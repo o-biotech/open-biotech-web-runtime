@@ -11,7 +11,6 @@
     "deploy": "deno task build && deno task test && npx ftm git",
     "deploy:docker": "docker run -dp 127.0.0.1:3000:3000 eac-runtime",
     "dev": "deno run -A --watch=apps/,configs/,data/,routes/,src/,static/ dev.ts",
-    "icons": "deno run -A ./scripts/icons.atomic.ts",
     "start": "deno run -A main.ts",
     "test": "deno test -A tests/tests.ts --coverage=cov"
   },
