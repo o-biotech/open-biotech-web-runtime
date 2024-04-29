@@ -59,10 +59,13 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 Port: config.Server.port || 8000,
               },
               eac: {
-                Hostname: 'eac.fathym.com',
+                Hostname: 'openbiotech.co',
               },
-              eac2: {
-                Hostname: 'eac2.fathym.com',
+              runtime: {
+                Hostname: 'runtime.openbiotech.co',
+              },
+              azure: {
+                Hostname: 'open-biotech-web-runtime.azurewebsites.net',
               },
             },
             ModifierResolvers: {
