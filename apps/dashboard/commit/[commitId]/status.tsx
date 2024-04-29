@@ -148,7 +148,11 @@ export default function CommitStatus({
         {Data!.complete && (
           <p class='text-lg my-2'>
             <span class='font-bold'>Complete:</span> Redirecting in 30 seconds,{' '}
-            <a href={Data!.redirect} class='text-blue-500 underline'>
+            <a
+              href={Data!.redirect}
+              class='text-blue-500 underline'
+              data-eac-bypass-base
+            >
               click here
             </a>{' '}
             to redirect now.

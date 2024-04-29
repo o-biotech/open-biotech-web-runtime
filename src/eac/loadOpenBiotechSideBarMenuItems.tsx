@@ -21,7 +21,7 @@ export function loadOoenBiotechSideBarMenuItems(
   phase: SetupPhaseTypes,
   eac?: OpenBiotechEaC,
 ): SideBarMenuItem[] {
-  eac = eac || {};
+  eac = { ...(eac || {}) };
 
   delete eac.EnterpriseLookup;
   delete eac.ParentEnterpriseLookup;

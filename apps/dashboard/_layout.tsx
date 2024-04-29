@@ -103,7 +103,7 @@ export default function MainLayout({
           header={
             <BiotechHeader
               class='h-[64px]'
-              currentUrl={Data.CurrentURLPath}
+              currentUrl={new URL(Data.CurrentURLPath)}
               setupPhase={Data.Phase}
               hasApis={!!Data.CloudLookup && !!Data.ResourceGroupLookup}
               hasEaC={!!Data.EaC}
