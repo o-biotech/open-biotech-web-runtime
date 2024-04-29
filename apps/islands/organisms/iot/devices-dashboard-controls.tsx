@@ -3,7 +3,6 @@ import { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { intlFormat } from 'npm:date-fns';
-import { ChevronDownIcon, IconProps, RenewIcon } from '$o-biotech/atomic-icons';
 import {
   Action,
   classSet,
@@ -17,6 +16,9 @@ import {
 import { EaCDeviceAsCode } from '@fathym/eac';
 import HotConnect from './hot-connect.tsx';
 import { ExplorerRequest } from '@fathym/eac/api';
+import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
+import { ChevronDownIcon } from '../../../../build/iconset/icons/ChevronDownIcon.tsx';
+import { IconProps } from '@fathym/atomic-icons/browser';
 
 export const IsIsland = true;
 

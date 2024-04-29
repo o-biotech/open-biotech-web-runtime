@@ -2,9 +2,9 @@ import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { Action, ActionGroup, ActionStyleTypes, classSet, Input } from '@o-biotech/atomic';
-import { RenewIcon } from '$o-biotech/atomic-icons';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 import DashboardDisplay from './dashboard-display.tsx';
+import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 export const IsIsland = true;
 

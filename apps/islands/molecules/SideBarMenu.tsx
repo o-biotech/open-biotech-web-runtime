@@ -3,7 +3,6 @@ import { useEffect, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { classSet } from '@o-biotech/atomic';
 import { Icon } from '@fathym/atomic-icons/browser';
-import { MenuIcon } from '$o-biotech/atomic-icons';
 import { UserEaCRecord } from '@fathym/eac/api';
 import { loadOoenBiotechSideBarSettings } from '../../../src/eac/loadOpenBiotechSideBarMenuItems.tsx';
 import { CloudPhaseTypes } from '../../../src/state/CloudPhaseTypes.ts';
@@ -12,6 +11,7 @@ import { DevicesPhaseTypes } from '../../../src/state/DevicesPhaseTypes.ts';
 import { OpenBiotechEaC } from '../../../src/eac/OpenBiotechEaC.ts';
 import { SideBarMenuItem } from './SideBar.tsx';
 import { SetupPhaseTypes } from '../../../src/state/SetupPhaseTypes.ts';
+import { MenuIcon } from '../../../build/iconset/icons/MenuIcon.tsx';
 
 export const IsIsland = true;
 

@@ -2,7 +2,7 @@ import { ComponentChildren } from 'preact';
 import { Action, ActionGroup, classSet, FeaturesProps, StepsFeatures } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import { SetupPhaseTypes } from '../../../../src/state/SetupPhaseTypes.ts';
-import { ChevronRightIcon } from '$o-biotech/atomic-icons';
+import { ChevronRightIcon } from '../../../../build/iconset/icons/ChevronRightIcon.tsx';
 
 export interface BiotechStepsFeaturesProps extends FeaturesProps {
   setupPhase?: SetupPhaseTypes;

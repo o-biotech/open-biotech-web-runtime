@@ -1,7 +1,6 @@
-import { ComponentChildren, JSX } from 'preact';
-import { snakeCase } from '@case';
-import { CheckIcon, ChevronRightIcon } from '$o-biotech/atomic-icons';
+import { JSX } from 'preact';
 import { Action, ActionStyleTypes, classSet } from '@o-biotech/atomic';
+import { CheckIcon } from '../../../build/iconset/icons/CheckIcon.tsx';
 
 export type ChecklistItem = {
   ActionPath: string;

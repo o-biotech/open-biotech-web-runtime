@@ -1,10 +1,10 @@
 import { ComponentChildren, JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { IconProps, RenewIcon } from '$o-biotech/atomic-icons';
 import { Action, ActionGroup, classSet } from '@o-biotech/atomic';
 import DeviceDataFlowing from './device-data-flowing.tsx';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
+import { IconProps } from '@fathym/atomic-icons/browser';
 
 export const IsIsland = true;
 

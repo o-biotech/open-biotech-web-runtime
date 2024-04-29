@@ -1,9 +1,10 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { ChevronDownIcon, RenewIcon } from '$o-biotech/atomic-icons';
 import * as signalR from 'npm:@microsoft/signalr@8.0.0/dist/browser/signalr.js';
 import { Action, CopyInput } from '@o-biotech/atomic';
+import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
+import { ChevronDownIcon } from '../../../../build/iconset/icons/ChevronDownIcon.tsx';
 
 export const IsIsland = true;
 

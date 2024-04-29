@@ -1,7 +1,9 @@
 import { EaCIoTAsCode } from '@fathym/eac';
 import { Action, ActionGroup, ActionStyleTypes } from '@o-biotech/atomic';
 import { DropOutMenu } from '../../../molecules/DropOutMenu.tsx';
-import { AddIcon, EditIcon, SettingsIcon } from '$o-biotech/atomic-icons';
+import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
+import { SettingsIcon } from '../../../../../build/iconset/icons/SettingsIcon.tsx';
+import { AddIcon } from '../../../../../build/iconset/icons/AddIcon.tsx';
 
 export function EaCIoTsDisplay(iots: Record<string, EaCIoTAsCode>) {
   const iotLookups = Object.keys(iots);

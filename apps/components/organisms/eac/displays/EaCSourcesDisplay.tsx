@@ -1,7 +1,8 @@
 import { EaCSourceAsCode } from '@fathym/eac';
 import { Action, ActionStyleTypes } from '@o-biotech/atomic';
-import { AddIcon, EditIcon } from '$o-biotech/atomic-icons';
 import { DropOutMenu } from '../../../molecules/DropOutMenu.tsx';
+import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
+import { AddIcon } from '../../../../../build/iconset/icons/AddIcon.tsx';
 
 export function EaCSourcesDisplay(sources: Record<string, EaCSourceAsCode>) {
   const sourceLookups = Object.keys(sources);

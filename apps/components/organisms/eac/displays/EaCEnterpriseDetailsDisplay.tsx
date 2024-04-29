@@ -1,7 +1,8 @@
 import { EaCEnterpriseDetails } from '@fathym/eac';
 import { UserEaCRecord } from '@fathym/eac/api';
 import { Action, ActionStyleTypes } from '@o-biotech/atomic';
-import { AddIcon, ChevronRightIcon, EditIcon } from '$o-biotech/atomic-icons';
+import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
+import { AddIcon } from '../../../../../build/iconset/icons/AddIcon.tsx';
 
 export function EaCEnterpriseDetailsDisplay(
   details: EaCEnterpriseDetails & {

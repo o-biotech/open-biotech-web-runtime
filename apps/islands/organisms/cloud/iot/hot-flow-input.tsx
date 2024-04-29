@@ -1,7 +1,6 @@
 import { ComponentChildren, JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { Action, ActionStyleTypes, Input, InputProps, Select } from '@o-biotech/atomic';
-import { RenewIcon } from '$o-biotech/atomic-icons';
 import GitHubAccessAction from '../../../molecules/GitHubAccessAction.tsx';
 
 export const IsIsland = true;

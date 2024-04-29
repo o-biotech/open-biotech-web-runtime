@@ -2,8 +2,9 @@
 import { ComponentChildren, JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { IconProps, RenewIcon } from '$o-biotech/atomic-icons';
 import { classSet } from '@o-biotech/atomic';
+import { IconProps } from '@fathym/atomic-icons/browser';
+import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 export const IsIsland = true;
 

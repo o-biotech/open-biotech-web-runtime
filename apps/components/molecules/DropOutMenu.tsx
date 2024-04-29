@@ -1,8 +1,8 @@
 import { ComponentChildren, JSX } from 'preact';
 import { useState } from 'preact/hooks';
 import { snakeCase } from '@case';
-import { ChevronRightIcon } from '$o-biotech/atomic-icons';
 import { classSet } from '@o-biotech/atomic';
+import { ChevronRightIcon } from '../../../build/iconset/icons/ChevronRightIcon.tsx';
 
 export type DropOutMenuProps = {
   action?: ComponentChildren;

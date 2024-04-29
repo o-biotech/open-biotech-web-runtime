@@ -6,7 +6,8 @@ import {
   MenuButtonProps,
   MenuButtonStyleTypes,
 } from '@o-biotech/atomic';
-import { ChevronDownIcon, LogOutIcon, UserIcon } from '$o-biotech/atomic-icons';
+import { UserIcon } from '../../../build/iconset/icons/UserIcon.tsx';
+import { LogOutIcon } from '../../../build/iconset/icons/LogOutIcon.tsx';
 
 // May not be necessary to be an island
 export const IsIsland = true;

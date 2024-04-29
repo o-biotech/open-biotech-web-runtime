@@ -5,7 +5,9 @@ import { EaCStatus, EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api
 import { intlFormatDistance } from 'npm:date-fns';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
 import Redirect from '../../../islands/atoms/Redirect.tsx';
-import { CheckIcon, ErrorIcon, RenewIcon } from '$o-biotech/atomic-icons';
+import { CheckIcon } from '../../../../build/iconset/icons/CheckIcon.tsx';
+import { ErrorIcon } from '../../../../build/iconset/icons/ErrorIcon.tsx';
+import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 interface CommitStatusPageData {
   complete: boolean;
