@@ -50,6 +50,9 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Priority: 500,
             },
             ResolverConfigs: {
+              azure: {
+                Hostname: 'open-biotech-web-runtime.azurewebsites.net',
+              },
               dev: {
                 Hostname: 'localhost',
                 Port: config.Server.port || 8000,
@@ -63,9 +66,6 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               },
               runtime: {
                 Hostname: 'runtime.openbiotech.co',
-              },
-              azure: {
-                Hostname: 'open-biotech-web-runtime.azurewebsites.net',
               },
             },
             ModifierResolvers: {
