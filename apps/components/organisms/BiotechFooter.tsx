@@ -10,25 +10,32 @@ export function BiotechFooter(props: FooterProps) {
         {
           href: '/',
           class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
+          'data-eac-bypass-base': true,
           children: 'Home',
         },
         {
-          href: '/products',
+          href: '/',
           class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
-          children: 'Products',
+          children: 'Dashboard',
         },
+        // {
+        //   href: '/products',
+        //   class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
+        //   children: 'Products',
+        // },
+        // {
+        //   href: '/services',
+        //   class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
+        //   children: 'Services',
+        // },
+        // {
+        //   href: '/about-us',
+        //   class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
+        //   children: 'About Us',
+        // },
         {
-          href: '/services',
-          class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
-          children: 'Services',
-        },
-        {
-          href: '/about-us',
-          class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
-          children: 'About Us',
-        },
-        {
-          href: '/contact',
+          href: 'mailto:support@fathym.com',
+          // href: '/contact',
           class: 'px-2 py-1 text-gray-400 hover:text-white md:mx-2',
           children: 'Contact',
         },

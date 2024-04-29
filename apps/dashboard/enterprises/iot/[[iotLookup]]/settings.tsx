@@ -22,6 +22,12 @@ export type EaCIoTSettingsPageData = {
 
   hasGitHubAuth: boolean;
 
+  hasStorageCold?: boolean;
+
+  hasStorageHot?: boolean;
+
+  hasStorageWarm?: boolean;
+
   iotHubKeys: Record<string, string>;
 
   manageCloudLookup: string;
@@ -45,6 +51,9 @@ export const handler: EaCRuntimeHandlerResult<
       deviceKeys: {},
       entLookup: ctx.State.EaC!.EnterpriseLookup!,
       hasGitHubAuth: !!ctx.State.GitHub,
+      hasStorageCold: !!ctx.State.Cloud.Storage?.Cold,
+      hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
+      hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       iotHubKeys: {},
       manageCloudLookup: manageIoT.CloudLookup!,
       manageResourceGroupLookup: manageIoT.ResourceGroupLookup!,
@@ -209,6 +218,9 @@ export default function EaCIoTSettings({
           cloudLookup={Data.manageCloudLookup}
           deviceKeys={Data.deviceKeys}
           hasGitHubAuth={Data.hasGitHubAuth}
+          hasStorageCold={Data!.hasStorageCold}
+          hasStorageHot={Data!.hasStorageHot}
+          hasStorageWarm={Data!.hasStorageWarm}
           iotHubKeys={Data.iotHubKeys}
           organizations={Data.organizationOptions}
           resGroupLookup={Data.manageResourceGroupLookup}

@@ -8,6 +8,12 @@ export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
 
   hasGitHubAuth: boolean;
 
+  hasStorageCold?: boolean;
+
+  hasStorageHot?: boolean;
+
+  hasStorageWarm?: boolean;
+
   organizations?: string[];
 
   resGroupLookup: string;
@@ -67,6 +73,8 @@ export function CloudIoTForm(props: CloudIoTFormProps) {
               name='storageFlowCold'
               type='checkbox'
               value='cold'
+              checked={props.hasStorageCold}
+              disabled={props.hasStorageCold}
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
 
@@ -81,6 +89,8 @@ export function CloudIoTForm(props: CloudIoTFormProps) {
               value='warm'
               checked
               disabled
+              // checked={props.hasStorageWarm}
+              // disabled={props.hasStorageWarm}
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
 
@@ -103,6 +113,8 @@ export function CloudIoTForm(props: CloudIoTFormProps) {
               value='hot'
               hasGitHubAuth={props.hasGitHubAuth}
               organizations={props.organizations}
+              checked={props.hasStorageHot}
+              disabled={props.hasStorageHot}
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             >
               <label for='storageFlowHot' class='ms-2 text-sm font-medium pl-3'>

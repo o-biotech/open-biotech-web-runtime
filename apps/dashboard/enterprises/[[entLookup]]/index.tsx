@@ -1,4 +1,4 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { jsonClone, merge, redirectRequest } from '@fathym/common';
 import { EverythingAsCode } from '@fathym/eac';
 import {
   EaCStatusProcessingTypes,
@@ -54,6 +54,13 @@ export const handler: EaCRuntimeHandlerResult<
 
     data.enterprises = ctx.State.UserEaCs!;
 
+    const oldRender = ctx.Render;
+    ctx.Render = (data) => {
+      const d: EnterprisesPageData = merge(ctx.Data, data ?? {});
+
+      return oldRender(jsonClone(data));
+    };
+
     return ctx.Render(data);
   },
 
@@ -63,11 +70,13 @@ export const handler: EaCRuntimeHandlerResult<
     const denoKv = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-biotech');
 
     await denoKv.set(
-      ['User', ctx.State.Username!, 'Current', 'EaC'],
+      ['User', ctx.State.Username!, 'Current', 'EnterpriseLookup'],
       eac.EnterpriseLookup,
     );
 
-    return respond({ Processing: EaCStatusProcessingTypes.COMPLETE });
+    console.log(`Set Active EaC to ${eac.EnterpriseLookup}`);
+
+    return Response.json({ Processing: EaCStatusProcessingTypes.COMPLETE });
   },
 
   async DELETE(req, ctx) {

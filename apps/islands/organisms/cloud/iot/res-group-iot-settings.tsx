@@ -15,6 +15,12 @@ export type ResourceGroupIoTSettingsProps = {
 
   hasGitHubAuth: boolean;
 
+  hasStorageCold?: boolean;
+
+  hasStorageHot?: boolean;
+
+  hasStorageWarm?: boolean;
+
   iotHubKeys: Record<string, string>;
 
   organizations?: string[];
@@ -82,6 +88,9 @@ export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettings
             class='px-4'
             cloudLookup={props.cloudLookup!}
             hasGitHubAuth={props.hasGitHubAuth}
+            hasStorageCold={props.hasStorageCold}
+            hasStorageHot={props.hasStorageHot}
+            hasStorageWarm={props.hasStorageWarm}
             organizations={props.organizations}
             resGroupLookup={curResGroup}
           />

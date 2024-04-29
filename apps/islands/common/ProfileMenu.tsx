@@ -39,14 +39,16 @@ export default function ProfileMenu(props: ProfileMenuProps) {
         <div class='flex flex-row pt-4'>
           <div class='flex-1'></div>
 
-          <Action
+          {
+            /* <Action
             href='/signout?success_url=https://www.openbiotech.co/'
             class='flex-none ml-2'
             actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
           >
             <LogOutIcon class='w-6 h-6 inline-block' />
             Sign Out
-          </Action>
+          </Action> */
+          }
 
           <Action
             href='/signout?success_url=https://auth.fathym.com/fathymcloudprd.onmicrosoft.com/b2c_1_sign_up_sign_in/oauth2/v2.0/logout'
@@ -54,7 +56,7 @@ export default function ProfileMenu(props: ProfileMenuProps) {
             actionStyle={ActionStyleTypes.Link | ActionStyleTypes.Rounded}
           >
             <LogOutIcon class='w-6 h-6 inline-block' />
-            Everywhere
+            Sign Out
           </Action>
         </div>
       </div>

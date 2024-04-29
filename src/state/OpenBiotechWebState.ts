@@ -38,6 +38,14 @@ export type OpenBiotechCloudState = {
   Phase: CloudPhaseTypes;
 
   ResourceGroupLookup?: string;
+
+  Storage?: {
+    Cold: boolean;
+
+    Hot: boolean;
+
+    Warm: boolean;
+  };
 };
 
 export type OpenBiotechDevicesState = {

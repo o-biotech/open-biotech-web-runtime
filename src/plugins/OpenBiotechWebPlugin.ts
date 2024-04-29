@@ -12,6 +12,7 @@ import {
   EaCBaseHREFModifierDetails,
   EaCDenoKVCacheModifierDetails,
   EaCDenoKVDatabaseDetails,
+  EaCDFSProcessor,
   EaCESMDistributedFileSystem,
   EaCJWTValidationModifierDetails,
   EaCKeepAliveModifierDetails,
@@ -77,6 +78,10 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               },
             },
             ApplicationResolvers: {
+              assets: {
+                PathPattern: '/assets*',
+                Priority: 200,
+              },
               apiProxy: {
                 PathPattern: '/api/eac*',
                 Priority: 200,
@@ -123,6 +128,24 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           },
         },
         Applications: {
+          assets: {
+            Details: {
+              Name: 'Open Biotech Assets',
+              Description: 'The static assets for use with Open Biotech.',
+            },
+            ModifierResolvers: {},
+            Processor: {
+              Type: 'DFS',
+              DFSLookup: 'local:apps/assets',
+              CacheControl: {
+                'text\\/html': `private, max-age=${60 * 5}`,
+                'image\\/': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'application\\/javascript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'application\\/typescript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'text\\/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+              },
+            } as EaCDFSProcessor,
+          },
           apiProxy: {
             Details: {
               Name: 'EaC API Proxy',
@@ -296,6 +319,10 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           },
         },
         DFS: {
+          'local:apps/assets': {
+            Type: 'Local',
+            FileRoot: './apps/assets/',
+          } as EaCLocalDistributedFileSystem,
           'local:apps/api/data': {
             Type: 'Local',
             FileRoot: './apps/api/data/',

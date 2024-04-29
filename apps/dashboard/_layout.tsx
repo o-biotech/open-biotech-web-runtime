@@ -73,7 +73,23 @@ export default function MainLayout({
 
         <title>Fathym EaC Runtime</title>
 
-        <link rel='shortcut icon' type='image/png' href='/thinky.png' />
+        <link
+          rel='shortcut icon'
+          type='image/svg+xml'
+          href='/assets/openBiotechFavicon.svg'
+          data-eac-bypass-base
+        />
+        <link
+          rel='icon'
+          href='/assets/openBiotechFavicon.svg'
+          data-eac-bypass-base
+        />
+        <link
+          rel='mask-icon'
+          href='/assets/openBiotechFavicon.svg'
+          data-eac-bypass-base
+        />
+
         <link
           rel='stylesheet'
           href={`/tailwind/styles.css?Revision=${Revision}`}

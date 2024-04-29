@@ -12,6 +12,12 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
 
   hasGitHubAuth: boolean;
 
+  hasStorageCold?: boolean;
+
+  hasStorageHot?: boolean;
+
+  hasStorageWarm?: boolean;
+
   locations: ArmSubscriptions.Location[];
 
   organizations?: string[];
@@ -56,6 +62,9 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
           class='px-4'
           cloudLookup={props.cloudLookup!}
           hasGitHubAuth={props.hasGitHubAuth}
+          hasStorageCold={props.hasStorageCold}
+          hasStorageHot={props.hasStorageHot}
+          hasStorageWarm={props.hasStorageWarm}
           organizations={props.organizations}
           resGroupLookup={props.resGroupLookup!}
         />

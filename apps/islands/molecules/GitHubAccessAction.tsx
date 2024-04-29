@@ -8,7 +8,7 @@ import { callToActionStyles } from '../../components/styles/actions.tsx';
 export default function GitHubAccessAction(props: ActionProps) {
   const [signInHref, setSignInHref] = useState('');
 
-  const successUrl = encodeURI(location.href);
+  const successUrl = encodeURI(location?.href || '');
 
   const href = `/github/oauth/signin?success_url=${successUrl}`;
 

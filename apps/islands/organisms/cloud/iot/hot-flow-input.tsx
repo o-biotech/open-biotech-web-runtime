@@ -33,11 +33,7 @@ export default function HotFlowInput(props: HotFlowInputProps) {
             GitHub Organization for Devices Flow
           </label>
 
-          <Select
-            id='gitHubOrg'
-            name='gitHubOrg'
-            required
-          >
+          <Select id='gitHubOrg' name='gitHubOrg' required>
             <option value=''>-- Select an organization --</option>
 
             {props.organizations?.map((org) => {
@@ -72,7 +68,7 @@ export default function HotFlowInput(props: HotFlowInputProps) {
             type='text'
             required
             placeholder='Enter new repository name'
-            value='iot-ensemble-device-flow'
+            value='open-biotech-device-flow'
           />
         </div>
       </>
@@ -91,7 +87,7 @@ export default function HotFlowInput(props: HotFlowInputProps) {
         {children}
       </div>
 
-      {isChecked && <div class='ml-8 mt-1'>{hotFlowGitHub}</div>}
+      {isChecked && !props.disabled && <div class='ml-8 mt-1'>{hotFlowGitHub}</div>}
     </div>
   );
 }

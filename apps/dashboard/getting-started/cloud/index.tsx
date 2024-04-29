@@ -15,6 +15,12 @@ interface CloudPageData {
 
   hasGitHubAuth: boolean;
 
+  hasStorageCold?: boolean;
+
+  hasStorageHot?: boolean;
+
+  hasStorageWarm?: boolean;
+
   isConnected: boolean;
 
   locations: Location[];
@@ -39,6 +45,9 @@ export const handler: EaCRuntimeHandlerResult<
       cloudLookup: ctx.State.Cloud.CloudLookup,
       cloudPhase: ctx.State.Cloud.Phase,
       hasGitHubAuth: !!ctx.State.GitHub,
+      hasStorageCold: !!ctx.State.Cloud.Storage?.Cold,
+      hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
+      hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       isConnected: ctx.State.Cloud.IsConnected,
       resGroupLookup: ctx.State.Cloud.ResourceGroupLookup,
       locations: [],
@@ -134,6 +143,9 @@ export default function Cloud({ Data }: PageProps<CloudPageData>) {
         cloudPhase={Data!.cloudPhase}
         locations={Data!.locations}
         hasGitHubAuth={Data!.hasGitHubAuth}
+        hasStorageCold={Data!.hasStorageCold}
+        hasStorageHot={Data!.hasStorageHot}
+        hasStorageWarm={Data!.hasStorageWarm}
         organizations={Data!.organizations}
         resGroupLookup={Data!.resGroupLookup}
         subs={Data!.subs}

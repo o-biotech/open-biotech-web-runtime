@@ -53,9 +53,17 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
           const iotResGroup = resGroups[state.Cloud.ResourceGroupLookup!];
 
           if ('iot-flow' in (iotResGroup.Resources || {})) {
+            const iotFlowRes = iotResGroup.Resources!['iot-flow'];
+
             state.Cloud.Phase = CloudPhaseTypes.Complete;
 
             state.Phase = SetupPhaseTypes.Devices;
+
+            state.Cloud.Storage = {
+              Cold: 'iot-flow-cold' in (iotFlowRes.Resources || {}),
+              Hot: 'iot-flow-hot' in (iotFlowRes.Resources || {}),
+              Warm: 'iot-flow-warm' in (iotFlowRes.Resources || {}),
+            };
 
             const iots = Object.keys(ctx.State.EaC.IoT || {});
 
