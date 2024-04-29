@@ -5,6 +5,7 @@ import {
   EaCRuntimePlugin,
   EaCRuntimePluginConfig,
   FathymAzureContainerCheckPlugin,
+  IS_BUILDING,
 } from '@fathym/eac/runtime';
 import {
   EaCAPIProcessor,
@@ -33,7 +34,21 @@ import { CurrentEaCModifierHandlerResolver } from './CurrentEaCModifierHandlerRe
 import { CurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
 
 export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
-  constructor() {}
+  constructor() {
+    if (!IS_BUILDING) {
+      console.log(
+        '************************************************************************************************',
+      );
+      Deno.mkdir('/home/denokv');
+
+      const stat = Deno.stat('/home/denokv');
+
+      console.log(stat);
+      console.log(
+        '************************************************************************************************',
+      );
+    }
+  }
 
   public Build(config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
     const pluginConfig: EaCRuntimePluginConfig = {
