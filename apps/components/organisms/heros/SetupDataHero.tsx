@@ -9,7 +9,7 @@ export default function SetupDataHero(props: SetupDataHeroProps) {
     <Hero
       title='Set Up Data'
       callToAction="Let's complete setup by flowing device data to the cloud and accessing it through dashboards and APIs."
-      class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+      class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}

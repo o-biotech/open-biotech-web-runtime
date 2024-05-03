@@ -156,7 +156,7 @@ export default function EaCSecrets({ Data }: PageProps<EaCSecretsPageData>) {
       <Hero
         title='Manage EaC Secret'
         callToAction='Configure reusable secrets to use in your system, where values are stored in a secure key vault.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

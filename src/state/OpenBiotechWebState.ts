@@ -31,7 +31,7 @@ export type OpenBiotechWebState =
   & Record<string, unknown>;
 
 export type OpenBiotechCloudState = {
-  IsConnected: boolean;
+  AzureAccessToken?: string;
 
   CloudLookup?: string;
 

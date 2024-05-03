@@ -76,7 +76,7 @@ export default function EaCSourceConnections({
       <Hero
         title='Manage EaC Source Connections'
         callToAction='Configure connections to source control providers to access and work with your code.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

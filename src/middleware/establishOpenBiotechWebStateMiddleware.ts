@@ -1,4 +1,8 @@
-import { createGitHubOAuthConfig, createOAuthHelpers } from '@fathym/common/oauth';
+import {
+  createAzureADOAuthConfig,
+  createGitHubOAuthConfig,
+  createOAuthHelpers,
+} from '@fathym/common/oauth';
 import { UserOAuthConnection, userOAuthConnExpired } from '@fathym/eac/oauth.ts';
 import { EaCRuntimeContext, EaCRuntimeHandler } from '@fathym/eac/runtime';
 import { OpenBiotechWebState } from '../state/OpenBiotechWebState.ts';
@@ -6,7 +10,7 @@ import { SetupPhaseTypes } from '../state/SetupPhaseTypes.ts';
 import { CloudPhaseTypes } from '../state/CloudPhaseTypes.ts';
 import { DevicesPhaseTypes } from '../state/DevicesPhaseTypes.ts';
 import { DataPhaseTypes } from '../state/DataPhaseTypes.ts';
-import { loadJwtConfig } from '@fathym/eac/mod.ts';
+import { EaCAzureADProviderDetails, loadJwtConfig } from '@fathym/eac/mod.ts';
 
 export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<OpenBiotechWebState> {
   return async (req, ctx: EaCRuntimeContext<OpenBiotechWebState>) => {
@@ -17,7 +21,6 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
       ...ctx.State,
       Phase: SetupPhaseTypes.Cloud,
       Cloud: {
-        IsConnected: true, //isAuthenticated,
         Phase: CloudPhaseTypes.Connect,
       },
       Devices: {
@@ -199,6 +202,41 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
         state.GitHub = {
           Username: currentConn.value!.Username,
         };
+      }
+    }
+
+    if (ctx.State.Username) {
+      const providerLookup = 'azure';
+
+      const provider = ctx.Runtime.EaC!.Providers![providerLookup]!;
+
+      const providerDetails = provider.Details as EaCAzureADProviderDetails;
+
+      const oAuthConfig = createAzureADOAuthConfig(
+        providerDetails!.ClientID,
+        providerDetails!.ClientSecret,
+        providerDetails!.TenantID,
+        providerDetails!.Scopes,
+      );
+
+      const helpers = createOAuthHelpers(oAuthConfig);
+
+      const sessionId = await helpers.getSessionId(req);
+
+      const oauthKv = await ctx.Runtime.IoC.Resolve<Deno.Kv>(
+        Deno.Kv,
+        provider.DatabaseLookup,
+      );
+
+      const currentAccTok = await oauthKv.get<string>([
+        'MSAL',
+        'Session',
+        sessionId!,
+        'AccessToken',
+      ]);
+
+      if (currentAccTok.value) {
+        state.Cloud.AzureAccessToken = currentAccTok.value;
       }
     }
 

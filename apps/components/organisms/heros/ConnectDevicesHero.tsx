@@ -9,7 +9,7 @@ export default function ConnectDevicesHero(props: ConnectDevicesHeroProps) {
     <Hero
       title='Connect Devices'
       callToAction="Let's continue by setting up your first device flow."
-      class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+      class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}

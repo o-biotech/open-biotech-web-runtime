@@ -41,7 +41,7 @@ export default function Devices({
       <Hero
         title='Applications & Collaboration'
         callToAction='Develop applications to share data, collaborate with colleagues or develop complete consumer applications.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       />

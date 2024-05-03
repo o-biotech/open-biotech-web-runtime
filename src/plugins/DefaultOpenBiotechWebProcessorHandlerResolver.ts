@@ -5,6 +5,7 @@ import {
   EaCRuntimeEaC,
   ProcessorHandlerResolver,
 } from '@fathym/eac/runtime';
+import { DefaultMSALProcessorHandlerResolver } from '@fathym/msal';
 import { IoCContainer } from '@fathym/ioc';
 
 export class DefaultOpenBiotechWebProcessorHandlerResolver implements ProcessorHandlerResolver {
@@ -16,6 +17,12 @@ export class DefaultOpenBiotechWebProcessorHandlerResolver implements ProcessorH
     const atomicIconsResolver = new DefaultAtomicIconsProcessorHandlerResolver();
 
     let resolver = await atomicIconsResolver.Resolve(ioc, appProcCfg, eac);
+
+    if (!resolver) {
+      const defaultResolver = new DefaultMSALProcessorHandlerResolver();
+
+      resolver = await defaultResolver.Resolve(ioc, appProcCfg, eac);
+    }
 
     if (!resolver) {
       const defaultResolver = new DefaultProcessorHandlerResolver();

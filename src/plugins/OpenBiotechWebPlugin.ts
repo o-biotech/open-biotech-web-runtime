@@ -9,6 +9,7 @@ import {
 import {
   EaCAPIProcessor,
   EaCAzureADB2CProviderDetails,
+  EaCAzureADProviderDetails,
   EaCBaseHREFModifierDetails,
   EaCDenoKVCacheModifierDetails,
   EaCDenoKVDatabaseDetails,
@@ -25,12 +26,15 @@ import {
   EaCTracingModifierDetails,
 } from '@fathym/eac';
 import { IoCContainer } from '@fathym/ioc';
+import { EaCMSALProcessor, MSALPlugin } from '@fathym/msal';
+import { loadOAuth2ClientConfig } from '@fathym/eac/runtime';
 import { DefaultOpenBiotechWebProcessorHandlerResolver } from './DefaultOpenBiotechWebProcessorHandlerResolver.ts';
 import { GitHubAppSourceConnectionModifierHandlerResolver } from './GitHubAppSourceConnectionModifierHandlerResolver.ts';
 import { DefaultOpenBiotechWebModifierResolver } from './DefaultOpenBiotechWebModifierResolver.ts';
 import { GitHubAppSourceConnectionModifierDetails } from './GitHubAppSourceConnectionModifierDetails.ts';
 import { CurrentEaCModifierHandlerResolver } from './CurrentEaCModifierHandlerResolver.ts';
 import { CurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
+import { createOAuthHelpers } from '@fathym/common/oauth';
 
 export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -41,6 +45,58 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
       Plugins: [
         new FathymAzureContainerCheckPlugin(),
         new FathymAtomicIconsPlugin(),
+        new MSALPlugin({
+          async Resolve(ioc, _processor, eac) {
+            const primaryProviderLookup = Object.keys(eac.Providers || {}).find(
+              (pl) => eac.Providers![pl].Details!.IsPrimary,
+            );
+
+            const provider = eac.Providers![primaryProviderLookup!]!;
+
+            const oAuthConfig = loadOAuth2ClientConfig(provider)!;
+
+            const helpers = createOAuthHelpers(oAuthConfig);
+
+            const kv = await ioc.Resolve<Deno.Kv>(
+              Deno.Kv,
+              provider.DatabaseLookup,
+            );
+
+            const keyRoot = ['MSAL', 'Session'];
+
+            return {
+              async Clear(req) {
+                const sessionId = await helpers.getSessionId(req);
+
+                const kvKey = [...keyRoot, sessionId!];
+
+                const results = await kv.list({ prefix: kvKey });
+
+                for await (const result of results) {
+                  await kv.delete(result.key);
+                }
+              },
+              async Load(req, key) {
+                const sessionId = await helpers.getSessionId(req);
+
+                const kvKey = [...keyRoot, sessionId!, key];
+
+                const res = await kv.get(kvKey);
+
+                return res.value;
+              },
+              async Set(req, key, value) {
+                const sessionId = await helpers.getSessionId(req);
+
+                const kvKey = [...keyRoot, sessionId!, key];
+
+                await kv.set(kvKey, value, {
+                  expireIn: 1000 * 60 * 30,
+                });
+              },
+            };
+          },
+        }),
       ],
       EaC: {
         Projects: {
@@ -100,10 +156,22 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 PathPattern: '*',
                 Priority: 100,
               },
+              msal: {
+                PathPattern: '/azure/oauth/*',
+                Priority: 500,
+                IsPrivate: true,
+                IsTriggerSignIn: true,
+              },
               oauth: {
                 PathPattern: '/oauth/*',
                 Priority: 500,
               },
+              // oauthAzure: {
+              //   PathPattern: '/azure/oauth/*',
+              //   Priority: 500,
+              //   IsPrivate: true,
+              //   IsTriggerSignIn: true,
+              // },
               oauthGitHub: {
                 PathPattern: '/github/oauth/*',
                 Priority: 500,
@@ -244,6 +312,29 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               ProxyRoot: 'https://www.openbiotech.co',
             } as EaCProxyProcessor,
           },
+          msal: {
+            Details: {
+              Name: 'OAuth Site',
+              Description: 'The site for use in OAuth workflows for a user',
+            },
+            Processor: {
+              Type: 'MSAL',
+              Config: {
+                MSALSignInOptions: {
+                  Scopes: [
+                    'https://management.core.windows.net//user_impersonation',
+                  ], // Your desired scopes go here
+                  RedirectURI: '/azure/oauth/callback',
+                  SuccessRedirect: '/cloud',
+                },
+                MSALSignOutOptions: {
+                  ClearSession: false,
+                  PostLogoutRedirectUri: '/',
+                },
+              },
+              ProviderLookup: 'azure',
+            } as EaCMSALProcessor,
+          },
           oauth: {
             Details: {
               Name: 'OAuth Site',
@@ -252,6 +343,19 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Processor: {
               Type: 'OAuth',
               ProviderLookup: 'adb2c',
+            } as EaCOAuthProcessor,
+          },
+          oauthAzure: {
+            Details: {
+              Name: 'OAuth GitHub App',
+              Description: 'The site for use in OAuth workflows for a user against GitHub.',
+            },
+            ModifierResolvers: {
+              currentEaC: { Priority: 9000 },
+            },
+            Processor: {
+              Type: 'OAuth',
+              ProviderLookup: 'azure',
             } as EaCOAuthProcessor,
           },
           oauthGitHub: {
@@ -395,10 +499,19 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               SignInPath: '/oauth/signin',
             } as EaCOAuthModifierDetails,
           },
+          oauthAzure: {
+            Details: {
+              Type: 'OAuth',
+              Name: 'OAuth Azure',
+              Description: 'Used to obtain login details for azure.',
+              ProviderLookup: 'azure',
+              SignInPath: '/azure/oauth/signin',
+            } as EaCOAuthModifierDetails,
+          },
           oauthGitHub: {
             Details: {
               Type: 'OAuth',
-              Name: 'OAuth',
+              Name: 'OAuth GitHub',
               Description: 'Used to restrict user access to various applications.',
               ProviderLookup: 'o-biotech-github-app',
               SignInPath: '/github/oauth/signin',
@@ -407,7 +520,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           oauthGitHubCallback: {
             Details: {
               Type: 'GitHubAppSourceConn',
-              Name: 'OAuth',
+              Name: 'OAuth GitHub Callback',
               Description: 'Used to restrict user access to various applications.',
               ProviderLookup: 'o-biotech-github-app',
               OAuthDatabaseLookup: 'oauth',
@@ -447,6 +560,17 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               TenantID: Deno.env.get('AZURE_ADB2C_TENANT_ID')!,
               IsPrimary: true,
             } as EaCAzureADB2CProviderDetails,
+          },
+          azure: {
+            DatabaseLookup: 'oauth',
+            Details: {
+              Name: 'Azure OAuth Provider',
+              Description: 'The provider used to connect with Azure',
+              ClientID: Deno.env.get('AZURE_AD_CLIENT_ID')!,
+              ClientSecret: Deno.env.get('AZURE_AD_CLIENT_SECRET')!,
+              Scopes: ['openid'],
+              TenantID: Deno.env.get('AZURE_AD_TENANT_ID')!, //common
+            } as EaCAzureADProviderDetails,
           },
           // 'o-biotech-github-app': {
           //   DatabaseLookup: 'oauth',

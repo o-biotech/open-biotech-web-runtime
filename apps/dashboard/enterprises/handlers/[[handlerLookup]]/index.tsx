@@ -110,7 +110,7 @@ export default function EaCHandlers({ Data }: PageProps<EaCHandlersPageData>) {
       <Hero
         title='Manage EaC Handler'
         callToAction='Work with your EaC Handlers to control how your EaC is managed.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

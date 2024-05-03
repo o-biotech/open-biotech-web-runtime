@@ -1,5 +1,5 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCCloudAzureDetails } from '@fathym/eac';
+import { EaCCloudDetails } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime';
 import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
@@ -17,14 +17,13 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
         [cloudLookup]: {
           Token: ctx.State.Cloud.AzureAccessToken,
           Details: {
-            Name: formData.get('name') as string,
-            Description: formData.get('description') as string,
-            ApplicationID: formData.get('application-id') as string,
-            AuthKey: formData.get('auth-key') as string,
+            Name: formData.get('subscription-name') as string,
+            Description: formData.get('subscription-name') as string,
             SubscriptionID: formData.get('subscription-id') as string,
-            TenantID: formData.get('tenant-id') as string,
+            IsDev: !!formData.get('is-dev'),
+            BillingScope: formData.get('billing-scope') as string,
             Type: 'Azure',
-          } as EaCCloudAzureDetails,
+          } as EaCCloudDetails,
         },
       },
     };

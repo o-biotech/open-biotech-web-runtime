@@ -124,7 +124,7 @@ export default function EaCClouds({ Data }: PageProps<EaCCloudsPageData>) {
       <Hero
         title='Manage EaC Clouds'
         callToAction='Connect and manage access to your clouds.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >

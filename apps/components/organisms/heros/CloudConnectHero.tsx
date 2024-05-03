@@ -9,7 +9,7 @@ export default function CloudConnectHero(props: CloudConnectHeroProps) {
     <Hero
       title='Cloud Configuration'
       callToAction='Connect to Azure and select cloud automation options.'
-      class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+      class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center bg-hero-pattern'
       heroStyle={HeroStyleTypes.None}
       displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       {...props}

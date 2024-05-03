@@ -42,7 +42,7 @@ export const handler: EaCRuntimeHandlerResult<
       manageEaC = await eacSvc.Get(manageEaCLookup);
 
       if (!manageEaC?.EnterpriseLookup) {
-        return redirectRequest('/enterprises', false, false);
+        return redirectRequest('/dashboard/enterprises', false, false);
       }
     }
 
@@ -128,7 +128,9 @@ export const handler: EaCRuntimeHandlerResult<
 export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
   return (
     <>
-      <CreateEaCHero />
+      <CreateEaCHero
+        title={Data.manageEaC ? 'Manage Enterprise' : 'Create Enterprise'}
+      />
 
       <EaCManageForm
         action='/api/o-biotech/eac'
@@ -136,20 +138,21 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
         entLookup={Data.manageEaC?.EnterpriseLookup}
         entName={Data.manageEaC?.Details?.Name || undefined}
         entDescription={Data.manageEaC?.Details?.Description || undefined}
+        hideTitle={true}
       />
 
-      <div class='max-w-sm m-auto'>
-        <label
-          for='subscription-plan'
-          class='block uppercase tracking-wide font-bold mb-2 text-xl text-center'
-        >
-          Enterprise {Data.manageEaC?.EnterpriseLookup ? 'Management' : 'Options'}
-        </label>
+      {Data.enterprises?.length > 0 && (
+        <div class='max-w-sm m-auto mt-8'>
+          <label
+            for='subscription-plan'
+            class='block uppercase tracking-wide font-bold mb-2 text-xl text-center'
+          >
+            Enterprise {Data.manageEaC?.EnterpriseLookup ? 'Management' : 'Options'}
+          </label>
 
-        <div class='border-b-[1px] border-dotted border-slate-400 dark:border-slate-700'></div>
+          <div class='border-b-[1px] border-dotted border-slate-400 dark:border-slate-700'></div>
 
-        {Data.enterprises &&
-          Data.enterprises.map((enterprise) => {
+          {Data.enterprises.map((enterprise) => {
             return !Data.manageEaC ||
                 Data.manageEaC.EnterpriseLookup ===
                   enterprise.EnterpriseLookup
@@ -166,7 +169,8 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
               )
               : undefined;
           })}
-      </div>
+        </div>
+      )}
     </>
   );
 }

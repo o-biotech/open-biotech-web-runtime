@@ -1,11 +1,19 @@
 import { ComponentChildren, JSX } from 'preact';
-import * as ArmSubscriptions from 'npm:@azure/arm-subscriptions';
-import { CloudCALZForm, StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic';
+import { Location, Subscription, TenantIdDescription } from 'npm:@azure/arm-subscriptions';
+import { BillingAccount } from 'npm:@azure/arm-billing';
+import {
+  classSet,
+  CloudCALZForm,
+  ConnectAzure,
+  StepsFeatures,
+  StepsFeaturesProps,
+} from '@o-biotech/atomic';
 import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
-import { CloudConnectForms } from './CloudConnectForms.tsx';
 import { CloudIoTForm } from '../data/iot.form.tsx';
 
 export type CloudStepsFeaturesProps = StepsFeaturesProps & {
+  billingScopes: Record<string, string>;
+
   cloudLookup?: string;
 
   cloudPhase: CloudPhaseTypes;
@@ -18,13 +26,17 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
 
   hasStorageWarm?: boolean;
 
-  locations: ArmSubscriptions.Location[];
+  isAzureConnected: boolean;
+
+  locations: Location[];
 
   organizations?: string[];
 
   resGroupLookup?: string;
 
-  subs: ArmSubscriptions.Subscription[];
+  subs: Record<string, string>;
+
+  tenants: Record<string, string>;
 };
 
 export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
@@ -33,11 +45,15 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
   switch (props.cloudPhase) {
     case CloudPhaseTypes.Connect:
       currentForm = (
-        <CloudConnectForms
-          action='/api/o-biotech/eac/clouds'
-          data-eac-bypass-base
-          subs={props.subs}
+        <ConnectAzure
+          cloudAction='/api/o-biotech/eac/clouds'
+          oauthAction='/azure/oauth/signin'
+          subAction='/api/o-biotech/eac/clouds/subs'
           class='px-4'
+          isConnected={props.isAzureConnected}
+          billingScopes={props.billingScopes}
+          subs={props.subs}
+          tenants={props.tenants}
         />
       );
       break;
@@ -81,6 +97,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
       {...props}
       callToAction={mdCurrentForm}
       step={props.cloudPhase}
+      class={classSet(['text-left'], props)}
     >
       {[
         {

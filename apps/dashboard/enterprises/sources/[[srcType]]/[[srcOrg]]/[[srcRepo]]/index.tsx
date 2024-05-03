@@ -207,7 +207,7 @@ export default function EaCSources({ Data }: PageProps<EaCSourcesPageData>) {
       <Hero
         title='Manage EaC Sources'
         callToAction='Configure connections to source control providers to access and work with your code.'
-        class='[&_*]:mx-auto [&>*>*]:w-full bg-[#000028] text-center'
+        class='[&_*]:mx-auto [&>*>*]:w-full bg-hero-pattern text-center'
         heroStyle={HeroStyleTypes.None}
         displayStyle={DisplayStyleTypes.Center | DisplayStyleTypes.Large}
       >
