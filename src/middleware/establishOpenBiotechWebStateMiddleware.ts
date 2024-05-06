@@ -149,6 +149,8 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
                         'Developed',
                       ]);
 
+                      console.log(currentDeveloped.value);
+
                       if (currentDeveloped.value) {
                         state.Data.Phase = DataPhaseTypes.Complete;
                       }

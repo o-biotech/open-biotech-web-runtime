@@ -4,6 +4,7 @@ import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.t
 
 export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
   async POST(req, ctx) {
+    console.log('******************************');
     const formData = await req.formData();
 
     const flowing = !!(formData.get('developed') as string);

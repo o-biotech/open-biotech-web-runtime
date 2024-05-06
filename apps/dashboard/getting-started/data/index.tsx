@@ -25,6 +25,12 @@ interface DataPageData {
 
   iotHubKeys: Record<string, string>;
 
+  hasStorageCold: boolean;
+
+  hasStorageHot: boolean;
+
+  hasStorageWarm: boolean;
+
   jwt: string;
 
   kustoCluster: string;
@@ -116,6 +122,9 @@ export const handler: EaCRuntimeHandlerResult<
       dataPhase: ctx.State.Data.Phase,
       deviceKeys: deviceKeys,
       iotHubKeys: iotHubKeys,
+      hasStorageCold: !!ctx.State.Cloud.Storage?.Cold,
+      hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
+      hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       jwt: ctx.State.Devices.JWT,
       kustoCluster: kustoCluster,
       kustoLocation: kustoLocation,
@@ -142,6 +151,9 @@ export default function Data({ Data }: PageProps<DataPageData>) {
         dataPhase={Data!.dataPhase}
         deviceKeys={Data!.deviceKeys}
         iotHubKeys={Data!.iotHubKeys}
+        hasStorageCold={Data.hasStorageCold}
+        hasStorageHot={Data.hasStorageHot}
+        hasStorageWarm={Data.hasStorageWarm}
         jwt={Data!.jwt}
         kustoCluster={Data!.kustoCluster}
         kustoLocation={Data!.kustoLocation}

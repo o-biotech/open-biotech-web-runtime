@@ -54,13 +54,6 @@ export const handler: EaCRuntimeHandlerResult<
 
     data.enterprises = ctx.State.UserEaCs!;
 
-    const oldRender = ctx.Render;
-    ctx.Render = (data) => {
-      const d: EnterprisesPageData = merge(ctx.Data, data ?? {});
-
-      return oldRender(jsonClone(data));
-    };
-
     return ctx.Render(data);
   },
 

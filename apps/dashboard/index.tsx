@@ -46,6 +46,12 @@ export default function Index({ Data }: PageProps<HomePageData>) {
 
   let initialSteps: JSX.Element | undefined = undefined;
 
+  const explainerData = {
+    Title: '',
+    Descriptions: [] as string[],
+    VideoURL: '',
+  };
+
   if (!Data.HasEaC) {
     currentHero = <CreateEaCHero />;
 
@@ -62,14 +68,41 @@ export default function Index({ Data }: PageProps<HomePageData>) {
     switch (Data!.SetupPhase) {
       case SetupPhaseTypes.Cloud:
         currentHero = <CloudConnectHero />;
+
+        explainerData.Title = 'Cloud Configuration';
+
+        explainerData.Descriptions = [
+          `In this workflow, you'll provide us with connectivity into your Azure so that we can help manage your cloud infrastructure.`,
+          `Once complete, you'll have a complete IoT infrastructure for use in your biotech solutions.`,
+        ];
+
+        explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
         break;
 
       case SetupPhaseTypes.Devices:
         currentHero = <ConnectDevicesHero />;
+
+        explainerData.Title = 'Connect Devices';
+
+        explainerData.Descriptions = [
+          `Establish a getting started device for your IoT flow.`,
+          `Configure your built in dashboarding experiences for your device data.`,
+        ];
+
+        explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
         break;
 
       case SetupPhaseTypes.Data:
         currentHero = <SetupDataHero />;
+
+        explainerData.Title = 'Set Up Data';
+
+        explainerData.Descriptions = [
+          `Verify data is flowing from your device or an emulated device.`,
+          'See your API connection information.',
+        ];
+
+        explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
         break;
 
       case SetupPhaseTypes.Complete:
@@ -98,11 +131,40 @@ export default function Index({ Data }: PageProps<HomePageData>) {
     }
   }
 
+  const explainer = explainerData.Title
+    ? (
+      <div class='flex flex-col md:flex-row m-8 md:m-16'>
+        <div class='md:flex-1 md:pr-[10rem]'>
+          <h2 class='text-3xl font-bold'>{explainerData.Title}</h2>
+
+          {explainerData.Descriptions.map((desc) => <p class='text-lg my-2'>{desc}</p>)}
+        </div>
+
+        <div class='md:flex-1'>
+          <iframe
+            class='w-full md:w-[560px] md:h-[315px]'
+            // width="560"
+            // height="315"
+            src={explainerData.VideoURL}
+            title='YouTube video player'
+            frameborder='0'
+            allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+            referrerpolicy='strict-origin-when-cross-origin'
+            allowfullscreen
+          >
+          </iframe>
+        </div>
+      </div>
+    )
+    : undefined;
+
   return (
     <>
       {currentHero}
 
       {Data.SetupPhase < 3 && initialSteps}
+
+      {explainer}
 
       {Data.SetupPhase > 2
         ? <BiotechDashboard class='m-4' devices={Data.Devices!} jwt={Data.JWT!} />

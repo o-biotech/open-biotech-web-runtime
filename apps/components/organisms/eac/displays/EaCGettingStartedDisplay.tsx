@@ -67,7 +67,7 @@ export function EaCGettingStartedDisplay(props: {
         // },
         {
           Title: 'Set Up Data Dashboards',
-          Complete: props.devicesPhase > 2,
+          Complete: props.devicesPhase > 1,
           ActionPath: './getting-started/devices',
         },
       ]

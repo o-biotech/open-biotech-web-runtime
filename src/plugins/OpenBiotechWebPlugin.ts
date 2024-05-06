@@ -39,7 +39,7 @@ import { createOAuthHelpers } from '@fathym/common/oauth';
 export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
   constructor() {}
 
-  public Build(config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
+  public Setup(config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
     const pluginConfig: EaCRuntimePluginConfig = {
       Name: 'OpenBiotechWebPlugin',
       Plugins: [
@@ -414,7 +414,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 'local:apps/islands',
                 'esm:fathym_open_biotech_atomic',
               ],
-              ConfigPath: '/apps/tailwind/tailwind.config.ts',
+              ConfigPath: './tailwind.config.ts',
               StylesTemplatePath: './apps/tailwind/styles.css',
               CacheControl: {
                 'text\\/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,

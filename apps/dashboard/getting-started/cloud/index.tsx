@@ -4,7 +4,7 @@ import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { Location, Subscription, TenantIdDescription } from 'npm:@azure/arm-subscriptions';
 import { BillingAccount } from 'npm:@azure/arm-billing';
 import CloudConnectHero from '../../../components/organisms/heros/CloudConnectHero.tsx';
-import CloudStepsFeatures from '../../../components/organisms/cloud/CloudStepsFeatures.tsx';
+import CloudStepsFeatures from '../../../components/organisms/features/CloudStepsFeatures.tsx';
 import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
 import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';

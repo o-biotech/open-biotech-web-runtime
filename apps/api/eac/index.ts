@@ -55,16 +55,18 @@ export default {
     );
 
     if (status.Processing == EaCStatusProcessingTypes.COMPLETE) {
-      if (!ctx.State.EaC) {
-        await ctx.State.OBiotechKV.set(
-          ['User', ctx.State.Username, 'Current', 'EnterpriseLookup'],
-          saveResp.EnterpriseLookup,
-        );
-      }
+      await ctx.State.OBiotechKV.set(
+        ['User', ctx.State.Username, 'Current', 'EnterpriseLookup'],
+        saveResp.EnterpriseLookup,
+      );
 
       return redirectRequest('/dashboard', false, false);
     } else {
-      return redirectRequest(`/dashboard?commitId=${saveResp.CommitID}`, false, false);
+      return redirectRequest(
+        `/dashboard?commitId=${saveResp.CommitID}`,
+        false,
+        false,
+      );
     }
   },
 } as EaCRuntimeHandlers<OpenBiotechWebState>;

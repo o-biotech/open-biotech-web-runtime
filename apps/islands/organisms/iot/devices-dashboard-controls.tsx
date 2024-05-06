@@ -30,7 +30,7 @@ export type DevicesDashboardControlsProps = IconProps & {
 
 export default function DevicesDashboardControls(props: DevicesDashboardControlsProps) {
   const renewIcon = (
-    <>
+    <div>
       <div class='font-bold text-lg'>Loading device data</div>
 
       <RenewIcon
@@ -40,7 +40,7 @@ export default function DevicesDashboardControls(props: DevicesDashboardControls
           props,
         )}
       />
-    </>
+    </div>
   );
 
   if (!IS_BROWSER) return renewIcon;

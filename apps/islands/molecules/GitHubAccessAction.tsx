@@ -3,7 +3,7 @@ import { Action, ActionProps, ActionStyleTypes, classSet } from '@o-biotech/atom
 import { callToActionStyles } from '../../components/styles/actions.tsx';
 
 // May not be necessary to be an island
-// export const IsIsland = true;
+export const IsIsland = true;
 
 export default function GitHubAccessAction(props: ActionProps) {
   const [signInHref, setSignInHref] = useState('');
@@ -19,6 +19,7 @@ export default function GitHubAccessAction(props: ActionProps) {
       actionStyle={ActionStyleTypes.Outline | ActionStyleTypes.Link}
       {...props}
       href={signInHref}
+      data-eac-bypass-base
       class={classSet(
         [
           'w-full md:w-auto text-white text-xs font-bold m-1 py-1 px-2 rounded focus:outline-none shadow-lg',

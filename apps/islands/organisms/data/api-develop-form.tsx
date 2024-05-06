@@ -8,7 +8,7 @@ export const IsIsland = true;
 export type APIDevelopFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   apiPath: string;
 
-  jwt: string;
+  jwt?: string;
 };
 
 export default function APIDevelopForm(props: APIDevelopFormProps) {
@@ -40,24 +40,26 @@ export default function APIDevelopForm(props: APIDevelopFormProps) {
         />
       </div>
 
-      <div class='w-full mb-8'>
-        <label
-          for='connStr'
-          class='block uppercase tracking-wide font-bold mb-0 text-lg'
-        >
-          API Access Token
-        </label>
+      {props.jwt && (
+        <div class='w-full mb-8'>
+          <label
+            for='connStr'
+            class='block uppercase tracking-wide font-bold mb-0 text-lg'
+          >
+            API Access Token
+          </label>
 
-        <p>Set Authorization header as 'Bearer (token)'</p>
+          <p>Set Authorization header as 'Bearer (token)'</p>
 
-        <CopyInput
-          id='jwt'
-          name='jwt'
-          type='text'
-          class='mt-2'
-          value={props.jwt}
-        />
-      </div>
+          <CopyInput
+            id='jwt'
+            name='jwt'
+            type='text'
+            class='mt-2'
+            value={props.jwt}
+          />
+        </div>
+      )}
     </div>
   );
 }

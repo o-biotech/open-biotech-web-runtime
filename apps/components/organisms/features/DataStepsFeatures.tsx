@@ -1,9 +1,17 @@
 import { ComponentChildren } from 'preact';
-import { StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic';
+import {
+  Action,
+  ActionGroup,
+  classSet,
+  StepsFeatures,
+  StepsFeaturesProps,
+} from '@o-biotech/atomic';
 import { DataFlowForm } from '../data/flow.form.tsx';
 import DataExploreForm from '../../../islands/organisms/data/explore-form.tsx';
-import { DataDevelopForm } from '../data/develop.form.tsx';
 import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
+import { StorageAPIsDisplay } from '../../molecules/StorageAPIsDisplay.tsx';
+import { callToActionStyles } from '../../styles/actions.tsx';
+import { DataDevelopForm } from '../data/develop.form.tsx';
 
 export interface DataStepsFeaturesProps extends StepsFeaturesProps {
   dashboardTypes: string[];
@@ -13,6 +21,12 @@ export interface DataStepsFeaturesProps extends StepsFeaturesProps {
   deviceKeys: Record<string, string>;
 
   iotHubKeys: Record<string, string>;
+
+  hasStorageCold: boolean;
+
+  hasStorageHot: boolean;
+
+  hasStorageWarm: boolean;
 
   jwt: string;
 
@@ -52,7 +66,19 @@ export function DataStepsFeatures(props: DataStepsFeaturesProps) {
       break;
 
     case DataPhaseTypes.Develop:
-      currentForm = <DataDevelopForm jwt={props.jwt} class='px-4' />;
+      currentForm = (
+        <div>
+          <StorageAPIsDisplay
+            hasStorageCold={props.hasStorageCold}
+            hasStorageHot={props.hasStorageHot}
+            hasStorageWarm={props.hasStorageWarm}
+            class='m-8 md:m-16'
+            jwt={props.jwt}
+          />
+
+          <DataDevelopForm />
+        </div>
+      );
       break;
   }
 
