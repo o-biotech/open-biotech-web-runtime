@@ -1,4 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
+import { useEffect, useState } from 'preact/hooks';
 import { redirectRequest } from '@fathym/common';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { EaCStatus, EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api';
@@ -8,11 +9,18 @@ import Redirect from '../../../islands/atoms/Redirect.tsx';
 import { CheckIcon } from '../../../../build/iconset/icons/CheckIcon.tsx';
 import { ErrorIcon } from '../../../../build/iconset/icons/ErrorIcon.tsx';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
+import { IS_BROWSER } from '@fathym/eac/runtime/browser';
+
+export const IsIsland = true;
 
 interface CommitStatusPageData {
+  commitId: string;
+
   complete: boolean;
 
-  redirect: string;
+  jwt: string;
+
+  successRedirect: string;
 
   status: EaCStatus;
 }
@@ -48,12 +56,11 @@ export const handler: EaCRuntimeHandlerResult<
       );
     } else {
       const data: CommitStatusPageData = {
+        commitId,
         complete: status.Processing === EaCStatusProcessingTypes.COMPLETE,
-        redirect:
-          `/dashboard/commit/${commitId}/status?successRedirect=${successRedirect}&errorRedirect=${errorRedirect}&complete=${
-            status.Processing === EaCStatusProcessingTypes.COMPLETE
-          }`,
+        successRedirect,
         status,
+        jwt: ctx.State.Devices.JWT,
       };
 
       return ctx.Render(data);
@@ -64,12 +71,11 @@ export const handler: EaCRuntimeHandlerResult<
 export default function CommitStatus({
   Data,
 }: PageProps<CommitStatusPageData>) {
-  const start = intlFormatDistance(
-    new Date(Data!.status.StartTime),
-    new Date(),
-  );
+  const [complete, setComplete] = useState(Data.complete);
 
-  const interval = Data!.complete ? 30000 : Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
+  const [status, setStatus] = useState(Data.status);
+
+  const start = intlFormatDistance(new Date(status.StartTime), new Date());
 
   const classyPrint = (key: string, data: any, level: number) => {
     if (typeof data === 'object') {
@@ -81,7 +87,8 @@ export default function CommitStatus({
       return (
         <details
           open={data.State !== 'Succeeded'}
-          class={`text-lg my-2 mt-3 ml-${2 * level}`}
+          class={`text-lg my-2 mt-3 ml-6`}
+          key={key}
         >
           <summary class='font-bold'>
             {statusIcon}
@@ -109,22 +116,48 @@ export default function CommitStatus({
         } (${date.toLocaleString()})`;
       }
       return (
-        <div class={`text-lg my-2 ml-${2 * level + 2}`}>
-          <span class={`font-bold ml-${2 * level}`}>{key}:</span> {data}
+        <div class={`text-lg my-2 ml-6`} key={key}>
+          <span class={`font-bold`}>{key}:</span> {data}
         </div>
       );
     }
   };
 
+  useEffect(() => {
+    if (IS_BROWSER) {
+      const checkInterval = setInterval(() => {
+        fetch(`/api/o-biotech/eac/${Data.commitId}/status`, {
+          headers: {
+            Authrorization: `Bearer ${Data.jwt}`,
+          },
+        }).then((resp: Response) => {
+          resp.json().then((status) => {
+            setStatus(status);
+
+            setComplete(
+              status.Processing === EaCStatusProcessingTypes.COMPLETE,
+            );
+
+            if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+              clearInterval(checkInterval);
+            } else if (status.Processing === EaCStatusProcessingTypes.ERROR) {
+              location.reload();
+            }
+          });
+        });
+      }, 4250);
+    }
+  }, []);
+
   return (
     <div class='m-4'>
       <p class='text-lg my-2'>
-        <span class='font-bold'>Started by:</span> {Data!.status.Username}
+        <span class='font-bold'>Started by:</span> {status.Username}
       </p>
 
       <p class='text-lg my-2'>
-        <span class='font-bold'>Status:</span> {EaCStatusProcessingTypes[Data!.status.Processing]}
-        {Data!.complete
+        <span class='font-bold'>Status:</span> {EaCStatusProcessingTypes[status.Processing]}
+        {complete
           ? <CheckIcon class='w-6 h-6 text-green-500 inline-block ml-4' />
           : <RenewIcon class='w-6 h-6 text-blue-500 animate-spin inline-block ml-4' />}
       </p>
@@ -135,21 +168,21 @@ export default function CommitStatus({
 
       <p class='text-lg my-2'>
         <span class='font-bold'>Started At:</span>{' '}
-        {new Date(Data!.status.StartTime).toLocaleString('en-US')}
+        {new Date(status.StartTime).toLocaleString('en-US')}
       </p>
 
       <p class='text-lg my-2'>
-        <span class='font-bold'>Commit ID:</span> {Data!.status.ID}
+        <span class='font-bold'>Commit ID:</span> {status.ID}
       </p>
 
       <div open class='text-2xl my-2 mt-6'>
         <span class='font-bold'>Messages</span>
 
-        {Data!.complete && (
+        {complete && (
           <p class='text-lg my-2'>
             <span class='font-bold'>Complete:</span> Redirecting in 30 seconds,{' '}
             <a
-              href={Data!.redirect}
+              href={Data!.successRedirect}
               class='text-blue-500 underline'
               data-eac-bypass-base
             >
@@ -159,12 +192,12 @@ export default function CommitStatus({
           </p>
         )}
 
-        {Object.keys(Data!.status.Messages || {}).map((messageKey) => {
-          return classyPrint(messageKey, Data!.status.Messages[messageKey], 1);
+        {Object.keys(status.Messages || {}).map((messageKey) => {
+          return classyPrint(messageKey, status.Messages[messageKey], 1);
         })}
       </div>
 
-      <Redirect interval={interval} redirect={Data!.redirect} />
+      {complete && <Redirect interval={30000} redirect={Data.successRedirect} />}
     </div>
   );
 }

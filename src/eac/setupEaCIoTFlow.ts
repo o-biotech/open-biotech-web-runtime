@@ -3,6 +3,7 @@ import {
   EaCCloudAzureDetails,
   EaCCloudResourceAsCode,
   EaCCloudResourceFormatDetails,
+  EaCCloudRoleAssignment,
 } from '@fathym/eac';
 import { OpenBiotechEaC } from './OpenBiotechEaC.ts';
 
@@ -34,6 +35,8 @@ export function setupEaCIoTFlow(
 
   const servicePrincipalId = details!.ID;
 
+  const roleAssignments: Record<string, EaCCloudRoleAssignment> = {};
+
   if (storageFlowCold) {
     iotResources[`${resLookup}-cold`] = {
       Details: {
@@ -43,7 +46,7 @@ export function setupEaCIoTFlow(
         Order: 1,
         Template: {
           Content:
-            'https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold/template.jsonc',
+            `https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold/template.jsonc`,
           Parameters:
             'https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold/parameters.jsonc',
         },
@@ -59,6 +62,43 @@ export function setupEaCIoTFlow(
         Outputs: {},
       } as EaCCloudResourceFormatDetails,
     };
+
+    roleAssignments[details.ID!] = [
+      {
+        PrincipalID: details.ID!,
+        PrincipalType: 'ServicePrincipal',
+        RoleDefinitionID: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b',
+        Scope:
+          `/subscriptions/${details.SubscriptionID}/resourceGroups/${resGroupLookup}/providers/Microsoft.Storage/storageAccounts/${shortName}datalake`,
+        // Scope: '$output:dataLakeRoleScope',
+      },
+    ];
+    // if (coldRoleAssignment) {
+    //   iotResources[`${resLookup}-cold-assignments`] = {
+    //     Details: {
+    //       Type: 'Format',
+    //       Name: 'IoT Infrastructure - Cold Flow Role Assignments',
+    //       Description:
+    //         'The cold flow role assignments to use for the enterprise.',
+    //       Order: 1,
+    //       Template: {
+    //         Content: `https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold-assignments/template.jsonc`,
+    //         Parameters:
+    //           'https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold-assignments/parameters.jsonc',
+    //       },
+    //       Data: {
+    //         CloudLookup: cloudLookup,
+    //         Location: resGroupLocation,
+    //         Name: resGroupLookup,
+    //         ParentResourceLookup: `${resLookup}`,
+    //         ResourceLookup: `${resLookup}-cold`,
+    //         ServicePrincipalID: servicePrincipalId,
+    //         ShortName: shortName,
+    //       },
+    //       Outputs: {},
+    //     } as EaCCloudResourceFormatDetails,
+    //   };
+    // }
   }
 
   if (storageFlowWarm) {
@@ -119,6 +159,7 @@ export function setupEaCIoTFlow(
     EnterpriseLookup: entLookup,
     Clouds: {
       [cloudLookup]: {
+        RoleAssignments: roleAssignments,
         ResourceGroups: {
           [resGroupLookup]: {
             Resources: {
