@@ -146,7 +146,8 @@ export default function EaCIoTDevice({
         deviceIsIoTEdge={Data.manageDevice?.Details?.IsIoTEdge || false}
       />
 
-      {Data.manageDeviceLookup && (
+      {
+        /* {Data.manageDeviceLookup && (
         <div class='max-w-sm mx-auto mb-4'>
           <DeleteAction
             actionPath={`./iot/devices/${Data.manageDeviceLookup}`}
@@ -155,7 +156,8 @@ export default function EaCIoTDevice({
             Delete EaC IoT Device
           </DeleteAction>
         </div>
-      )}
+      )} */
+      }
     </>
   );
 }
