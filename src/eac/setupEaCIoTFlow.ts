@@ -35,7 +35,7 @@ export function setupEaCIoTFlow(
 
   const servicePrincipalId = details!.ID;
 
-  const roleAssignments: Record<string, EaCCloudRoleAssignment> = {};
+  const roleAssignments: Record<string, EaCCloudRoleAssignment[]> = {};
 
   if (storageFlowCold) {
     iotResources[`${resLookup}-cold`] = {

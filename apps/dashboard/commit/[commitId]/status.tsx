@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { redirectRequest } from '@fathym/common';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
+import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { EaCStatus, EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api';
 import { intlFormatDistance } from 'npm:date-fns';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
@@ -9,7 +10,6 @@ import Redirect from '../../../islands/atoms/Redirect.tsx';
 import { CheckIcon } from '../../../../build/iconset/icons/CheckIcon.tsx';
 import { ErrorIcon } from '../../../../build/iconset/icons/ErrorIcon.tsx';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 
 export const IsIsland = true;
 
