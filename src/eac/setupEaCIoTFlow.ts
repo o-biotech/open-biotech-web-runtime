@@ -73,32 +73,6 @@ export function setupEaCIoTFlow(
         // Scope: '$output:dataLakeRoleScope',
       },
     ];
-    // if (coldRoleAssignment) {
-    //   iotResources[`${resLookup}-cold-assignments`] = {
-    //     Details: {
-    //       Type: 'Format',
-    //       Name: 'IoT Infrastructure - Cold Flow Role Assignments',
-    //       Description:
-    //         'The cold flow role assignments to use for the enterprise.',
-    //       Order: 1,
-    //       Template: {
-    //         Content: `https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold-assignments/template.jsonc`,
-    //         Parameters:
-    //           'https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/cold-assignments/parameters.jsonc',
-    //       },
-    //       Data: {
-    //         CloudLookup: cloudLookup,
-    //         Location: resGroupLocation,
-    //         Name: resGroupLookup,
-    //         ParentResourceLookup: `${resLookup}`,
-    //         ResourceLookup: `${resLookup}-cold`,
-    //         ServicePrincipalID: servicePrincipalId,
-    //         ShortName: shortName,
-    //       },
-    //       Outputs: {},
-    //     } as EaCCloudResourceFormatDetails,
-    //   };
-    // }
   }
 
   if (storageFlowWarm) {
