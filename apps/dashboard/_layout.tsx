@@ -50,6 +50,7 @@ export const handler: EaCRuntimeHandlerResult<
       Phase: ctx.State.Phase,
       ResourceGroupLookup: ctx.State.Cloud?.ResourceGroupLookup,
       Username: ctx.State.Username,
+      UserEaCs: ctx.State.UserEaCs,
     };
 
     ctx.Data = merge(ctx.Data, data);

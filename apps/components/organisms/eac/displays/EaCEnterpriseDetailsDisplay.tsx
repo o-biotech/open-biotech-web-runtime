@@ -5,33 +5,33 @@ import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
 import { AddIcon } from '../../../../../build/iconset/icons/AddIcon.tsx';
 
 export function EaCEnterpriseDetailsDisplay(
-  details: EaCEnterpriseDetails & {
+  props: EaCEnterpriseDetails & {
     entLookup: string;
     userEaCs?: UserEaCRecord[];
   },
 ) {
-  const otherEaCs = details.userEaCs?.filter(
-    (ue) => ue.EnterpriseLookup !== details.entLookup,
+  const otherEaCs = props.userEaCs?.filter(
+    (ue) => ue.EnterpriseLookup !== props.entLookup,
   );
 
   return (
     <>
       <div class='ml-2'>
         <h2 class='flex flex-row items-center text-lg font-bold'>
-          <span class='flex-1'>{details.Name}</span>
+          <span class='flex-1'>{props.Name}</span>
 
           <Action
             actionStyle={ActionStyleTypes.Link |
               ActionStyleTypes.Rounded |
               ActionStyleTypes.Icon}
             class='flex-none'
-            href={`./enterprises/${details.entLookup}`}
+            href={`./enterprises/${props.entLookup}`}
           >
             <EditIcon class='w-4 h-4' />
           </Action>
         </h2>
 
-        <p class='text-sm'>{details.Description}</p>
+        <p class='text-sm'>{props.Description}</p>
       </div>
 
       <div>

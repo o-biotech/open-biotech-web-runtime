@@ -18,8 +18,6 @@ interface CommitStatusPageData {
 
   complete: boolean;
 
-  jwt: string;
-
   successRedirect: string;
 
   status: EaCStatus;
@@ -60,7 +58,6 @@ export const handler: EaCRuntimeHandlerResult<
         complete: status.Processing === EaCStatusProcessingTypes.COMPLETE,
         successRedirect,
         status,
-        jwt: ctx.State.Devices.JWT,
       };
 
       return ctx.Render(data);
@@ -126,25 +123,23 @@ export default function CommitStatus({
   useEffect(() => {
     if (IS_BROWSER) {
       const checkInterval = setInterval(() => {
-        fetch(`/api/o-biotech/eac/${Data.commitId}/status`, {
-          headers: {
-            Authrorization: `Bearer ${Data.jwt}`,
+        fetch(`/api/o-biotech/eac/${Data.commitId}/status`).then(
+          (resp: Response) => {
+            resp.json().then((status) => {
+              setStatus(status);
+
+              setComplete(
+                status.Processing === EaCStatusProcessingTypes.COMPLETE,
+              );
+
+              if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
+                clearInterval(checkInterval);
+              } else if (status.Processing === EaCStatusProcessingTypes.ERROR) {
+                location.reload();
+              }
+            });
           },
-        }).then((resp: Response) => {
-          resp.json().then((status) => {
-            setStatus(status);
-
-            setComplete(
-              status.Processing === EaCStatusProcessingTypes.COMPLETE,
-            );
-
-            if (status.Processing === EaCStatusProcessingTypes.COMPLETE) {
-              clearInterval(checkInterval);
-            } else if (status.Processing === EaCStatusProcessingTypes.ERROR) {
-              location.reload();
-            }
-          });
-        });
+        );
       }, 4250);
     }
   }, []);

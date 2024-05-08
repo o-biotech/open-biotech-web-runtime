@@ -128,7 +128,10 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
 
       const parentEaCSvc = await loadEaCSvc();
 
-      const jwt = await parentEaCSvc.JWT(eac.EnterpriseLookup!, ctx.State.Username!);
+      const jwt = await parentEaCSvc.JWT(
+        eac.EnterpriseLookup!,
+        ctx.State.Username!,
+      );
 
       ctx.State.EaCJWT = jwt.Token;
     }
