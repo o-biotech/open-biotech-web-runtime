@@ -72,8 +72,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
         explainerData.Title = 'Cloud Configuration';
 
         explainerData.Descriptions = [
-          `In this workflow, you'll provide us with connectivity into your Azure so that we can help manage your cloud infrastructure.`,
-          `Once complete, you'll have a complete IoT infrastructure for use in your biotech solutions.`,
+          `Establish an Azure cloud connection so OpenBiotech can set up a complete IoT cloud infrastructure for collecting, processing, exploring and sharing device data.`,
         ];
 
         explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
@@ -85,8 +84,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
         explainerData.Title = 'Connect Devices';
 
         explainerData.Descriptions = [
-          `Establish a getting started device for your IoT flow.`,
-          `Configure your built in dashboarding experiences for your device data.`,
+          `Start the process of connecting a device to the cloud and configure default dashboard services for exploring device data. `,
         ];
 
         explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
@@ -98,8 +96,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
         explainerData.Title = 'Set Up Data';
 
         explainerData.Descriptions = [
-          `Verify data is flowing from your device or an emulated device.`,
-          'See your API connection information.',
+          `Verify that data is flowing from your physical or emulated device to the cloud and view your API details and credentials.`,
         ];
 
         explainerData.VideoURL = 'https://www.youtube.com/embed/tprpd02a0mg?si=bnXDMsuj1MWdcCk4';
@@ -150,7 +147,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
             frameborder='0'
             allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
             referrerpolicy='strict-origin-when-cross-origin'
-            allowfullscreen
+            allowFullScreen
           >
           </iframe>
         </div>
