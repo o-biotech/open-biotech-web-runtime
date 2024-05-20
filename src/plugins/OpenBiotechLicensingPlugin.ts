@@ -1,9 +1,8 @@
-import { EaCStripeProcessor } from '@fathym/eac';
+import { EaCStripeProcessor, EverythingAsCode } from '@fathym/eac';
 import { EaCRuntimeConfig, EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime';
 import * as djwt from 'https://deno.land/x/djwt@v3.0.0/mod.ts';
 import { loadEaCSvc } from '@fathym/eac/api';
 import { IoCContainer } from 'https://deno.land/x/fathym_ioc@v0.0.10/src/ioc/ioc.ts';
-import { EverythingAsCode } from '../../../../fathym-deno/everything-as-code/src/eac/EverythingAsCode.ts';
 
 export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
   constructor() {}
