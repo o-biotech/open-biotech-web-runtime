@@ -11,6 +11,7 @@ import { CloudPhaseTypes } from '../state/CloudPhaseTypes.ts';
 import { DevicesPhaseTypes } from '../state/DevicesPhaseTypes.ts';
 import { DataPhaseTypes } from '../state/DataPhaseTypes.ts';
 import { EaCAzureADProviderDetails, loadJwtConfig } from '@fathym/eac/mod.ts';
+import { loadEaCSvc } from '@fathym/eac/api';
 
 export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<OpenBiotechWebState> {
   return async (req, ctx: EaCRuntimeContext<OpenBiotechWebState>) => {
@@ -171,6 +172,24 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
     }
 
     ctx.State = state;
+
+    if (ctx.State.Username) {
+      const parentEaCSvc = await loadEaCSvc();
+
+      const jwt = await parentEaCSvc.JWT(
+        ctx.Runtime.EaC.EnterpriseLookup!,
+        ctx.State.Username,
+      );
+
+      const eacSvc = await loadEaCSvc(jwt.Token);
+
+      ctx.State.UserLicenses = {
+        'o-biotech': await eacSvc.GetLicense(
+          ctx.Runtime.EaC.EnterpriseLookup!,
+          'o-biotech',
+        ),
+      };
+    }
 
     if (ctx.State.Username) {
       const providerLookup = 'o-biotech-github-app';

@@ -8,8 +8,10 @@ import {
   StepsFeatures,
   StepsFeaturesProps,
 } from '@o-biotech/atomic';
+import { EaCLicenseAsCode } from '@fathym/eac';
 import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
 import { CloudIoTForm } from '../data/iot.form.tsx';
+import { UserEaCLicense } from '@fathym/eac/api';
 
 export type CloudStepsFeaturesProps = StepsFeaturesProps & {
   billingScopes: Record<string, string>;
@@ -30,13 +32,21 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
 
   locations: Location[];
 
+  license?: EaCLicenseAsCode;
+
+  licLookup?: string;
+
   organizations?: string[];
 
   resGroupLookup?: string;
 
+  stripePublishableKey: string;
+
   subs: Record<string, string>;
 
   tenants: Record<string, string>;
+
+  userLicense?: UserEaCLicense;
 };
 
 export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
@@ -81,8 +91,12 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
           hasStorageCold={props.hasStorageCold}
           hasStorageHot={props.hasStorageHot}
           hasStorageWarm={props.hasStorageWarm}
+          license={props.license}
+          licLookup={props.licLookup}
           organizations={props.organizations}
           resGroupLookup={props.resGroupLookup!}
+          stripePublishableKey={props.stripePublishableKey}
+          userLicense={props.userLicense}
         />
       );
       break;

@@ -22,19 +22,20 @@ import {
   EaCOAuthProcessor,
   EaCPreactAppProcessor,
   EaCProxyProcessor,
+  EaCStripeModifierDetails,
   EaCTailwindProcessor,
   EaCTracingModifierDetails,
 } from '@fathym/eac';
 import { IoCContainer } from '@fathym/ioc';
-import { EaCMSALProcessor, MSALPlugin } from '@fathym/msal';
-import { loadOAuth2ClientConfig } from '@fathym/eac/runtime';
+import { EaCMSALProcessor } from '@fathym/msal';
 import { DefaultOpenBiotechWebProcessorHandlerResolver } from './DefaultOpenBiotechWebProcessorHandlerResolver.ts';
 import { GitHubAppSourceConnectionModifierHandlerResolver } from './GitHubAppSourceConnectionModifierHandlerResolver.ts';
 import { DefaultOpenBiotechWebModifierResolver } from './DefaultOpenBiotechWebModifierResolver.ts';
 import { GitHubAppSourceConnectionModifierDetails } from './GitHubAppSourceConnectionModifierDetails.ts';
 import { CurrentEaCModifierHandlerResolver } from './CurrentEaCModifierHandlerResolver.ts';
 import { CurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
-import { createOAuthHelpers } from '@fathym/common/oauth';
+import OpenBiotechMSALPlugin from './OpenBiotechMSALPlugin.ts';
+import OpenBiotechLicensingPlugin from './OpenBiotechLicensingPlugin.ts';
 
 export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -45,58 +46,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
       Plugins: [
         new FathymAzureContainerCheckPlugin(),
         new FathymAtomicIconsPlugin(),
-        new MSALPlugin({
-          async Resolve(ioc, _processor, eac) {
-            const primaryProviderLookup = Object.keys(eac.Providers || {}).find(
-              (pl) => eac.Providers![pl].Details!.IsPrimary,
-            );
-
-            const provider = eac.Providers![primaryProviderLookup!]!;
-
-            const oAuthConfig = loadOAuth2ClientConfig(provider)!;
-
-            const helpers = createOAuthHelpers(oAuthConfig);
-
-            const kv = await ioc.Resolve<Deno.Kv>(
-              Deno.Kv,
-              provider.DatabaseLookup,
-            );
-
-            const keyRoot = ['MSAL', 'Session'];
-
-            return {
-              async Clear(req) {
-                const sessionId = await helpers.getSessionId(req);
-
-                const kvKey = [...keyRoot, sessionId!];
-
-                const results = await kv.list({ prefix: kvKey });
-
-                for await (const result of results) {
-                  await kv.delete(result.key);
-                }
-              },
-              async Load(req, key) {
-                const sessionId = await helpers.getSessionId(req);
-
-                const kvKey = [...keyRoot, sessionId!, key];
-
-                const res = await kv.get(kvKey);
-
-                return res.value;
-              },
-              async Set(req, key, value) {
-                const sessionId = await helpers.getSessionId(req);
-
-                const kvKey = [...keyRoot, sessionId!, key];
-
-                await kv.set(kvKey, value, {
-                  expireIn: 1000 * 60 * 30,
-                });
-              },
-            };
-          },
-        }),
+        new OpenBiotechMSALPlugin(),
+        new OpenBiotechLicensingPlugin(),
       ],
       EaC: {
         Projects: {
@@ -132,6 +83,9 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               oauth: {
                 Priority: 10000,
               },
+              stripe: {
+                Priority: 5000,
+              },
             },
             ApplicationResolvers: {
               assets: {
@@ -155,6 +109,11 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               home: {
                 PathPattern: '*',
                 Priority: 100,
+              },
+              licensingApi: {
+                PathPattern: '/api/o-biotech/licensing/*',
+                Priority: 200,
+                IsPrivate: true,
               },
               msal: {
                 PathPattern: '/azure/oauth/*',
@@ -186,7 +145,6 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 PathPattern: '/api/o-biotech/eac*',
                 Priority: 200,
                 IsPrivate: true,
-                IsTriggerSignIn: true,
               },
               tailwind: {
                 PathPattern: '/tailwind*',
@@ -535,6 +493,14 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               DenoKVDatabaseLookup: 'cache',
               CacheSeconds: 60 * 20,
             } as EaCDenoKVCacheModifierDetails,
+          },
+          stripe: {
+            Details: {
+              Type: 'Stripe',
+              Name: 'Stripe',
+              Description: 'Stripe middleware for including stripe js on every page.',
+              IncludeScript: true,
+            } as EaCStripeModifierDetails,
           },
           tracing: {
             Details: {

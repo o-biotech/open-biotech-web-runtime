@@ -1,4 +1,4 @@
-import { UserEaCRecord } from '@fathym/eac/api';
+import { UserEaCLicense, UserEaCRecord } from '@fathym/eac/api';
 import { SetupPhaseTypes } from './SetupPhaseTypes.ts';
 import { OpenBiotechEaC } from '../eac/OpenBiotechEaC.ts';
 import { CloudPhaseTypes } from './CloudPhaseTypes.ts';
@@ -24,6 +24,8 @@ export type OpenBiotechWebState =
     Phase: SetupPhaseTypes;
 
     UserEaCs?: UserEaCRecord[];
+
+    UserLicenses?: Record<string, UserEaCLicense>;
 
     Username: string;
   }

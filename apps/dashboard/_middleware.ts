@@ -1,5 +1,5 @@
 import { EaCRuntimeHandler } from '@fathym/eac/runtime';
-import { establishOpenBiotechWebStateMiddleware } from '../../src/middleware/establishOpenBiotechWebStateMiddleware.ts';
+import { establishOpenBiotechWebStateMiddleware } from '../../src/eac/establishOpenBiotechWebStateMiddleware.ts';
 
 export default [
   establishOpenBiotechWebStateMiddleware(),

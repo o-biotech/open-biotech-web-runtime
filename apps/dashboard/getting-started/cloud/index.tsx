@@ -1,5 +1,11 @@
 import { mergeWithArrays, redirectRequest } from '@fathym/common';
-import { EaCServiceDefinitions, loadEaCAzureSvc, loadEaCSvc } from '@fathym/eac/api';
+import { EaCLicenseAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
+import {
+  EaCServiceDefinitions,
+  loadEaCAzureSvc,
+  loadEaCSvc,
+  UserEaCLicense,
+} from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { Location, Subscription, TenantIdDescription } from 'npm:@azure/arm-subscriptions';
 import { BillingAccount } from 'npm:@azure/arm-billing';
@@ -26,15 +32,23 @@ interface CloudPageData {
 
   isAzureConnected: boolean;
 
+  license?: EaCLicenseAsCode;
+
+  licLookup?: string;
+
   locations: Location[];
 
   organizations?: string[];
 
   resGroupLookup?: string;
 
+  stripePublishableKey: string;
+
   subs: Record<string, string>;
 
   tenants: Record<string, string>;
+
+  userLicense?: UserEaCLicense;
 }
 
 export const handler: EaCRuntimeHandlerResult<
@@ -46,6 +60,9 @@ export const handler: EaCRuntimeHandlerResult<
       return redirectRequest('/', false, false);
     }
 
+    const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
+      .Details as EaCLicenseStripeDetails;
+
     const data: CloudPageData = {
       billingScopes: {},
       cloudLookup: ctx.State.Cloud.CloudLookup,
@@ -55,10 +72,14 @@ export const handler: EaCRuntimeHandlerResult<
       hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
       hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       isAzureConnected: !!ctx.State.Cloud.AzureAccessToken,
+      license: ctx.Runtime.EaC.Licenses!['o-biotech'],
+      licLookup: 'o-biotech',
       resGroupLookup: ctx.State.Cloud.ResourceGroupLookup,
+      stripePublishableKey: licDetails.PublishableKey,
       locations: [],
       subs: {},
       tenants: {},
+      userLicense: ctx.State.UserLicenses?.['o-biotech'],
     };
 
     const svcCalls: (() => Promise<void>)[] = [];
@@ -243,10 +264,14 @@ export default function Cloud({ Data }: PageProps<CloudPageData>) {
         hasStorageHot={Data.hasStorageHot}
         hasStorageWarm={Data.hasStorageWarm}
         isAzureConnected={Data.isAzureConnected}
+        license={Data.license}
+        licLookup={Data.licLookup}
         organizations={Data.organizations}
         resGroupLookup={Data.resGroupLookup}
+        stripePublishableKey={Data.stripePublishableKey}
         subs={Data.subs}
         tenants={Data.tenants}
+        userLicense={Data.userLicense}
       />
     </div>
   );
