@@ -183,12 +183,16 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
 
       const eacSvc = await loadEaCSvc(jwt.Token);
 
-      ctx.State.UserLicenses = {
-        'o-biotech': await eacSvc.GetLicense(
-          ctx.Runtime.EaC.EnterpriseLookup!,
-          'o-biotech',
-        ),
-      };
+      const licRes = await eacSvc.GetLicense(
+        ctx.Runtime.EaC.EnterpriseLookup!,
+        'o-biotech',
+      );
+
+      if (licRes.Active) {
+        ctx.State.UserLicenses = {
+          'o-biotech': licRes.License,
+        };
+      }
     }
 
     if (ctx.State.Username) {

@@ -30,7 +30,7 @@
     "@fathym/eac/": "https://deno.land/x/fathym_everything_as_code@v0.0.412/",
     "@fathym/eac/azure": "https://deno.land/x/fathym_everything_as_code@v0.0.412/azure.ts",
     // "@fathym/eac/api": "../../fathym-deno/everything-as-code-api/mod.ts",
-    "@fathym/eac/api": "https://deno.land/x/fathym_everything_as_code_api@v0.0.39/mod.ts",
+    "@fathym/eac/api": "https://deno.land/x/fathym_everything_as_code_api@v0.0.40/mod.ts",
     // "@fathym/eac/runtime": "../../fathym-deno/eac-runtime/mod.ts",
     "@fathym/eac/runtime": "https://deno.land/x/fathym_eac_runtime@v0.0.250/mod.ts",
     // "@fathym/eac/runtime/": "../../fathym-deno/eac-runtime/",
