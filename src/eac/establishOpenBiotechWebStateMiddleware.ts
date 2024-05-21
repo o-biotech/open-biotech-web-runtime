@@ -176,15 +176,9 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
     if (ctx.State.Username) {
       const parentEaCSvc = await loadEaCSvc();
 
-      const jwt = await parentEaCSvc.JWT(
+      const licRes = await parentEaCSvc.GetLicense(
         ctx.Runtime.EaC.EnterpriseLookup!,
         ctx.State.Username,
-      );
-
-      const eacSvc = await loadEaCSvc(jwt.Token);
-
-      const licRes = await eacSvc.GetLicense(
-        ctx.Runtime.EaC.EnterpriseLookup!,
         'o-biotech',
       );
 
