@@ -143,7 +143,7 @@ export function DeviceForm(props: DeviceFormProps) {
               callToActionStyles.props,
             )}
           >
-            Save Device(s)
+            {isSimulated ? 'Save Device(s)' : 'Save Device'}
           </Action>
         </>
       </ActionGroup>
