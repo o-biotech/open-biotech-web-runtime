@@ -4,7 +4,7 @@ import { Location } from 'npm:@azure/arm-subscriptions';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import { useState } from 'preact/hooks';
 
-export type DeviceFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+export type DeviceFormProps = JSX.HTMLAttributes<formElement> & {
   cloudLookup: string;
 
   deviceLookup?: string;
@@ -84,7 +84,7 @@ export function DeviceForm(props: DeviceFormProps) {
               value='isIoTEdge'
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
-            <label htmlFor='isIoTEdge' class='ms-2 text-sm font-medium pl-3'>
+            <label for='isIoTEdge' class='ms-2 text-sm font-medium pl-3'>
               Is IoT Edge Device?
             </label>
           </div>
@@ -98,7 +98,7 @@ export function DeviceForm(props: DeviceFormProps) {
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
               onChange={() => setIsSimulated(!isSimulated)}
             />
-            <label htmlFor='isSimulated' class='ms-2 text-sm font-medium pl-3'>
+            <label for='isSimulated' class='ms-2 text-sm font-medium pl-3'>
               Create a simulated device?
             </label>
             <div class="relative group">
@@ -112,7 +112,7 @@ export function DeviceForm(props: DeviceFormProps) {
           {isSimulated && (
             <div class='w-full px-3'>
               <label
-                htmlFor='simulatedDeviceName'
+                for='simulatedDeviceName'
                 class='block uppercase tracking-wide font-bold mb-0 text-xl'
               >
                 Simulated Device Name
