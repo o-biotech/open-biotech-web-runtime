@@ -3,7 +3,6 @@ import { Action, ActionGroup, ActionStyleTypes, classSet, Input } from '@o-biote
 import { Location } from 'npm:@azure/arm-subscriptions';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import { useState } from 'preact/hooks';
-import { FaQuestionCircle } from 'react-icons/fa';
 
 export type DeviceFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
@@ -103,7 +102,7 @@ export function DeviceForm(props: DeviceFormProps) {
               Create a simulated device?
             </label>
             <div className="relative group">
-              <FaQuestionCircle className='ml-2 text-gray-500 cursor-pointer' />
+              <HelpIcon class="w-4 h-4" />
               <div className="absolute left-0 w-64 p-2 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 This option creates a simulated device for testing purposes. The simulated device name defaults to "simulated-device".
               </div>
