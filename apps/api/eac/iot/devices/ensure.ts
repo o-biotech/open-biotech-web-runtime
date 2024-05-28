@@ -41,16 +41,16 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
                 IsSimulated: false,
               },
             },
-            ...(isSimulated && {
+            ...(isSimulated ? {
               [simulatedDeviceLookup]: {
                 Details: {
                   Name: simulatedDeviceLookup,
                   Description: simulatedDeviceLookup,
-                  IsIoTEdge: false,
+                  IsIoTEdge: true,
                   IsSimulated: true,
                 },
               },
-            }),
+            }: {}),
           },
         },
       },

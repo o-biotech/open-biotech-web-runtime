@@ -144,11 +144,9 @@ export function setupEaCIoTFlow(
         },
         Data: {
           CloudLookup: cloudLookup,
-          Location: resGroupLocation,
           Name: resGroupLookup,
-          ParentResourceLookup: `${resLookup}`,
           ResourceLookup: `${resLookup}-device-simulator`,
-          ServicePrincipalID: servicePrincipalId,
+          DeviceID: 'simulated-device',
           ShortName: shortName,
         },
         Outputs: {},
