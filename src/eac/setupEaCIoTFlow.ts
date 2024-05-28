@@ -129,6 +129,42 @@ export function setupEaCIoTFlow(
     };
   }
 
+  //Device Simulator
+    iotResources[`${resLookup}-device-simulator`] = {
+      Details: {
+        Type: 'Format',
+        Name: 'IoT Infrastructure - Device Simulator',
+        Description: 'A containerized function to simulate and send device data',
+        Order: 1,
+        Template: {
+          Content:
+            `https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/simulator/template.jsonc`,
+          Parameters:
+            'https://raw.githubusercontent.com/lowcodeunit/infrastructure/integration/templates/o-biotech/iot/ref-arch/simulator/parameters.jsonc',
+        },
+        Data: {
+          CloudLookup: cloudLookup,
+          Name: resGroupLookup,
+          ResourceLookup: `${resLookup}-device-simulator`,
+          DeviceID: 'simulated-device',
+          ShortName: shortName,
+        },
+        Outputs: {},
+      } as EaCCloudResourceFormatDetails,
+    };
+
+    // roleAssignments[details.ID!] = [
+    //   {
+    //     PrincipalID: details.ID!,
+    //     PrincipalType: 'ServicePrincipal',
+    //     RoleDefinitionID: 'b7e6dc6d-f1e8-4753-8033-0f276bb0955b',
+    //     Scope:
+    //       `/subscriptions/${details.SubscriptionID}/resourceGroups/${resGroupLookup}/providers/Microsoft.Storage/storageAccounts/${shortName}datalake`,
+    //     // Scope: '$output:dataLakeRoleScope',
+    //   },
+    // ];
+  //}
+
   const eac: OpenBiotechEaC = {
     EnterpriseLookup: entLookup,
     Clouds: {
