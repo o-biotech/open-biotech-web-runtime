@@ -3,8 +3,8 @@ import { classSet, Footer, FooterProps } from '@o-biotech/atomic';
 export function BiotechFooter(props: FooterProps) {
   return (
     <Footer
-      companyName='Fathym OpenBiotech'
-      companyDescription='Deliver Biotech applications with ease, share with the masses.'
+      companyName='Fathym OpenIndustrial'
+      companyDescription='Deliver Industrial applications with ease, share with the masses.'
       class={classSet(['![&_a]:text-white'], props)}
       nav={[
         {

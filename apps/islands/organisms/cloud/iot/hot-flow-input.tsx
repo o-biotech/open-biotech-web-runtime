@@ -68,7 +68,7 @@ export default function HotFlowInput(props: HotFlowInputProps) {
             type='text'
             required
             placeholder='Enter new repository name'
-            value='open-biotech-device-flow'
+            value='open-industrial-device-flow'
           />
         </div>
       </>
