@@ -1,1 +1,1 @@
-# open-biotech-web-runtime
+# open-industrial-web-runtime
