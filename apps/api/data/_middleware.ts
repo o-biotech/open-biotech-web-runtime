@@ -1,8 +1,8 @@
 import { loadEaCSvc } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult } from '@fathym/eac/runtime';
-import { OpenBiotechWebAPIState } from '../../../src/api/OpenBiotechWebAPIState.ts';
+import { OpenIndustrialWebAPIState } from '../../../src/api/OpenIndustrialWebAPIState.ts';
 
-export const handler: EaCRuntimeHandlerResult<OpenBiotechWebAPIState> = async (
+export const handler: EaCRuntimeHandlerResult<OpenIndustrialWebAPIState> = async (
   _req,
   ctx,
 ) => {
