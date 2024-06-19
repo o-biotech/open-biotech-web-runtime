@@ -1,5 +1,5 @@
 // deno-lint-ignore-file no-explicit-any
-import { ComponentChildren, JSX } from 'preact';
+import { ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { classSet } from '@o-biotech/atomic';

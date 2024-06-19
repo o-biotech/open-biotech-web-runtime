@@ -1,4 +1,4 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCSourceAsCode } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
@@ -109,7 +109,7 @@ export const handler: EaCRuntimeHandlerResult<
 
     const [remoteOrg, remoteRepo] = remoteUrl.pathname.substring(1).split('/');
 
-    const configuredSrcLookup = !action || action === 'configure'
+    const _configuredSrcLookup = !action || action === 'configure'
       ? `GITHUB://${org}/${repo}`
       : `GITHUB://${remoteOrg}/${remoteRepo}`;
 
@@ -154,7 +154,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const srcLookup: string = ctx.Params.srcLookup ? decodeURIComponent(ctx.Params.srcLookup) : '';
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);

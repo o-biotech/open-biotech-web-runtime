@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'preact/hooks';
+import { useState } from 'preact/hooks';
 import { Action, ActionProps, ActionStyleTypes, classSet } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../components/styles/actions.tsx';
 

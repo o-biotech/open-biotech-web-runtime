@@ -1,4 +1,4 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCDevOpsActionAsCode } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
@@ -86,7 +86,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const doaLookup = ctx.Params.doaLookup!;
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);

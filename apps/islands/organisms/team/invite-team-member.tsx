@@ -1,5 +1,4 @@
 import { JSX } from 'preact';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 

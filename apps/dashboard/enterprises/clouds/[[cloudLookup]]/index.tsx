@@ -1,14 +1,8 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCCloudAsCode, EaCCloudAzureDetails } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import {
-  DisplayStyleTypes,
-  EaCManageCloudForm,
-  EaCManageDevOpsActionForm,
-  Hero,
-  HeroStyleTypes,
-} from '@o-biotech/atomic';
+import { DisplayStyleTypes, EaCManageCloudForm, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { OpenBiotechWebState } from '../../../../../src/state/OpenBiotechWebState.ts';
 import { OpenBiotechEaC } from '../../../../../src/eac/OpenBiotechEaC.ts';
 import DeleteAction from '../../../../islands/molecules/DeleteAction.tsx';
@@ -90,7 +84,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const cloudLookup = ctx.Params.cloudLookup!;
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);

@@ -1,4 +1,3 @@
-import { ComponentChildren } from 'preact';
 import {
   Action,
   ActionGroup,

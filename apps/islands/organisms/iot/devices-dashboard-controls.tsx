@@ -107,13 +107,13 @@ export default function DevicesDashboardControls(props: DevicesDashboardControls
   };
 
   const handleOnApplyCustomFilterClick = (
-    e: JSX.TargetedMouseEvent<HTMLButtonElement>,
+    _e: JSX.TargetedMouseEvent<HTMLButtonElement>,
   ) => {
     setCustomFilter(customFilterRef.current!.value);
   };
 
   const handleOnApplySettingsFilterClick = (
-    e: JSX.TargetedMouseEvent<HTMLButtonElement>,
+    _e: JSX.TargetedMouseEvent<HTMLButtonElement>,
   ) => {
     setRefresh({
       EnableRefresh: enableRefreshRef.current!.checked,

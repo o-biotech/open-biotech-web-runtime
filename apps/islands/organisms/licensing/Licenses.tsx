@@ -2,18 +2,9 @@ import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { EaCLicenseAsCode } from '@fathym/eac';
 import { UserEaCLicense } from '@fathym/eac/api';
-import {
-  Action,
-  ActionGroup,
-  ActionStyleTypes,
-  classSet,
-  Input,
-  MenuButton,
-  SlideToggle,
-} from '@o-biotech/atomic';
+import { Action, ActionGroup, ActionStyleTypes, classSet, SlideToggle } from '@o-biotech/atomic';
 import { loadStripe } from 'npm:@stripe/stripe-js';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
-import { LoadingIcon } from '../../../../build/iconset/icons/LoadingIcon.tsx';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 export const IsIsland = true;
@@ -49,7 +40,7 @@ export default function Licenses(props: LicensesProps) {
     .map((planLookup) => {
       const plan = props.license.Plans[planLookup];
 
-      const planDetails = plan.Details!;
+      const _planDetails = plan.Details!;
 
       const prices = Object.keys(plan.Prices).map((priceLookup) => {
         const price = plan.Prices[priceLookup];
@@ -93,7 +84,7 @@ export default function Licenses(props: LicensesProps) {
 
     console.log(interval);
 
-    const planKey = `${planLookup}-${interval}`;
+    const _planKey = `${planLookup}-${interval}`;
 
     const plan = plans.find((p) => p.PlanLookup === planLookup)!;
 

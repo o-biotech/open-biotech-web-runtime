@@ -1,4 +1,4 @@
-import { classSet, Display } from '@o-biotech/atomic';
+import { classSet } from '@o-biotech/atomic';
 import { JSX } from 'preact';
 import DevicesDashboardControls from '../../islands/organisms/iot/devices-dashboard-controls.tsx';
 import { EaCDeviceAsCode } from '@fathym/eac';

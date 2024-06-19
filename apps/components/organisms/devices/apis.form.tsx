@@ -1,6 +1,5 @@
 import { JSX } from 'preact';
-import { Action, ActionGroup, ActionStyleTypes, classSet, Input } from '@o-biotech/atomic';
-import { Location } from 'npm:@azure/arm-subscriptions';
+import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../styles/actions.tsx';
 
 export type APIsFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
