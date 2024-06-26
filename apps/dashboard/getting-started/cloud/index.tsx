@@ -97,7 +97,7 @@ export const handler: EaCRuntimeHandlerResult<
 
       const svcFileCalls: Promise<EaCServiceDefinitions>[] = serviceFiles.map(
         (sf) => {
-          return new Promise((resolve, _reject) => {
+          return new Promise((resolve) => {
             fetch(sf).then((fileResp) => {
               fileResp.json().then((response) => {
                 resolve(response);
