@@ -1,4 +1,4 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCDashboardAsCode } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
@@ -91,7 +91,7 @@ export const handler: EaCRuntimeHandlerResult<
         iot.ResourceGroupLookup!
       ].Resources!['iot-flow'];
 
-      const resKeys = iotFlowResource.Keys as Record<string, unknown>;
+      const _resKeys = iotFlowResource.Keys as Record<string, unknown>;
 
       const shortName = iot
         .ResourceGroupLookup!.split('-')
@@ -187,7 +187,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const iotLookup = ctx.Params.iotLookup!;
 
     const dashboardLookup = ctx.Params.dashboardLookup!;

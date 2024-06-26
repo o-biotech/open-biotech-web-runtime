@@ -1,20 +1,11 @@
 import { redirectRequest } from '@fathym/common';
 import { loadEaCSvc } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import {
-  Action,
-  ActionGroup,
-  classSet,
-  DisplayStyleTypes,
-  Hero,
-  HeroStyleTypes,
-} from '@o-biotech/atomic';
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { DataStepsFeatures } from '../../../components/organisms/features/DataStepsFeatures.tsx';
 import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
 import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
-import DeviceDataFlowing from '../../../islands/organisms/iot/device-data-flowing.tsx';
-import { callToActionStyles } from '../../../components/styles/actions.tsx';
 
 interface DataPageData {
   dashboardTypes: string[];

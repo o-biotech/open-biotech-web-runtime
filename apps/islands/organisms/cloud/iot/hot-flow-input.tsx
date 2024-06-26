@@ -1,4 +1,4 @@
-import { ComponentChildren, JSX } from 'preact';
+import { ComponentChildren } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { Action, ActionStyleTypes, Input, InputProps, Select } from '@o-biotech/atomic';
 import GitHubAccessAction from '../../../molecules/GitHubAccessAction.tsx';
@@ -16,9 +16,9 @@ export type HotFlowInputProps = {
 export default function HotFlowInput(props: HotFlowInputProps) {
   // if (!IS_BROWSER) return <></>;
 
-  const { children, hasGitHubAuth, organizations, ...inputProps } = props;
+  const { children, hasGitHubAuth, organizations: _orgs, ...inputProps } = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const _inputRef = useRef<HTMLInputElement>(null);
 
   const [isChecked, setIsChecked] = useState(!!props.checked);
 

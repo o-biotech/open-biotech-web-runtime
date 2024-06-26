@@ -1,11 +1,10 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCDeviceAsCode } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { DisplayStyleTypes, EaCManageIoTDeviceForm, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { OpenBiotechWebState } from '../../../../../../../src/state/OpenBiotechWebState.ts';
 import { OpenBiotechEaC } from '../../../../../../../src/eac/OpenBiotechEaC.ts';
-import DeleteAction from '../../../../../../islands/molecules/DeleteAction.tsx';
 
 export type EaCIoTDevicePageData = {
   entLookup: string;
@@ -91,7 +90,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const iotLookup = ctx.Params.iotLookup!;
 
     const deviceLookup = ctx.Params.deviceLookup!;

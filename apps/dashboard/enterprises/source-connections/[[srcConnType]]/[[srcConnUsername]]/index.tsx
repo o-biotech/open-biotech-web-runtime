@@ -1,4 +1,4 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCSourceConnectionAsCode } from '@fathym/eac';
 import { loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
@@ -40,7 +40,7 @@ export const handler: EaCRuntimeHandlerResult<
     return ctx.Render(data);
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const srcConnLookup: string = ctx.Params.srcConnLookup
       ? decodeURIComponent(ctx.Params.srcConnLookup)
       : '';

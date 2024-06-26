@@ -1,6 +1,5 @@
 import { JSX } from 'preact';
-import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
-import { callToActionStyles } from '../../styles/actions.tsx';
+import { classSet, Input } from '@o-biotech/atomic';
 import IoTHubKeySimulatorDisplay from '../../../islands/organisms/iot/hub-key-simulator.tsx';
 import DeviceDataFlowingContinue from '../../../islands/organisms/iot/device-data-flowing-continue.tsx';
 

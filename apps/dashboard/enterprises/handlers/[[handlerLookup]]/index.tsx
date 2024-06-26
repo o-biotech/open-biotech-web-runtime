@@ -1,10 +1,9 @@
-import { redirectRequest, respond } from '@fathym/common';
+import { redirectRequest } from '@fathym/common';
 import { EaCHandler } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { DisplayStyleTypes, EaCManageHandlerForm, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { OpenBiotechWebState } from '../../../../../src/state/OpenBiotechWebState.ts';
-import CreateEaCHero from '../../../../components/organisms/heros/CreateEaCHero.tsx';
 import { OpenBiotechEaC } from '../../../../../src/eac/OpenBiotechEaC.ts';
 import DeleteAction from '../../../../islands/molecules/DeleteAction.tsx';
 
@@ -78,7 +77,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
   },
 
-  async DELETE(req, ctx) {
+  async DELETE(_req, ctx) {
     const handlerLookup = ctx.Params.handlerLookup!;
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);

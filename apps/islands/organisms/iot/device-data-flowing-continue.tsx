@@ -1,6 +1,3 @@
-import { ComponentChildren, JSX } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
 import { Action, ActionGroup, classSet } from '@o-biotech/atomic';
 import DeviceDataFlowing from './device-data-flowing.tsx';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';

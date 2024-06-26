@@ -26,6 +26,8 @@ export type ResourceGroupIoTSettingsProps = {
   organizations?: string[];
 
   resGroupLookup: string;
+
+  stripePublishableKey: string;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettingsProps) {
@@ -33,7 +35,7 @@ export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettings
 
   const [selectedKey, setSelectedKey] = useState('');
 
-  const onKeyChange = (key: string) => {
+  const _onKeyChange = (key: string) => {
     setSelectedKey(key);
   };
 
@@ -42,13 +44,13 @@ export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettings
     .map((p) => p.charAt(0))
     .join('');
 
-  const connStr = selectedKey
+  const _connStr = selectedKey
     ? `HostName=${shortName}-iot-hub.azure-devices.net;SharedAccessKeyName=${selectedKey};SharedAccessKey=${
       props.iotHubKeys[selectedKey]
     }`
     : '';
 
-  const resGroupChanged = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
+  const _resGroupChanged = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
     setCurResGroup(e.currentTarget.value);
   };
 
@@ -93,6 +95,7 @@ export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettings
             hasStorageWarm={props.hasStorageWarm}
             organizations={props.organizations}
             resGroupLookup={curResGroup}
+            stripePublishableKey={props.stripePublishableKey}
           />
 
           <div class='my-8'>

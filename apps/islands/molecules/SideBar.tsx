@@ -1,6 +1,5 @@
 import { ComponentChildren, JSX } from 'preact';
 import { classSet } from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../src/state/OpenBiotechWebState.ts';
 import { CloudPhaseTypes } from '../../../src/state/CloudPhaseTypes.ts';
 import { DataPhaseTypes } from '../../../src/state/DataPhaseTypes.ts';
 import { UserEaCRecord } from '@fathym/eac/api';

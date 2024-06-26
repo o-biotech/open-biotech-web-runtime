@@ -1,6 +1,5 @@
-import { ComponentChildren, JSX } from 'preact';
-import { Location, Subscription, TenantIdDescription } from 'npm:@azure/arm-subscriptions';
-import { BillingAccount } from 'npm:@azure/arm-billing';
+import { ComponentChildren } from 'preact';
+import { Location } from 'npm:@azure/arm-subscriptions';
 import {
   classSet,
   CloudCALZForm,

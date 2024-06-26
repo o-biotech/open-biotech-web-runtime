@@ -7,8 +7,7 @@ import {
   UserEaCLicense,
 } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { Location, Subscription, TenantIdDescription } from 'npm:@azure/arm-subscriptions';
-import { BillingAccount } from 'npm:@azure/arm-billing';
+import { Location } from 'npm:@azure/arm-subscriptions';
 import CloudConnectHero from '../../../components/organisms/heros/CloudConnectHero.tsx';
 import CloudStepsFeatures from '../../../components/organisms/features/CloudStepsFeatures.tsx';
 import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
@@ -98,7 +97,7 @@ export const handler: EaCRuntimeHandlerResult<
 
       const svcFileCalls: Promise<EaCServiceDefinitions>[] = serviceFiles.map(
         (sf) => {
-          return new Promise((resolve, reject) => {
+          return new Promise((resolve) => {
             fetch(sf).then((fileResp) => {
               fileResp.json().then((response) => {
                 resolve(response);
@@ -130,7 +129,7 @@ export const handler: EaCRuntimeHandlerResult<
     }
 
     if (ctx.State.Cloud.AzureAccessToken) {
-      const provider = ctx.Runtime.EaC.Providers!['azure']!;
+      const _provider = ctx.Runtime.EaC.Providers!['azure']!;
 
       svcCalls.push(async () => {
         const tenants = await eacAzureSvc.Tenants(

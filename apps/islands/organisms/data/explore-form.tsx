@@ -1,10 +1,9 @@
 import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { Action, ActionGroup, ActionStyleTypes, classSet, Input } from '@o-biotech/atomic';
+import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 import DashboardDisplay from './dashboard-display.tsx';
-import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 export const IsIsland = true;
 
@@ -23,7 +22,7 @@ export default function DataExploreForm(props: DataExploreFormProps) {
 
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [_isLoaded, setIsLoaded] = useState(false);
 
   if (props.dashboardTypes.includes('AzureDataExplorer')) {
     const mapScope = (scope: string) => {
@@ -84,23 +83,6 @@ export default function DataExploreForm(props: DataExploreFormProps) {
       }
     });
   }
-
-  const kustoQuery = props.dashboardTypes.includes('AzureDataExplorer')
-    ? `https://dataexplorer.azure.com/clusters/${props.kustoCluster}.${props.kustoLocation}/databases/Telemetry?f-IFrameAuth=true&f-UseMeControl=false&workspace=<guid>`
-    : null;
-
-  const kustoIframe = kustoQuery && (
-    <>
-      {!isLoaded && <RenewIcon class='w-20 h-20 text-blue-500 animate-spin inline-block m-4' />}
-
-      <iframe
-        class='w-full h-[600px]'
-        ref={iframeRef}
-        src={kustoQuery}
-      >
-      </iframe>
-    </>
-  );
 
   return (
     <form

@@ -1,4 +1,3 @@
-import { ComponentChildren } from 'preact';
 import { Action, ActionGroup, classSet, FeaturesProps, StepsFeatures } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import { SetupPhaseTypes } from '../../../../src/state/SetupPhaseTypes.ts';
