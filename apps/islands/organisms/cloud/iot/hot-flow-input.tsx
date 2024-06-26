@@ -16,12 +16,7 @@ export type HotFlowInputProps = {
 export default function HotFlowInput(props: HotFlowInputProps) {
   // if (!IS_BROWSER) return <></>;
 
-  const {
-    children,
-    hasGitHubAuth,
-    organizations: _organizations,
-    ...inputProps
-  } = props;
+  const { children, hasGitHubAuth, organizations: _orgs, ...inputProps } = props;
 
   const _inputRef = useRef<HTMLInputElement>(null);
 

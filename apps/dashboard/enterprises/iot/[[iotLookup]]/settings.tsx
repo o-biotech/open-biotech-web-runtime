@@ -1,5 +1,5 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCIoTAsCode } from '@fathym/eac';
+import { EaCIoTAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
 import { EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
@@ -29,6 +29,8 @@ export type EaCIoTSettingsPageData = {
 
   organizationOptions: string[];
   // resGroupOptions: DataLookup[];
+
+  stripePublishableKey: string;
 };
 
 export const handler: EaCRuntimeHandlerResult<
@@ -39,6 +41,9 @@ export const handler: EaCRuntimeHandlerResult<
     const manageIoTLookup = ctx.Params.iotLookup!;
 
     const manageIoT: EaCIoTAsCode = ctx.State.EaC!.IoT![manageIoTLookup]!;
+
+    const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
+      .Details as EaCLicenseStripeDetails;
 
     const data: EaCIoTSettingsPageData = {
       deviceKeys: {},
@@ -52,6 +57,7 @@ export const handler: EaCRuntimeHandlerResult<
       manageResourceGroupLookup: manageIoT.ResourceGroupLookup!,
       organizationOptions: [],
       // resGroupOptions: [],
+      stripePublishableKey: licDetails.PublishableKey,
     };
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
@@ -217,6 +223,7 @@ export default function EaCIoTSettings({
           iotHubKeys={Data.iotHubKeys}
           organizations={Data.organizationOptions}
           resGroupLookup={Data.manageResourceGroupLookup}
+          stripePublishableKey={Data.stripePublishableKey}
         />
       </div>
     </>

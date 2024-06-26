@@ -21,8 +21,7 @@ export default function Theme(_props: ThemeProps) {
   };
 
   useEffect(() => {
-    const isDarkTheme = !('theme' in localStorage) &&
-      matchMedia(darkMedia).matches;
+    const isDarkTheme = !('theme' in localStorage) && matchMedia(darkMedia).matches;
 
     if (localStorage.theme === 'dark' || isDarkTheme) {
       setDark();

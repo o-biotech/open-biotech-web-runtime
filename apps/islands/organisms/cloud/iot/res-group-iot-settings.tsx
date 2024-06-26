@@ -26,6 +26,8 @@ export type ResourceGroupIoTSettingsProps = {
   organizations?: string[];
 
   resGroupLookup: string;
+
+  stripePublishableKey: string;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export default function ResourceGroupIoTSettings(
@@ -95,6 +97,7 @@ export default function ResourceGroupIoTSettings(
             hasStorageWarm={props.hasStorageWarm}
             organizations={props.organizations}
             resGroupLookup={curResGroup}
+            stripePublishableKey={props.stripePublishableKey}
           />
 
           <div class='my-8'>
