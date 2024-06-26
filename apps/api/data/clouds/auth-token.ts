@@ -1,9 +1,9 @@
 import { respond } from '@fathym/common';
 import { loadEaCAzureSvc } from '@fathym/eac/api';
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime';
-import { OpenBiotechWebAPIState } from '../../../../src/api/OpenBiotechWebAPIState.ts';
+import { OpenIndustrialWebAPIState } from '../../../../src/api/OpenIndustrialWebAPIState.ts';
 
-export const handler: EaCRuntimeHandlers<OpenBiotechWebAPIState> = {
+export const handler: EaCRuntimeHandlers<OpenIndustrialWebAPIState> = {
   async GET(req, ctx) {
     const entLookup = ctx.State.EnterpriseLookup;
 

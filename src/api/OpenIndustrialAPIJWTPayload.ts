@@ -1,4 +1,4 @@
-export type OpenBiotechAPIJWTPayload = {
+export type OpenIndustrialAPIJWTPayload = {
   CloudLookup: string;
 
   EnterpriseLookup: string;

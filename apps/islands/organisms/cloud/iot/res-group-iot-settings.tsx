@@ -30,7 +30,9 @@ export type ResourceGroupIoTSettingsProps = {
   stripePublishableKey: string;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
-export default function ResourceGroupIoTSettings(props: ResourceGroupIoTSettingsProps) {
+export default function ResourceGroupIoTSettings(
+  props: ResourceGroupIoTSettingsProps,
+) {
   const [curResGroup, setCurResGroup] = useState(props.resGroupLookup);
 
   const [selectedKey, setSelectedKey] = useState('');
