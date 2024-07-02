@@ -3,6 +3,7 @@ import { Action, ActionGroup, ActionStyleTypes, classSet, Input } from '@o-biote
 import { Location } from 'npm:@azure/arm-subscriptions';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import { useState } from 'preact/hooks';
+import { HelpIcon } from '../../../../build/iconset/icons/HelpIcon.tsx';
 
 export type DeviceFormProps = JSX.HTMLAttributes<formElement> & {
   cloudLookup: string;
@@ -18,7 +19,15 @@ export type DeviceFormProps = JSX.HTMLAttributes<formElement> & {
 
 export function DeviceForm(props: DeviceFormProps) {
   // State to manage the visibility of the simulated device input
-  const [isSimulated, setIsSimulated] = useState(false);
+  const [isSimulatedState, setIsSimulatedState] = useState(false);
+
+  const toggleIsSimulated= () => {
+    setIsSimulatedState(!isSimulatedState);
+
+    console.log(isSimulatedState);
+  };
+
+  console.log(isSimulatedState);
 
   return (
     <form
@@ -94,9 +103,10 @@ export function DeviceForm(props: DeviceFormProps) {
               id='isSimulated'
               name='isSimulated'
               type='checkbox'
-              value='isSimulated'
+              checked={isSimulatedState}
+              //value='isSimulated'
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
-              onChange={() => setIsSimulated(!isSimulated)}
+              onChange={toggleIsSimulated}
             />
             <label for='isSimulated' class='ms-2 text-sm font-medium pl-3'>
               Create a simulated device?
@@ -109,17 +119,17 @@ export function DeviceForm(props: DeviceFormProps) {
             </div>
           </div>
 
-          {isSimulated && (
+          {isSimulatedState && (
             <div class='w-full px-3'>
               <label
-                for='simulatedDeviceName'
+                for='simulatedDeviceLookup'
                 class='block uppercase tracking-wide font-bold mb-0 text-xl'
               >
                 Simulated Device Name
               </label>
               <Input
-                id='simulatedDeviceName'
-                name='simulatedDeviceName'
+                id='simulatedDeviceLookup'
+                name='simulatedDeviceLookup'
                 type='text'
                 readOnly
                 value='simulated-device'
@@ -142,7 +152,7 @@ export function DeviceForm(props: DeviceFormProps) {
               callToActionStyles.props,
             )}
           >
-            {isSimulated ? 'Save Device(s)' : 'Save Device'}
+            {isSimulatedState ? 'Save Device(s)' : 'Save Device'}
           </Action>
         </>
       </ActionGroup>
