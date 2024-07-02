@@ -16,6 +16,10 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
 
     const deviceLookup = formData.get('deviceLookup') as string;
 
+    const simulatedDeviceLookup = formData.get('simulatedDeviceLookup') as string;
+
+    const isSimulated = !!(formData.get('isSimulated') as string);
+
     const isIoTEdge = !!(formData.get('isIoTEdge') as string);
 
     const eac: OpenBiotechEaC = {
@@ -34,8 +38,19 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
                 Name: deviceLookup,
                 Description: deviceLookup,
                 IsIoTEdge: isIoTEdge,
+                IsSimulated: false,
               },
             },
+            ...(isSimulated ? {
+              [simulatedDeviceLookup]: {
+                Details: {
+                  Name: simulatedDeviceLookup,
+                  Description: simulatedDeviceLookup,
+                  IsIoTEdge: true,
+                  IsSimulated: true,
+                },
+              },
+            }: {}),
           },
         },
       },

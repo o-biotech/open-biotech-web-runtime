@@ -210,6 +210,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                     'emulated-device':
                       'https://api.iconify.design/material-symbols:android-find-my-device-outline.svg',
                     error: 'https://api.iconify.design/material-symbols:error.svg',
+                    help: 'https://api.iconify.design/ph-question.svg',
                     loading: 'https://api.iconify.design/line-md:loading-alt-loop.svg',
                     'log-out': 'https://api.iconify.design/ic:sharp-logout.svg',
                     menu: 'https://api.iconify.design/ci:hamburger.svg',
