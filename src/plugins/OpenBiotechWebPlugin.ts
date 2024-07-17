@@ -416,6 +416,9 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Root: '@o-biotech/atomic/',
             EntryPoints: ['mod.ts'],
             IncludeDependencies: true,
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCESMDistributedFileSystemWorker.ts',
+            ),
           } as EaCESMDistributedFileSystem,
         },
         Modifiers: {
