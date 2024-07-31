@@ -57,6 +57,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
                 class='mt-2 text-center'
                 href={`/api/o-biotech/data/cold/execute?resultType=csv&download=true&Authorization=${jwt}`}
                 target='blank'
+                data-eac-bypass-base
               >
                 Download Last 7 Days of Data
               </Action>
