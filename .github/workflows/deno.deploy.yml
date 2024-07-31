@@ -29,5 +29,5 @@ jobs:
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
-          project: "open-industrial-web-runtime"
+          project: "open-biotech-web-runtime"
           entrypoint: "./main.ts" # 📝 Update the entrypoint if necessary
