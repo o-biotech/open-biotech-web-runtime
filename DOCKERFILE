@@ -10,4 +10,4 @@ RUN deno cache main.ts
 
 EXPOSE 3000
 
-CMD ["run", "-A", "main.ts"]
+CMD ["run", "-A", "--log-level=debug", "main.ts"]
