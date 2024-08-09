@@ -65,7 +65,7 @@ export default function DashboardDisplay(props: DashboardDisplayProps) {
     const getAuthToken = async (scope: string): Promise<void> => {
       const aadScopes = mapScope(scope);
 
-      const dataUrl = `${location.origin}/api/o-biotech/data/clouds/auth-token?scope=${
+      const dataUrl = `${location.origin}/api/o-industrial/data/clouds/auth-token?scope=${
         aadScopes.join(',')
       }`;
 

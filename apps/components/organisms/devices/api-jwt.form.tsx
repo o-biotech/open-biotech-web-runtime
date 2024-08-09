@@ -10,7 +10,7 @@ export function APIJWTForm(props: APIJWTFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/iot/data-apis-jwt'
+      action='/api/o-industrial/eac/iot/data-apis-jwt'
       data-eac-bypass-base
       {...props}
       class={classSet(

@@ -42,7 +42,7 @@ export const handler: EaCRuntimeHandlerResult<
 
     const manageIoT: EaCIoTAsCode = ctx.State.EaC!.IoT![manageIoTLookup]!;
 
-    const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
+    const licDetails = ctx.Runtime.EaC.Licenses!['o-industrial']
       .Details as EaCLicenseStripeDetails;
 
     const data: EaCIoTSettingsPageData = {

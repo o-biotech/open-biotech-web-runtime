@@ -16,7 +16,7 @@ export function DeviceForm(props: DeviceFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/iot/devices/ensure'
+      action='/api/o-industrial/eac/iot/devices/ensure'
       data-eac-bypass-base
       {...props}
       class={classSet(

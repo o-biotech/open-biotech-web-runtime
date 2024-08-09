@@ -47,7 +47,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
               timeframe, in CSV, JSONLines, and JSON format.
             </p>
 
-            <APIDevelopForm apiPath='/api/o-biotech/data/cold/execute' // jwt={jwt}
+            <APIDevelopForm apiPath='/api/o-industrial/data/cold/execute' // jwt={jwt}
             />
 
             <div class='w-full mb-8 px-8'>
@@ -55,7 +55,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
 
               <Action
                 class='mt-2 text-center'
-                href={`/api/o-biotech/data/cold/execute?resultType=csv&download=true&Authorization=${jwt}`}
+                href={`/api/o-industrial/data/cold/execute?resultType=csv&download=true&Authorization=${jwt}`}
                 target='blank'
               >
                 Download Last 7 Days of Data
@@ -73,7 +73,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
               allowing for the development of complex data management downstream.
             </p>
 
-            <APIDevelopForm apiPath='/api/o-biotech/data/warm/explorer' // jwt={jwt}
+            <APIDevelopForm apiPath='/api/o-industrial/data/warm/explorer' // jwt={jwt}
             />
 
             <div class='w-full mb-8 px-8'>
@@ -97,7 +97,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
               create custom data ingestion and processing logic.
             </p>
 
-            <APIDevelopForm apiPath='/api/o-biotech/data/hot/connect' // jwt={jwt}
+            <APIDevelopForm apiPath='/api/o-industrial/data/hot/connect' // jwt={jwt}
             />
 
             <div class='w-full mb-8 px-8'>

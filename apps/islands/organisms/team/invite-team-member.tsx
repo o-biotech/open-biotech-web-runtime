@@ -13,7 +13,7 @@ export default function InviteTeamMemberForm(props: InviteTeamMemberFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/users'
+      action='/api/o-industrial/eac/users'
       data-eac-bypass-base
       {...props}
       class={classSet(['-:w-full -:mx-auto -:p-3 -:mt-8'], props)}

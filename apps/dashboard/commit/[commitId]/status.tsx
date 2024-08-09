@@ -123,7 +123,7 @@ export default function CommitStatus({
   useEffect(() => {
     if (IS_BROWSER) {
       const checkInterval = setInterval(() => {
-        fetch(`/api/o-biotech/eac/${Data.commitId}/status`).then(
+        fetch(`/api/o-industrial/eac/${Data.commitId}/status`).then(
           (resp: Response) => {
             resp.json().then((status) => {
               setStatus(status);

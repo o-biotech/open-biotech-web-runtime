@@ -4,7 +4,7 @@ import * as djwt from 'https://deno.land/x/djwt@v3.0.0/mod.ts';
 import { loadEaCSvc } from '@fathym/eac/api';
 import { IoCContainer } from 'https://deno.land/x/fathym_ioc@v0.0.10/src/ioc/ioc.ts';
 
-export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
+export default class OpenIndustrialLicensingPlugin implements EaCRuntimePlugin {
   constructor() {}
 
   public Setup(_config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
@@ -20,14 +20,14 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
             ModifierResolvers: {},
             Processor: {
               Type: 'Stripe',
-              DatabaseLookup: 'o-biotech',
-              LicenseLookup: 'o-biotech',
+              DatabaseLookup: 'o-industrial',
+              LicenseLookup: 'o-industrial',
             } as EaCStripeProcessor,
           },
         },
         Licenses: {
-          'o-biotech': {
-            DatabaseLookup: 'o-biotech',
+          'o-industrial': {
+            DatabaseLookup: 'o-industrial',
             Details: {
               Name: 'OpenIndustrial',
               Description: 'The main access license for OpenIndustrial',

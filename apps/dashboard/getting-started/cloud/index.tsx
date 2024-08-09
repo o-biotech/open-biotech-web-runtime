@@ -59,7 +59,7 @@ export const handler: EaCRuntimeHandlerResult<
       return redirectRequest('/', false, false);
     }
 
-    const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
+    const licDetails = ctx.Runtime.EaC.Licenses!['o-industrial']
       .Details as EaCLicenseStripeDetails;
 
     const data: CloudPageData = {
@@ -71,14 +71,14 @@ export const handler: EaCRuntimeHandlerResult<
       hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
       hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       isAzureConnected: !!ctx.State.Cloud.AzureAccessToken,
-      license: ctx.Runtime.EaC.Licenses!['o-biotech'],
-      licLookup: 'o-biotech',
+      license: ctx.Runtime.EaC.Licenses!['o-industrial'],
+      licLookup: 'o-industrial',
       resGroupLookup: ctx.State.Cloud.ResourceGroupLookup,
       stripePublishableKey: licDetails.PublishableKey,
       locations: [],
       subs: {},
       tenants: {},
-      userLicense: ctx.State.UserLicenses?.['o-biotech'],
+      userLicense: ctx.State.UserLicenses?.['o-industrial'],
     };
 
     const svcCalls: (() => Promise<void>)[] = [];

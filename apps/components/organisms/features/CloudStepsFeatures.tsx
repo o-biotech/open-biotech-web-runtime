@@ -55,9 +55,9 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Connect:
       currentForm = (
         <ConnectAzure
-          cloudAction='/api/o-biotech/eac/clouds'
+          cloudAction='/api/o-industrial/eac/clouds'
           oauthAction='/azure/oauth/signin'
-          subAction='/api/o-biotech/eac/clouds/subs'
+          subAction='/api/o-industrial/eac/clouds/subs'
           class='px-4'
           isConnected={props.isAzureConnected}
           billingScopes={props.billingScopes}
@@ -70,7 +70,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.CALZ:
       currentForm = (
         <CloudCALZForm
-          action='/api/o-biotech/eac/clouds/resource-groups'
+          action='/api/o-industrial/eac/clouds/resource-groups'
           data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
@@ -82,7 +82,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Infrastucture:
       currentForm = (
         <CloudIoTForm
-          action='/api/o-biotech/eac/clouds/iot-infrastructure'
+          action='/api/o-industrial/eac/clouds/iot-infrastructure'
           data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
