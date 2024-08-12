@@ -15,6 +15,7 @@ import {
   EaCDenoKVDatabaseDetails,
   EaCDFSProcessor,
   EaCESMDistributedFileSystem,
+  EaCGitHubAppProviderDetails,
   EaCJWTValidationModifierDetails,
   EaCKeepAliveModifierDetails,
   EaCLocalDistributedFileSystem,
@@ -34,10 +35,10 @@ import { DefaultOpenBiotechWebModifierResolver } from './DefaultOpenBiotechWebMo
 import { GitHubAppSourceConnectionModifierDetails } from './GitHubAppSourceConnectionModifierDetails.ts';
 import { CurrentEaCModifierHandlerResolver } from './CurrentEaCModifierHandlerResolver.ts';
 import { CurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
-import OpenBiotechMSALPlugin from './OpenBiotechMSALPlugin.ts';
-import OpenBiotechLicensingPlugin from './OpenBiotechLicensingPlugin.ts';
+import OpenIndustrialMSALPlugin from './OpenIndustrialMSALPlugin.ts';
+import OpenIndustrialLicensingPlugin from './OpenIndustrialLicensingPlugin.ts';
 
-export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
+export default class OpenIndustrialWebPlugin implements EaCRuntimePlugin {
   constructor() {}
 
   public Setup(config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
@@ -46,8 +47,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
       Plugins: [
         new FathymAzureContainerCheckPlugin(),
         new FathymAtomicIconsPlugin(),
-        new OpenBiotechMSALPlugin(),
-        new OpenBiotechLicensingPlugin(),
+        new OpenIndustrialMSALPlugin(),
+        new OpenIndustrialLicensingPlugin(),
       ],
       EaC: {
         Projects: {
@@ -70,10 +71,13 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 Port: config.Server.port || 8000,
               },
               eac: {
-                Hostname: 'openbiotech.co',
+                Hostname: 'openindustrial.co',
               },
               runtime: {
                 Hostname: 'runtime.openbiotech.co',
+              },
+              www: {
+                Hostname: 'www.openbiotech.co',
               },
             },
             ModifierResolvers: {
@@ -111,7 +115,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 Priority: 100,
               },
               licensingApi: {
-                PathPattern: '/api/o-biotech/licensing/*',
+                PathPattern: '/api/o-industrial/licensing/*',
                 Priority: 200,
                 IsPrivate: true,
               },
@@ -138,11 +142,11 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 IsTriggerSignIn: true,
               },
               oBiotechDataApi: {
-                PathPattern: '/api/o-biotech/data*',
+                PathPattern: '/api/o-industrial/data*',
                 Priority: 200,
               },
               oBiotechEaCApi: {
-                PathPattern: '/api/o-biotech/eac*',
+                PathPattern: '/api/o-industrial/eac*',
                 Priority: 200,
                 IsPrivate: true,
               },
@@ -267,7 +271,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             },
             Processor: {
               Type: 'Proxy',
-              ProxyRoot: 'https://www.openbiotech.co',
+              ProxyRoot: 'https://www.openindustrial.co',
             } as EaCProxyProcessor,
           },
           msal: {
@@ -327,7 +331,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             },
             Processor: {
               Type: 'OAuth',
-              ProviderLookup: 'o-biotech-github-app',
+              ProviderLookup: 'o-industrial-github-app',
             } as EaCOAuthProcessor,
           },
           oBiotechDataApi: {
@@ -494,7 +498,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Type: 'OAuth',
               Name: 'OAuth GitHub',
               Description: 'Used to restrict user access to various applications.',
-              ProviderLookup: 'o-biotech-github-app',
+              ProviderLookup: 'o-industrial-github-app',
               SignInPath: '/github/oauth/signin',
             } as EaCOAuthModifierDetails,
           },
@@ -503,7 +507,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Type: 'GitHubAppSourceConn',
               Name: 'OAuth GitHub Callback',
               Description: 'Used to restrict user access to various applications.',
-              ProviderLookup: 'o-biotech-github-app',
+              ProviderLookup: 'o-industrial-github-app',
               OAuthDatabaseLookup: 'oauth',
             } as GitHubAppSourceConnectionModifierDetails,
           },
@@ -561,7 +565,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               TenantID: Deno.env.get('AZURE_AD_TENANT_ID')!, //common
             } as EaCAzureADProviderDetails,
           },
-          // 'o-biotech-github-app': {
+          // 'o-industrial-github-app': {
           //   DatabaseLookup: 'oauth',
           //   Details: {
           //     Name: 'Open Biotech GitHub App OAuth Provider',
@@ -585,7 +589,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               DenoKVPath: Deno.env.get('LOCAL_CACHE_DENO_KV_PATH') || undefined,
             } as EaCDenoKVDatabaseDetails,
           },
-          'o-biotech': {
+          'o-industrial': {
             Details: {
               Type: 'DenoKV',
               Name: 'Local Cache',

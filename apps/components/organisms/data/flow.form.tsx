@@ -17,7 +17,7 @@ export function DataFlowForm(props: DataFlowFormProps) {
   return (
     <form
       method='POST'
-      action='/api/o-biotech/eac/data/flow'
+      action='/api/o-industrial/eac/data/flow'
       data-eac-bypass-base
       {...props}
       class={classSet(

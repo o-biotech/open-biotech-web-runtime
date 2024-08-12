@@ -130,7 +130,7 @@ export default function DevicesDashboardControls(props: DevicesDashboardControls
   const loadDeviceData = async (): Promise<void> => {
     setIsLoadingData(true);
 
-    const dataUrl = `${location.origin}/api/o-biotech/data/warm/explorer`;
+    const dataUrl = `${location.origin}/api/o-industrial/data/warm/explorer`;
 
     const dataReq: ExplorerRequest = {
       Query: kqlQuery,

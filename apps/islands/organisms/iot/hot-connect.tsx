@@ -37,7 +37,7 @@ export default function HotConnect(props: HotConnectProps) {
 
   const initConnection = () => {
     const conn = new signalR.HubConnectionBuilder()
-      .withUrl(`/api/o-biotech/data/hot/connect`, {
+      .withUrl(`/api/o-industrial/data/hot/connect`, {
         headers: {
           Authorization: `Bearer ${jwt}`,
         },

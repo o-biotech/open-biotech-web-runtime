@@ -3,7 +3,7 @@ import { MSALPlugin } from '@fathym/msal';
 import { loadOAuth2ClientConfig } from '@fathym/eac/runtime';
 import { createOAuthHelpers } from '@fathym/common/oauth';
 
-export default class OpenBiotechMSALPlugin implements EaCRuntimePlugin {
+export default class OpenIndustrialMSALPlugin implements EaCRuntimePlugin {
   constructor() {}
 
   public Setup(_config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {

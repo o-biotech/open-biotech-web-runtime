@@ -8,7 +8,7 @@ export function DataDevelopForm(props: DataDevelopFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/data/develop'
+      action='/api/o-industrial/eac/data/develop'
       data-eac-bypass-base
       {...props}
       class={classSet(

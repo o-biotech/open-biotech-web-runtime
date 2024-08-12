@@ -6,7 +6,7 @@ import { loadJwtConfig } from '@fathym/eac/mod.ts';
 
 export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWebState> {
   return async (_req, ctx) => {
-    ctx.State.OBiotechKV = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-biotech');
+    ctx.State.OBiotechKV = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-industrial');
 
     const currentEntLookup = await ctx.State.OBiotechKV.get<string>([
       'User',

@@ -56,7 +56,7 @@ export default function DataExploreForm(props: DataExploreFormProps) {
     const getAuthToken = async (scope: string): Promise<void> => {
       const aadScopes = mapScope(scope);
 
-      const dataUrl = `${location.origin}/api/o-biotech/data/clouds/auth-token?scope=${
+      const dataUrl = `${location.origin}/api/o-industrial/data/clouds/auth-token?scope=${
         aadScopes.join(',')
       }`;
 
@@ -87,7 +87,7 @@ export default function DataExploreForm(props: DataExploreFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/data/explore'
+      action='/api/o-industrial/eac/data/explore'
       data-eac-bypass-base
       {...props}
       class={classSet(['-:w-full -:mx-auto -:p-3 -:mt-8'], props)}

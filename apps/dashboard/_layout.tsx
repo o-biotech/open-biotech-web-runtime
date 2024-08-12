@@ -77,17 +77,17 @@ export default function MainLayout({
         <link
           rel='shortcut icon'
           type='image/png'
-          href='/assets/openBiotechFavicon.png'
+          href='/assets/openIndustrialFavicon.png'
           data-eac-bypass-base
         />
         <link
           rel='icon'
-          href='/assets/openBiotechFavicon.png'
+          href='/assets/openIndustrialFavicon.png'
           data-eac-bypass-base
         />
         <link
           rel='mask-icon'
-          href='/assets/openBiotechFavicon.png'
+          href='/assets/openIndustrialFavicon.png'
           data-eac-bypass-base
         />
 

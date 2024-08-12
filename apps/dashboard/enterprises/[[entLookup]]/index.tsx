@@ -60,7 +60,7 @@ export const handler: EaCRuntimeHandlerResult<
   async PUT(req, ctx) {
     const eac: EverythingAsCode = await req.json();
 
-    const denoKv = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-biotech');
+    const denoKv = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-industrial');
 
     await denoKv.set(
       ['User', ctx.State.Username!, 'Current', 'EnterpriseLookup'],
@@ -92,7 +92,7 @@ export const handler: EaCRuntimeHandlerResult<
       deleteResp.CommitID,
     );
 
-    const denoKv = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-biotech');
+    const denoKv = await ctx.Runtime.IoC.Resolve(Deno.Kv, 'o-industrial');
 
     const currentEaC = await denoKv.get<string>([
       'User',
@@ -126,7 +126,7 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
       />
 
       <EaCManageForm
-        action='/api/o-biotech/eac'
+        action='/api/o-industrial/eac'
         data-eac-bypass-base
         entLookup={Data.manageEaC?.EnterpriseLookup}
         entName={Data.manageEaC?.Details?.Name || undefined}
