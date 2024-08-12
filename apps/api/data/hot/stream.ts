@@ -1,8 +1,8 @@
 import { EaCRuntimeHandlerResult } from '@fathym/eac/runtime';
-import { OpenIndustrialWebAPIState } from '../../../../src/api/OpenIndustrialWebAPIState.ts';
+import { OpenBiotechWebAPIState } from '../../../../src/api/OpenBiotechWebAPIState.ts';
 import signalr from 'npm:@microsoft/signalr@8.0.0';
 
-export const handler: EaCRuntimeHandlerResult<OpenIndustrialWebAPIState> = {
+export const handler: EaCRuntimeHandlerResult<OpenBiotechWebAPIState> = {
   GET(_req, _ctx) {
     const connection = new signalr.HubConnectionBuilder()
       .withUrl('https://fr1-iot-devices-flow.azurewebsites.net/api')

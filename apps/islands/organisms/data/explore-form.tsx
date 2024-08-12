@@ -83,7 +83,7 @@ export default function DataExploreForm(props: DataExploreFormProps) {
       }
     });
   }
-  
+
   return (
     <form
       method='post'

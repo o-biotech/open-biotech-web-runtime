@@ -388,38 +388,61 @@ export default class OpenIndustrialWebPlugin implements EaCRuntimePlugin {
           'local:apps/assets': {
             Type: 'Local',
             FileRoot: './apps/assets/',
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'local:apps/api/data': {
             Type: 'Local',
             FileRoot: './apps/api/data/',
             DefaultFile: 'index.ts',
             Extensions: ['ts'],
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'local:apps/api/eac': {
             Type: 'Local',
             FileRoot: './apps/api/eac/',
             DefaultFile: 'index.ts',
             Extensions: ['ts'],
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'local:apps/components': {
             Type: 'Local',
             FileRoot: './apps/components/',
+            Extensions: ['tsx'],
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'local:apps/dashboard': {
             Type: 'Local',
             FileRoot: './apps/dashboard/',
             DefaultFile: 'index.tsx',
             Extensions: ['tsx'],
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'local:apps/islands': {
             Type: 'Local',
             FileRoot: './apps/islands/',
+            Extensions: ['tsx'],
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCLocalDistributedFileSystemWorker.ts',
+            ),
           } as EaCLocalDistributedFileSystem,
           'esm:fathym_open_biotech_atomic': {
             Type: 'ESM',
             Root: '@o-biotech/atomic/',
             EntryPoints: ['mod.ts'],
             IncludeDependencies: true,
+            WorkerPath: import.meta.resolve(
+              '@fathym/eac/runtime/src/runtime/dfs/workers/EaCESMDistributedFileSystemWorker.ts',
+            ),
           } as EaCESMDistributedFileSystem,
         },
         Modifiers: {

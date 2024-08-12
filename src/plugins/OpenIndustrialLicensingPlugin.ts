@@ -29,8 +29,8 @@ export default class OpenIndustrialLicensingPlugin implements EaCRuntimePlugin {
           'o-industrial': {
             DatabaseLookup: 'o-industrial',
             Details: {
-              Name: 'OpenIndustrial',
-              Description: 'The main access license for OpenIndustrial',
+              Name: 'OpenBiotech',
+              Description: 'The main access license for OpenBiotech',
               Enabled: true,
               PublishableKey: Deno.env.get('STRIPE_PUBLISHABLE_KEY')!,
               SecretKey: Deno.env.get('STRIPE_SECRET_KEY')!,
