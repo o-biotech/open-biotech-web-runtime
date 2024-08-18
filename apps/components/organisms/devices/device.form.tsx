@@ -1,11 +1,15 @@
 import { JSX } from 'preact';
 import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
 import { callToActionStyles } from '../../styles/actions.tsx';
+import { useState } from 'preact/hooks';
+import { HelpIcon } from '../../../../build/iconset/icons/HelpIcon.tsx';
 
-export type DeviceFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
+export type DeviceFormProps = JSX.HTMLAttributes<formElement> & {
   cloudLookup: string;
 
   deviceLookup?: string;
+
+  simulatedDeviceLookup?: string;
 
   iotLookup: string;
 
@@ -13,6 +17,17 @@ export type DeviceFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
 };
 
 export function DeviceForm(props: DeviceFormProps) {
+  // State to manage the visibility of the simulated device input
+  const [isSimulatedState, setIsSimulatedState] = useState(false);
+
+  const toggleIsSimulated= () => {
+    setIsSimulatedState(!isSimulatedState);
+
+    console.log(isSimulatedState);
+  };
+
+  console.log(isSimulatedState);
+
   return (
     <form
       method='post'
@@ -69,12 +84,6 @@ export function DeviceForm(props: DeviceFormProps) {
         </div>
 
         <div class='w-full p-3'>
-          {
-            /* <label class="block uppercase tracking-wide font-bold mb-2 text-xl">
-            IoT Edge Device?
-          </label> */
-          }
-
           <div class='flex items-center mb-2'>
             <Input
               id='isIoTEdge'
@@ -83,11 +92,51 @@ export function DeviceForm(props: DeviceFormProps) {
               value='isIoTEdge'
               class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
-
             <label for='isIoTEdge' class='ms-2 text-sm font-medium pl-3'>
               Is IoT Edge Device?
             </label>
           </div>
+
+          <div class='flex items-center mb-2'>
+            <Input
+              id='isSimulated'
+              name='isSimulated'
+              type='checkbox'
+              checked={isSimulatedState}
+              //value='isSimulated'
+              class='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+              onChange={toggleIsSimulated}
+            />
+            <label for='isSimulated' class='ms-2 text-sm font-medium pl-3'>
+              Create a simulated device?
+            </label>
+            <div class="relative group">
+              <HelpIcon class="w-4 h-4" />
+              <div class="absolute left-0 w-64 p-2 text-xs text-white bg-gray-800 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                This option creates a simulated device for testing purposes. The simulated device name defaults to "simulated-device".
+              </div>
+            </div>
+          </div>
+
+          {isSimulatedState && (
+            <div class='w-full px-3'>
+              <label
+                for='simulatedDeviceLookup'
+                class='block uppercase tracking-wide font-bold mb-0 text-xl'
+              >
+                Simulated Device Name
+              </label>
+              <Input
+                id='simulatedDeviceLookup'
+                name='simulatedDeviceLookup'
+                type='text'
+                readOnly
+                value='simulated-device'
+                placeholder='simulated-device'
+                class='w-full px-3 py-2 border border-gray-300 rounded mt-1'
+              />
+            </div>
+          )}
         </div>
       </div>
 
@@ -102,20 +151,8 @@ export function DeviceForm(props: DeviceFormProps) {
               callToActionStyles.props,
             )}
           >
-            Save Device
+            {isSimulatedState ? 'Save Device(s)' : 'Save Device'}
           </Action>
-
-          {
-            /* <Action
-            href="./cloud/connect/acquire"
-            class="m-2"
-            actionStyle={ActionStyleTypes.Link |
-              ActionStyleTypes.Outline |
-              ActionStyleTypes.Rounded}
-          >
-            Acquire Device
-          </Action> */
-          }
         </>
       </ActionGroup>
     </form>
