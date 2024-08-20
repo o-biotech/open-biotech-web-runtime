@@ -20,7 +20,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
       <h1 class='text-3xl max-w-[500px] mx-auto'>Storage APIs</h1>
 
       <p class='text-lg max-w-[500px] mx-auto'>
-        Storage APIs are used to work with your data across your cold, warm, and Hot storage flows.
+        Storage APIs are used to work with your data across your cold, warm, and hot storage flows.
         Use the following JWT to access your APIs.
       </p>
 
