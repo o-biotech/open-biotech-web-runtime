@@ -4,6 +4,8 @@ import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { OpenBiotechWebState } from '../../../src/state/OpenBiotechWebState.ts';
 import { StorageAPIsDisplay } from '../../components/molecules/StorageAPIsDisplay.tsx';
 
+export const IsIsland = true;
+
 interface APIsPageData {
   hasStorageCold: boolean;
 
