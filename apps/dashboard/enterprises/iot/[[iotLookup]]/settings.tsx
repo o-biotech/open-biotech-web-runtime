@@ -60,6 +60,7 @@ export const handler: EaCRuntimeHandlerResult<
       stripePublishableKey: licDetails.PublishableKey,
     };
 
+    debugger
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
 
     const connsReq: OpenBiotechEaC = {
