@@ -6,6 +6,8 @@ import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
 import { StorageAPIsDisplay } from '../../molecules/StorageAPIsDisplay.tsx';
 import { DataDevelopForm } from '../data/develop.form.tsx';
 
+export const IsIsland = true;
+
 export interface DataStepsFeaturesProps extends StepsFeaturesProps {
   dashboardTypes: string[];
 
