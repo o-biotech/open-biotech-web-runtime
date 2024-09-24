@@ -7,6 +7,8 @@ import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
 import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
 
+export const IsIsland = true;
+
 interface DataPageData {
   dashboardTypes: string[];
 
