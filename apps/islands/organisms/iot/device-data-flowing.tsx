@@ -47,7 +47,9 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
 
       const data = await response.json();
 
-      const primaryResult = data.tables?.find(
+      const json = JSON.parse(data);
+      
+      const primaryResult = json.tables?.find(
         (t: any) => t.name === 'PrimaryResult',
       ).data;
 
