@@ -148,7 +148,9 @@ export default function DevicesDashboardControls(props: DevicesDashboardControls
 
     const data = await response.json();
 
-    const primaryResult = data.primaryResults[0].data;
+    const json = JSON.parse(data);
+
+    const primaryResult = json.primaryResults[0].data;
 
     console.log(primaryResult[0]);
 
