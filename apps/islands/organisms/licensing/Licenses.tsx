@@ -86,7 +86,7 @@ export default function Licenses(props: LicensesProps) {
 
     const _planKey = `${planLookup}-${interval}`;
 
-    const plan = plans.find((p) => p.PlanLookup === planLookup)!;
+    const plan = plans.find((p) => p.Lookup === _planKey)!;
 
     setLoading(true);
 
