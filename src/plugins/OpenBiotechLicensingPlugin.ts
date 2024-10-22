@@ -40,12 +40,11 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
               standard: {
                 Details: {
                   Name: 'Standard',
-                  Description: 'A standard license',
+                  Description: 'Get Started with 1 enterprise workspace',
                   Featured: 'Popular',
                   Features: [
-                    '1 Enterprise',
-                    'Cloud Provisioning',
-                    'Other Stuff',
+                    'Fully Provisioned Azure Cloud',
+                    '1 Enterprise Workspace',
                   ],
                   Priority: 200,
                 },
@@ -73,12 +72,11 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
               pro: {
                 Details: {
                   Name: 'Pro',
-                  Description: 'A professional license',
+                  Description: 'Scale with unlimited workspaces',
                   Featured: '',
                   Features: [
-                    'Unlimited Enterprise',
-                    'Cloud Provisioning',
-                    'Even Cooler Stuff',
+                    'Fully Provisioned Azure Cloud',
+                    'Unlimited Enterprise Workspaces',
                   ],
                   Popular: '',
                   Priority: 100,
