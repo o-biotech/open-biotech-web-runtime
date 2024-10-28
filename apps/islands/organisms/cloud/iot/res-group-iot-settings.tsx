@@ -3,6 +3,8 @@ import { useState } from 'preact/hooks';
 // import { SignalLike } from "preact/signal-core";
 import IoTHubKeySimulatorDisplay from '../../iot/hub-key-simulator.tsx';
 import { CloudIoTForm } from '../../../../components/organisms/data/iot.form.tsx';
+import { EaCLicenseAsCode } from '@fathym/eac/mod.ts';
+import { UserEaCLicense } from '@fathym/eac/api';
 
 export const IsIsland = true;
 
@@ -23,11 +25,17 @@ export type ResourceGroupIoTSettingsProps = {
 
   iotHubKeys: Record<string, string>;
 
+  license?: EaCLicenseAsCode;
+  
+  licLookup?: string;
+
   organizations?: string[];
 
   resGroupLookup: string;
 
   stripePublishableKey: string;
+
+  userLicense?: UserEaCLicense;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export default function ResourceGroupIoTSettings(
@@ -95,9 +103,12 @@ export default function ResourceGroupIoTSettings(
             hasStorageCold={props.hasStorageCold}
             hasStorageHot={props.hasStorageHot}
             hasStorageWarm={props.hasStorageWarm}
+            license={props.license}
+            licLookup={props.licLookup}
             organizations={props.organizations}
             resGroupLookup={curResGroup}
             stripePublishableKey={props.stripePublishableKey}
+            userLicense={props.userLicense}
           />
 
           <div class='my-8'>
