@@ -1,6 +1,6 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCIoTAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
-import { EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api';
+import { EaCIoTAsCode, EaCLicenseAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
+import { EaCStatusProcessingTypes, loadEaCSvc, UserEaCLicense } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { setupEaCIoTFlow } from '../../../../../src/eac/setupEaCIoTFlow.ts';
@@ -23,6 +23,10 @@ export type EaCIoTSettingsPageData = {
 
   iotHubKeys: Record<string, string>;
 
+  license?: EaCLicenseAsCode; 
+  
+  licLookup?: string;
+
   manageCloudLookup: string;
 
   manageResourceGroupLookup: string;
@@ -31,6 +35,8 @@ export type EaCIoTSettingsPageData = {
   // resGroupOptions: DataLookup[];
 
   stripePublishableKey: string;
+
+  userLicense?: UserEaCLicense;
 };
 
 export const handler: EaCRuntimeHandlerResult<
@@ -42,8 +48,12 @@ export const handler: EaCRuntimeHandlerResult<
 
     const manageIoT: EaCIoTAsCode = ctx.State.EaC!.IoT![manageIoTLookup]!;
 
+    const license = ctx.Runtime.EaC.Licenses!['o-biotech'] as EaCLicenseAsCode;
+
     const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
       .Details as EaCLicenseStripeDetails;
+
+    const userLicense = ctx.State.UserLicenses?.['o-biotech']
 
     const data: EaCIoTSettingsPageData = {
       deviceKeys: {},
@@ -53,11 +63,14 @@ export const handler: EaCRuntimeHandlerResult<
       hasStorageHot: !!ctx.State.Cloud.Storage?.Hot,
       hasStorageWarm: !!ctx.State.Cloud.Storage?.Warm,
       iotHubKeys: {},
+      license: license,
+      licLookup: 'o-biotech',
       manageCloudLookup: manageIoT.CloudLookup!,
       manageResourceGroupLookup: manageIoT.ResourceGroupLookup!,
       organizationOptions: [],
       // resGroupOptions: [],
       stripePublishableKey: licDetails.PublishableKey,
+      userLicense: userLicense,
     };
 
     const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
@@ -221,9 +234,12 @@ export default function EaCIoTSettings({
           hasStorageHot={Data!.hasStorageHot}
           hasStorageWarm={Data!.hasStorageWarm}
           iotHubKeys={Data.iotHubKeys}
+          license={Data.license}
+          licLookup={Data.licLookup}
           organizations={Data.organizationOptions}
           resGroupLookup={Data.manageResourceGroupLookup}
           stripePublishableKey={Data.stripePublishableKey}
+          userLicense={Data.userLicense}
         />
       </div>
     </>
