@@ -197,7 +197,7 @@ export const handler: EaCRuntimeHandlerResult<
       status.Processing == EaCStatusProcessingTypes.QUEUED
     ) {
       return redirectRequest(
-        `/dashboard/commit/${commitResp.CommitID}/status?successRedirect=/enterprises/iot/${resLookup}/settings&errorRedirect=/enterprises/iot/${resLookup}/settings`,
+        `/dashboard/commit/${commitResp.CommitID}/status?successRedirect=/dashboard/enterprises/iot/${resLookup}/settings&errorRedirect=/dashboard/enterprises/iot/${resLookup}/settings`,
         false,
         false,
       );
