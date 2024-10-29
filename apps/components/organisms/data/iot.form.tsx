@@ -6,6 +6,8 @@ import HotFlowInput from '../../../islands/organisms/cloud/iot/hot-flow-input.ts
 import Licenses from '../../../islands/organisms/licensing/Licenses.tsx';
 import { UserEaCLicense } from '@fathym/eac/api';
 
+export const IsIsland = true;
+
 export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   cloudLookup: string;
 
