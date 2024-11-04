@@ -14,7 +14,7 @@ import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
 import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
 import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
 
-export const IsIsland = true;
+//export const IsIsland = true;
 
 interface CloudPageData {
   billingScopes: Record<string, string>;
