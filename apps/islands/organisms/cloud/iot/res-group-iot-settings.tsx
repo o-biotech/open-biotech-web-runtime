@@ -26,7 +26,7 @@ export type ResourceGroupIoTSettingsProps = {
   iotHubKeys: Record<string, string>;
 
   license?: EaCLicenseAsCode;
-  
+
   licLookup?: string;
 
   organizations?: string[];

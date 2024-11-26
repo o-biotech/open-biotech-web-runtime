@@ -86,10 +86,10 @@ export default function SideBarMenu(props: SideBarMenuProps) {
       sideBarCloseCheck(e.target as HTMLDivElement);
     };
 
-    window.document.addEventListener('click', eventHandler);
+    document.addEventListener('click', eventHandler);
 
     return () => {
-      window.document.removeEventListener('click', eventHandler);
+      document.removeEventListener('click', eventHandler);
     };
   };
 
