@@ -23,8 +23,8 @@ export type EaCIoTSettingsPageData = {
 
   iotHubKeys: Record<string, string>;
 
-  license?: EaCLicenseAsCode; 
-  
+  license?: EaCLicenseAsCode;
+
   licLookup?: string;
 
   manageCloudLookup: string;
@@ -53,7 +53,7 @@ export const handler: EaCRuntimeHandlerResult<
     const licDetails = ctx.Runtime.EaC.Licenses!['o-biotech']
       .Details as EaCLicenseStripeDetails;
 
-    const userLicense = ctx.State.UserLicenses?.['o-biotech']
+    const userLicense = ctx.State.UserLicenses?.['o-biotech'];
 
     const data: EaCIoTSettingsPageData = {
       deviceKeys: {},
