@@ -259,6 +259,8 @@ export function establishOpenBiotechWebStateMiddleware(): EaCRuntimeHandler<Open
       }
     }
 
+    if (ctx.State.EaC.)
+
     const resp = ctx.Next();
 
     return resp;

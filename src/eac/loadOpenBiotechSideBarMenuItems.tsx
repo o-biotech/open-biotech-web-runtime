@@ -8,6 +8,7 @@ import { EaCDevOpsActionsDisplay } from '../../apps/components/organisms/eac/dis
 import { EaCHandlersDisplay } from '../../apps/components/organisms/eac/displays/EaCHandlersDisplay.tsx';
 import { EaCIoTsDisplay } from '../../apps/components/organisms/eac/displays/EaCIoTsDisplay.tsx';
 import { EaCSecretsDisplay } from '../../apps/components/organisms/eac/displays/EaCSecretsDisplay.tsx';
+import { EaCWarmQueriesDisplay } from '../../apps/components/organisms/eac/displays/EaCWarmQueriesDisplay.tsx';
 import { EaCSourceConnectionsDisplay } from '../../apps/components/organisms/eac/displays/EaCSourceConnectionsDisplay.tsx';
 import { EaCSourcesDisplay } from '../../apps/components/organisms/eac/displays/EaCSourcesDisplay.tsx';
 import { EaCGettingStartedDisplay } from '../../apps/components/organisms/eac/displays/EaCGettingStartedDisplay.tsx';
@@ -140,6 +141,15 @@ export function loadOoenBiotechSideBarSettings(
             Title: 'Sources',
             Display: <EaCSourcesDisplay {...data} />,
             Order: 400,
+          };
+          break;
+        }
+
+        case 'WarmQueries': {
+          prev[menuItemName] = {
+            Title: 'Warm Queries',
+            Display: <EaCWarmQueriesDisplay {...data} />,
+            Order: 700,
           };
           break;
         }
