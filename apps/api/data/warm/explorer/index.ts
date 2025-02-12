@@ -1,7 +1,7 @@
 import { respond } from '@fathym/common';
 import { ExplorerRequest, loadEaCExplorerSvc } from '@fathym/eac/api';
 import { EaCRuntimeHandlerResult } from '@fathym/eac/runtime';
-import { OpenBiotechWebAPIState } from '../../../../src/api/OpenBiotechWebAPIState.ts';
+import { OpenBiotechWebAPIState } from '../../../../../src/api/OpenBiotechWebAPIState.ts';
 
 export const handler: EaCRuntimeHandlerResult<OpenBiotechWebAPIState> = {
   async GET(_req, ctx) {

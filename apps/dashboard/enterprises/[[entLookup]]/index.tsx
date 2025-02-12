@@ -151,6 +151,7 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
                   enterprise.EnterpriseLookup
               ? (
                 <EnterpriseManagementItem
+                  
                   active={Data.currentEaC?.EnterpriseLookup ===
                     enterprise.EnterpriseLookup}
                   deleteActionPath={`./enterprises/${enterprise.EnterpriseLookup}`}

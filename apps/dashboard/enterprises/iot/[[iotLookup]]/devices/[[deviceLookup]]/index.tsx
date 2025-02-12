@@ -5,6 +5,7 @@ import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
 import { DisplayStyleTypes, EaCManageIoTDeviceForm, Hero, HeroStyleTypes } from '@o-biotech/atomic';
 import { OpenBiotechWebState } from '../../../../../../../src/state/OpenBiotechWebState.ts';
 import { OpenBiotechEaC } from '../../../../../../../src/eac/OpenBiotechEaC.ts';
+import DeleteAction from '../../../../../../islands/molecules/DeleteAction.tsx';
 
 export type EaCIoTDevicePageData = {
   entLookup: string;
@@ -145,18 +146,16 @@ export default function EaCIoTDevice({
         deviceIsIoTEdge={Data.manageDevice?.Details?.IsIoTEdge || false}
       />
 
-      {
-        /* {Data.manageDeviceLookup && (
+      {Data.manageDeviceLookup && (
         <div class='max-w-sm mx-auto mb-4'>
           <DeleteAction
-            actionPath={`./iot/devices/${Data.manageDeviceLookup}`}
-            message={`Are you sure you want to delete EaC IoT Device '${Data.manageDeviceLookup}?`}
+            actionPath={`http://localhost:8000/dashboard/enterprises/iot/${Data.iotLookup}/devices/${Data.manageDeviceLookup}`}
+            message={`Are you sure you want to delete EaC IoT Device '${Data.manageDeviceLookup}'?`}
           >
             Delete EaC IoT Device
           </DeleteAction>
         </div>
-      )} */
-      }
+      )}
     </>
   );
 }

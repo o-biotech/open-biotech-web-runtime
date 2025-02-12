@@ -7,10 +7,13 @@ import {
   EverythingAsCodeSources,
 } from '@fathym/eac';
 
+import {EaCWarmStorageQueryAsCode} from '@fathym/eac-azure'
+
 export type OpenBiotechEaC =
   & EverythingAsCodeClouds
   & EverythingAsCodeGitHub
   & EverythingAsCodeIdentity
   & EverythingAsCodeIoT
   & EverythingAsCodeSources
-  & EverythingAsCode;
+  & EverythingAsCode
+  & {WarmStorageQueries?: Record<string, EaCWarmStorageQueryAsCode>;}
