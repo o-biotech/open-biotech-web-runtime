@@ -1,9 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
 import { ComponentChildren } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { classSet } from '@o-biotech/atomic';
-import { IconProps } from '@fathym/atomic-icons/browser';
+import { IconProps, IS_BROWSER } from '@fathym/atomic';
+import { classSet } from '@o-biotech/atomic-design-kit';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 
 export const IsIsland = true;

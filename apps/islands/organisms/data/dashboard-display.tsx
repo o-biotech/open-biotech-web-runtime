@@ -1,8 +1,8 @@
 import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { Action, ActionStyleTypes } from '@o-biotech/atomic';
+import { Action, ActionStyleTypes } from '@o-biotech/atomic-design-kit';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
+import { IS_BROWSER } from '@fathym/atomic';
 
 export const IsIsland = true;
 

@@ -1,5 +1,11 @@
 import { JSX } from 'preact';
-import { Action, ActionGroup, ActionStyleTypes, classSet, CopyInput } from '@o-biotech/atomic';
+import {
+  Action,
+  ActionGroup,
+  ActionStyleTypes,
+  classSet,
+  CopyInput,
+} from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../styles/actions.tsx';
 
 export type APIJWTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {

@@ -3,8 +3,7 @@ import { useState } from 'preact/hooks';
 // import { SignalLike } from "preact/signal-core";
 import IoTHubKeySimulatorDisplay from '../../iot/hub-key-simulator.tsx';
 import { CloudIoTForm } from '../../../../components/organisms/data/iot.form.tsx';
-import { EaCLicenseAsCode } from '@fathym/eac/mod.ts';
-import { UserEaCLicense } from '@fathym/eac/api';
+import { EaCLicenseAsCode, EaCUserLicense } from '@fathym/eac-licensing';
 
 export const IsIsland = true;
 
@@ -35,7 +34,7 @@ export type ResourceGroupIoTSettingsProps = {
 
   stripePublishableKey: string;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 } & JSX.HTMLAttributes<HTMLInputElement>;
 
 export default function ResourceGroupIoTSettings(

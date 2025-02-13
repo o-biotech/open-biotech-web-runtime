@@ -1,16 +1,16 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import * as signalR from 'npm:@microsoft/signalr@8.0.0/dist/browser/signalr.js';
-import { Action, CopyInput } from '@o-biotech/atomic';
+import { IS_BROWSER } from '@fathym/atomic';
+import { Action, CopyInput } from '@o-biotech/atomic-design-kit';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 import { ChevronDownIcon } from '../../../../build/iconset/icons/ChevronDownIcon.tsx';
+
+import * as SignalR from 'npm:@microsoft/signalr@8.0.0';
 
 export const IsIsland = true;
 
 export type HotConnectProps = {
   jwt: string;
-
   takeRows: number;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 
@@ -23,19 +23,25 @@ export default function HotConnect(props: HotConnectProps) {
     );
   }
 
+  const [signalR, setSignalR] = useState<typeof SignalR>();
   const [jwt] = useState(props.jwt);
-
   const [takeRows] = useState(props.takeRows);
-
   const [hotPayloads, setHotPayloads] = useState<Record<string, unknown>[]>([]);
-
-  const [connection, setConnection] = useState<
-    signalR.HubConnectionBuilder | undefined
-  >(undefined);
-
+  const [connection, setConnection] = useState<SignalR.HubConnection>();
   const [running, setRunning] = useState(true);
 
-  const initConnection = () => {
+  useEffect(() => {
+    import(
+      'https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.0/dist/browser/signalr.min.js'
+    ).then((sr) => {
+      // deno-lint-ignore no-explicit-any
+      setSignalR(sr as any);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!signalR || !jwt) return;
+
     const conn = new signalR.HubConnectionBuilder()
       .withUrl(`/api/o-biotech/data/hot/connect`, {
         headers: {
@@ -45,47 +51,28 @@ export default function HotConnect(props: HotConnectProps) {
       .withAutomaticReconnect()
       .build();
 
-    conn.on(
-      'telemetry',
-      function (messageFromIoTDevice: Record<string, unknown>) {
-        console.log(messageFromIoTDevice);
+    conn.on('telemetry', (messageFromIoTDevice: Record<string, unknown>) => {
+      console.log(messageFromIoTDevice);
+      setHotPayloads((prev) => [messageFromIoTDevice, ...prev].slice(0, takeRows));
+    });
 
-        hotPayloads.unshift(messageFromIoTDevice);
-
-        setHotPayloads(hotPayloads.slice(0, takeRows));
-      },
-    );
-
-    conn.onclose(() => connection.start().catch(console.error));
+    conn.onclose(() => conn.start().catch(console.error));
 
     setConnection(conn);
-  };
+    setRunning(true);
 
-  useEffect(() => {
-    if (jwt) {
-      initConnection();
-    }
-  }, [jwt, takeRows]);
+    return () => {
+      setRunning(false);
+    };
+  }, [signalR, jwt]);
 
   useEffect(() => {
     if (connection) {
-      console.log('connecting...');
-
-      connection.start().catch(console.error);
-
-      return () => {
-        connection?.stop();
-      };
-    }
-  }, [connection]);
-
-  useEffect(() => {
-    if (connection && !running) {
-      connection.stop();
-
-      setConnection(undefined);
-    } else {
-      initConnection();
+      if (running) {
+        connection.start().catch(console.error);
+      } else {
+        connection.stop();
+      }
     }
   }, [running]);
 
@@ -99,33 +86,23 @@ export default function HotConnect(props: HotConnectProps) {
         ? (
           hotPayloads.map((hotPayload) => {
             const flat = JSON.stringify(hotPayload);
-
             const structured = JSON.stringify(hotPayload, null, 2);
-
             const uniqueKey = crypto.randomUUID();
 
             return (
-              <div
-                class='flex-1 flex flex-wrap items-center p-2'
-                key={uniqueKey}
-              >
+              <div class='flex-1 flex flex-wrap items-center p-2' key={uniqueKey}>
                 <div class='flex-1 md:hidden'>{flat.slice(0, 25)}</div>
-
                 <div class='flex-1 hidden md:block'>{flat.slice(0, 80)}</div>
-
                 <div class='flex-none'>
                   <CopyInput class='hidden' value={structured} />
                 </div>
-
                 <input id={uniqueKey} type='checkbox' class={`sr-only peer`} />
-
                 <label
                   for={uniqueKey}
                   class={`cursor-pointer transition-all duration-200 peer-checked:rotate-[-180deg]`}
                 >
                   <ChevronDownIcon class='w-6 h-6' />
                 </label>
-
                 <div
                   class={`hidden peer-checked:block w-full m-2 p-2 shadow shadow-inner bg-gray-200 dark:bg-gray-700`}
                 >

@@ -1,21 +1,22 @@
-import { loadEaCSvc } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { OpenBiotechWebState } from '../../../src/state/OpenBiotechWebState.ts';
-import { Display, DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { Display, DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
 import InviteTeamMemberForm from '../../islands/organisms/team/invite-team-member.tsx';
 
 interface TeamsPageData {
   members: string[];
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   TeamsPageData
 > = {
   GET: async (_req, ctx) => {
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const users = await eacSvc.ListUsers(ctx.State.EaC!.EnterpriseLookup!);
+    const users = await eacSvc.Users.List(ctx.State.EaC!.EnterpriseLookup!);
 
     const data: TeamsPageData = {
       members: users.map((user) => user.Username),

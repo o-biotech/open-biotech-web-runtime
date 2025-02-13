@@ -5,10 +5,10 @@ import {
   Header,
   HeaderProps,
   ResponsiveSet,
-} from '@o-biotech/atomic';
+} from '@o-biotech/atomic-design-kit';
 import ProfileMenu from '../../islands/common/ProfileMenu.tsx';
-import { SetupPhaseTypes } from '../../../src/state/SetupPhaseTypes.ts';
 import { Logo } from '../atoms/Logo.tsx';
+import { SetupPhaseTypes } from '@o-biotech/common/state';
 
 export type BiotechHeaderProps = HeaderProps & {
   currentUrl: URL;

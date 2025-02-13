@@ -1,18 +1,18 @@
 import { DefaultAtomicIconsProcessorHandlerResolver } from '@fathym/atomic-icons/plugin';
-import {
-  DefaultProcessorHandlerResolver,
-  EaCApplicationProcessorConfig,
-  EaCRuntimeEaC,
-  ProcessorHandlerResolver,
-} from '@fathym/eac/runtime';
 import { DefaultMSALProcessorHandlerResolver } from '@fathym/msal';
 import { IoCContainer } from '@fathym/ioc';
+import {
+  DefaultProcessorHandlerResolver,
+  ProcessorHandlerResolver,
+} from '@fathym/eac-applications/runtime/processors';
+import { EaCApplicationProcessorConfig } from '@fathym/eac-applications/processors';
+import { EverythingAsCode } from '@fathym/eac';
 
 export class DefaultOpenBiotechWebProcessorHandlerResolver implements ProcessorHandlerResolver {
   public async Resolve(
     ioc: IoCContainer,
     appProcCfg: EaCApplicationProcessorConfig,
-    eac: EaCRuntimeEaC,
+    eac: EverythingAsCode,
   ) {
     const atomicIconsResolver = new DefaultAtomicIconsProcessorHandlerResolver();
 

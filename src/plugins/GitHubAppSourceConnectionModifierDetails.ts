@@ -1,4 +1,4 @@
-import { EaCModifierDetails, isEaCModifierDetails } from '@fathym/eac';
+import { EaCModifierDetails, isEaCModifierDetails } from '@fathym/eac-applications/modifiers';
 
 export type GitHubAppSourceConnectionModifierDetails = {
   ProviderLookup: string;

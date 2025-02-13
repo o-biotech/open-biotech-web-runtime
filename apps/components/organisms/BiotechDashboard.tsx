@@ -1,7 +1,7 @@
-import { classSet } from '@o-biotech/atomic';
+import { classSet } from '@o-biotech/atomic-design-kit';
 import { JSX } from 'preact';
 import DevicesDashboardControls from '../../islands/organisms/iot/devices-dashboard-controls.tsx';
-import { EaCDeviceAsCode } from '@fathym/eac';
+import { EaCDeviceAsCode } from '@fathym/eac-iot';
 
 export type BiotechDashboardProps = {
   devices: Record<string, EaCDeviceAsCode>;

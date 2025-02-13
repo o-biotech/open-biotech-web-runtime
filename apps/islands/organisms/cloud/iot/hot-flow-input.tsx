@@ -1,6 +1,6 @@
 import { ComponentChildren } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { Action, ActionStyleTypes, Input, InputProps, Select } from '@o-biotech/atomic';
+import { Action, ActionStyleTypes, Input, InputProps, Select } from '@o-biotech/atomic-design-kit';
 import GitHubAccessAction from '../../../molecules/GitHubAccessAction.tsx';
 
 export const IsIsland = true;

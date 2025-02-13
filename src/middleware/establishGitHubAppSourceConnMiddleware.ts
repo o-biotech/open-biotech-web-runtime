@@ -1,14 +1,24 @@
-import { EaCSourceConnectionDetails } from '@fathym/eac';
-import { loadEaCSvc, waitForStatus } from '@fathym/eac/api';
-import { UserOAuthConnection } from '@fathym/eac/oauth.ts';
-import { EaCRuntimeHandler } from '@fathym/eac/runtime';
-import { OpenBiotechWebState } from '../state/OpenBiotechWebState.ts';
+import { EaCSourceConnectionDetails } from '@fathym/eac-sources';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { UserOAuthConnection } from '@fathym/common/oauth';
+import { EaCRuntimeContext } from '@fathym/eac/runtime';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 
 export function establishGitHubAppSourceConnMiddleware(
   providerLookup: string,
   oAuthKvLookup: string,
 ): EaCRuntimeHandler<OpenBiotechWebState> | undefined {
-  return async (_req, ctx) => {
+  return async (
+    _req,
+    ctx: EaCRuntimeContext<
+      OpenBiotechWebState,
+      Record<string, unknown>,
+      OpenBiotechEaC
+    >,
+  ) => {
     const resp = await ctx.Next();
 
     if (ctx.Runtime.URLMatch.Path.endsWith('callback')) {
@@ -48,9 +58,9 @@ export function establishGitHubAppSourceConnMiddleware(
 
         srcConnDetails.Token = currentConn.value.Token;
 
-        const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+        const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-        const commitResp = await eacSvc.Commit(
+        const commitResp = await eacSvc.EaC.Commit(
           {
             EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
             SourceConnections: {

@@ -1,5 +1,5 @@
 import { JSX } from 'preact';
-import { Action, CopyInput, Display } from '@o-biotech/atomic';
+import { Action, CopyInput, Display } from '@o-biotech/atomic-design-kit';
 import APIDevelopForm from '../../islands/organisms/data/api-develop-form.tsx';
 
 export const IsIsland = true;

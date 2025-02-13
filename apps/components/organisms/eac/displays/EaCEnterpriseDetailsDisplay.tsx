@@ -1,13 +1,13 @@
 import { EaCEnterpriseDetails } from '@fathym/eac';
-import { UserEaCRecord } from '@fathym/eac/api';
-import { Action, ActionStyleTypes } from '@o-biotech/atomic';
+import { EaCUserRecord } from '@fathym/eac';
+import { Action, ActionStyleTypes } from '@o-biotech/atomic-design-kit';
 import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
 import { AddIcon } from '../../../../../build/iconset/icons/AddIcon.tsx';
 
 export function EaCEnterpriseDetailsDisplay(
   props: EaCEnterpriseDetails & {
     entLookup: string;
-    userEaCs?: UserEaCRecord[];
+    userEaCs?: EaCUserRecord[];
   },
 ) {
   const otherEaCs = props.userEaCs?.filter(

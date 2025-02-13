@@ -1,20 +1,22 @@
-import { UserEaCRecord } from '@fathym/eac/api';
+import { EaCUserRecord } from '@fathym/eac';
 import { SideBarMenuItem, SideBarMenuItemSettings } from '../../apps/islands/molecules/SideBar.tsx';
-import { SetupPhaseTypes } from '../state/SetupPhaseTypes.ts';
-import { OpenBiotechEaC } from './OpenBiotechEaC.ts';
 import { EaCCloudsDisplay } from '../../apps/components/organisms/eac/displays/EaCCloudsDisplay.tsx';
 import { EaCEnterpriseDetailsDisplay } from '../../apps/components/organisms/eac/displays/EaCEnterpriseDetailsDisplay.tsx';
 import { EaCDevOpsActionsDisplay } from '../../apps/components/organisms/eac/displays/EaCDevOpsActionsDisplay.tsx';
-import { EaCHandlersDisplay } from '../../apps/components/organisms/eac/displays/EaCHandlersDisplay.tsx';
 import { EaCIoTsDisplay } from '../../apps/components/organisms/eac/displays/EaCIoTsDisplay.tsx';
 import { EaCSecretsDisplay } from '../../apps/components/organisms/eac/displays/EaCSecretsDisplay.tsx';
 import { EaCWarmQueriesDisplay } from '../../apps/components/organisms/eac/displays/EaCWarmQueriesDisplay.tsx';
 import { EaCSourceConnectionsDisplay } from '../../apps/components/organisms/eac/displays/EaCSourceConnectionsDisplay.tsx';
 import { EaCSourcesDisplay } from '../../apps/components/organisms/eac/displays/EaCSourcesDisplay.tsx';
 import { EaCGettingStartedDisplay } from '../../apps/components/organisms/eac/displays/EaCGettingStartedDisplay.tsx';
-import { CloudPhaseTypes } from '../state/CloudPhaseTypes.ts';
-import { DevicesPhaseTypes } from '../state/DevicesPhaseTypes.ts';
-import { DataPhaseTypes } from '../state/DataPhaseTypes.ts';
+import {
+  CloudPhaseTypes,
+  DataPhaseTypes,
+  DevicesPhaseTypes,
+  SetupPhaseTypes,
+} from '@o-biotech/common/state';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
+import { EaCModuleActuatorsDisplay } from '../../apps/components/organisms/eac/displays/EaCHandlersDisplay.tsx';
 
 export function loadOoenBiotechSideBarMenuItems(
   phase: SetupPhaseTypes,
@@ -60,7 +62,7 @@ export function loadOoenBiotechSideBarSettings(
   cloudPhase?: CloudPhaseTypes,
   dataPhase?: DataPhaseTypes,
   devicesPhase?: DevicesPhaseTypes,
-  userEaCs?: UserEaCRecord[],
+  userEaCs?: EaCUserRecord[],
 ): Record<string, SideBarMenuItemSettings> {
   const settings: Record<string, SideBarMenuItemSettings> = eac
     ? menuItemNames.reduce((prev, menuItemName) => {
@@ -103,7 +105,7 @@ export function loadOoenBiotechSideBarSettings(
         case 'Handlers': {
           prev[menuItemName] = {
             Title: 'EaC Handlers',
-            Display: <EaCHandlersDisplay {...data} />,
+            Display: <EaCModuleActuatorsDisplay {...data} />,
             Order: 700,
           };
           break;

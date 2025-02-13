@@ -1,26 +1,23 @@
 import { redirectRequest } from '@fathym/common';
-import { EverythingAsCode } from '@fathym/eac';
-import {
-  EaCStatusProcessingTypes,
-  loadEaCSvc,
-  UserEaCRecord,
-  waitForStatus,
-} from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { EaCManageForm, EnterpriseManagementItem } from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
+import { EaCUserRecord, EverythingAsCode } from '@fathym/eac';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { EaCManageForm, EnterpriseManagementItem } from '@o-biotech/atomic-design-kit';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
 import CreateEaCHero from '../../../components/organisms/heros/CreateEaCHero.tsx';
-import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 
 export type EnterprisesPageData = {
   currentEaC?: OpenBiotechEaC;
 
-  enterprises: UserEaCRecord[];
+  enterprises: EaCUserRecord[];
 
   manageEaC?: OpenBiotechEaC;
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EnterprisesPageData
 > = {
@@ -30,16 +27,16 @@ export const handler: EaCRuntimeHandlerResult<
     let manageEaC: OpenBiotechEaC | undefined = undefined;
 
     if (manageEaCLookup) {
-      const parentEaCSvc = await loadEaCSvc();
+      const parentEaCSvc = await loadEaCStewardSvc();
 
-      const jwtResp = await parentEaCSvc.JWT(
+      const jwtResp = await parentEaCSvc.EaC.JWT(
         manageEaCLookup,
         ctx.State.Username,
       );
 
-      const eacSvc = await loadEaCSvc(jwtResp.Token);
+      const eacSvc = await loadEaCStewardSvc(jwtResp.Token);
 
-      manageEaC = await eacSvc.Get(manageEaCLookup);
+      manageEaC = await eacSvc.EaC.Get(manageEaCLookup);
 
       if (!manageEaC?.EnterpriseLookup) {
         return redirectRequest('/dashboard/enterprises', false, false);
@@ -76,15 +73,16 @@ export const handler: EaCRuntimeHandlerResult<
     console.log('DELETE');
     const eac: EverythingAsCode = await req.json();
 
-    const parentEaCSvc = await loadEaCSvc();
+    const parentEaCSvc = await loadEaCStewardSvc();
 
     const username = ctx.State.Username;
 
-    const jwt = await parentEaCSvc.JWT(eac.EnterpriseLookup, username);
+    const jwt = await parentEaCSvc.EaC.JWT(eac.EnterpriseLookup, username);
 
-    const eacSvc = await loadEaCSvc(jwt.Token);
+    const eacSvc = await loadEaCStewardSvc(jwt.Token);
 
-    const deleteResp = await eacSvc.Delete(eac, true, 60);
+    // deno-lint-ignore no-explicit-any
+    const deleteResp = await eacSvc.EaC.Delete(eac as any, true, 60);
 
     const status = await waitForStatus(
       eacSvc,
@@ -151,7 +149,6 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
                   enterprise.EnterpriseLookup
               ? (
                 <EnterpriseManagementItem
-                  
                   active={Data.currentEaC?.EnterpriseLookup ===
                     enterprise.EnterpriseLookup}
                   deleteActionPath={`./enterprises/${enterprise.EnterpriseLookup}`}

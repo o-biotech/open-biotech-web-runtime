@@ -1,8 +1,8 @@
-import { loadEaCSvc } from '@fathym/eac/api';
-import { EaCRuntimeHandler } from '@fathym/eac/runtime';
-import { OpenBiotechWebState } from '../state/OpenBiotechWebState.ts';
-import { OpenBiotechEaC } from '../eac/OpenBiotechEaC.ts';
-import { loadJwtConfig } from '@fathym/eac/mod.ts';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
+import { loadJwtConfig } from '@fathym/common';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 
 export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWebState> {
   return async (_req, ctx) => {
@@ -23,18 +23,18 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
     const parentEntLookup = payload.EnterpriseLookup;
 
     if (currentEntLookup.value) {
-      const eacSvc = await loadEaCSvc(
+      const eacSvc = await loadEaCStewardSvc(
         currentEntLookup.value,
         ctx.State.Username!,
       );
 
-      eac = await eacSvc.Get(currentEntLookup.value);
+      eac = await eacSvc.EaC.Get(currentEntLookup.value);
 
-      ctx.State.UserEaCs = await eacSvc.ListForUser(parentEntLookup);
+      ctx.State.UserEaCs = await eacSvc.EaC.ListForUser(parentEntLookup);
     } else {
-      let eacSvc = await loadEaCSvc('', ctx.State.Username!);
+      let eacSvc = await loadEaCStewardSvc('', ctx.State.Username!);
 
-      ctx.State.UserEaCs = await eacSvc.ListForUser(parentEntLookup);
+      ctx.State.UserEaCs = await eacSvc.EaC.ListForUser(parentEntLookup);
 
       if (ctx.State.UserEaCs[0]) {
         await ctx.State.OBiotechKV.set(
@@ -42,12 +42,12 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
           ctx.State.UserEaCs[0].EnterpriseLookup,
         );
 
-        eacSvc = await loadEaCSvc(
+        eacSvc = await loadEaCStewardSvc(
           ctx.State.UserEaCs[0].EnterpriseLookup,
           ctx.State.Username!,
         );
 
-        eac = await eacSvc.Get(ctx.State.UserEaCs[0].EnterpriseLookup);
+        eac = await eacSvc.EaC.Get(ctx.State.UserEaCs[0].EnterpriseLookup);
       }
     }
 
@@ -126,9 +126,9 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
 
       ctx.State.EaC = eac;
 
-      const parentEaCSvc = await loadEaCSvc();
+      const parentEaCSvc = await loadEaCStewardSvc();
 
-      const jwt = await parentEaCSvc.JWT(
+      const jwt = await parentEaCSvc.EaC.JWT(
         eac.EnterpriseLookup!,
         ctx.State.Username!,
       );

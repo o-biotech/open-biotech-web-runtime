@@ -1,8 +1,13 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { EaCLicenseAsCode } from '@fathym/eac';
-import { UserEaCLicense } from '@fathym/eac/api';
-import { Action, ActionGroup, ActionStyleTypes, classSet, SlideToggle } from '@o-biotech/atomic';
+import { EaCLicenseAsCode, EaCUserLicense } from '@fathym/eac-licensing';
+import {
+  Action,
+  ActionGroup,
+  ActionStyleTypes,
+  classSet,
+  SlideToggle,
+} from '@o-biotech/atomic-design-kit';
 import { loadStripe } from 'npm:@stripe/stripe-js';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
@@ -16,7 +21,7 @@ export type LicensesProps = JSX.HTMLAttributes<HTMLDivElement> & {
 
   stripePublishableKey: string;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 };
 
 export default function Licenses(props: LicensesProps) {
@@ -96,7 +101,7 @@ export default function Licenses(props: LicensesProps) {
         LicenseLookup: props.licLookup,
         PlanLookup: planLookup,
         PriceLookup: plan.PriceLookup,
-      } as UserEaCLicense),
+      } as EaCUserLicense),
     });
 
     const licData = await resp.json();

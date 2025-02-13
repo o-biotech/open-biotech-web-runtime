@@ -1,6 +1,6 @@
 import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { CopyInput, Select } from '@o-biotech/atomic';
+import { CopyInput, Select } from '@o-biotech/atomic-design-kit';
 
 export const IsIsland = true;
 

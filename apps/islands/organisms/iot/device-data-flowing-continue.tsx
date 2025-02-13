@@ -1,7 +1,7 @@
-import { Action, ActionGroup, classSet } from '@o-biotech/atomic';
+import { Action, ActionGroup, classSet } from '@o-biotech/atomic-design-kit';
 import DeviceDataFlowing from './device-data-flowing.tsx';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
-import { IconProps } from '@fathym/atomic-icons/browser';
+import { IconProps } from '@fathym/atomic';
 
 export const IsIsland = true;
 

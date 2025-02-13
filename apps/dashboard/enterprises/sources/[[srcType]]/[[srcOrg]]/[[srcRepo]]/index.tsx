@@ -1,18 +1,20 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCSourceAsCode } from '@fathym/eac';
-import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
+import { EaCSourceAsCode } from '@fathym/eac-sources';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
 import {
   DataLookup,
   DisplayStyleTypes,
   EaCManageSourceForm,
   Hero,
   HeroStyleTypes,
-} from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../../../../../src/state/OpenBiotechWebState.ts';
-import { OpenBiotechEaC } from '../../../../../../../src/eac/OpenBiotechEaC.ts';
+} from '@o-biotech/atomic-design-kit';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 import DeleteAction from '../../../../../../islands/molecules/DeleteAction.tsx';
 import GitHubAccessAction from '../../../../../../islands/molecules/GitHubAccessAction.tsx';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
 
 export type EaCSourcesPageData = {
   entLookup: string;
@@ -32,7 +34,7 @@ export type EaCSourcesPageData = {
   secretOptions: DataLookup[];
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EaCSourcesPageData
 > = {
@@ -65,9 +67,9 @@ export const handler: EaCRuntimeHandlerResult<
       const sourceKey = `GITHUB://${ctx.State.GitHub!.Username}`;
 
       if (ctx.State.EaC!.SourceConnections![sourceKey]) {
-        const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+        const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-        const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+        const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>({
           EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
           SourceConnections: {
             [sourceKey]: {},
@@ -133,9 +135,9 @@ export const handler: EaCRuntimeHandlerResult<
       },
     };
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(saveEaC, 60);
+    const commitResp = await eacSvc.EaC.Commit<OpenBiotechEaC>(saveEaC, 60);
 
     const status = await waitForStatus(
       eacSvc,
@@ -157,15 +159,16 @@ export const handler: EaCRuntimeHandlerResult<
   async DELETE(_req, ctx) {
     const srcLookup: string = ctx.Params.srcLookup ? decodeURIComponent(ctx.Params.srcLookup) : '';
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const deleteResp = await eacSvc.Delete(
+    const deleteResp = await eacSvc.EaC.Delete(
       {
         EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup,
         Sources: {
           [srcLookup]: null,
         },
-      },
+        // deno-lint-ignore no-explicit-any
+      } as any,
       false,
       60,
     );

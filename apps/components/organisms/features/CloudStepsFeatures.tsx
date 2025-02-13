@@ -6,11 +6,10 @@ import {
   ConnectAzure,
   StepsFeatures,
   StepsFeaturesProps,
-} from '@o-biotech/atomic';
-import { EaCLicenseAsCode } from '@fathym/eac';
-import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
+} from '@o-biotech/atomic-design-kit';
+import { EaCLicenseAsCode, EaCUserLicense } from '@fathym/eac-licensing';
 import { CloudIoTForm } from '../data/iot.form.tsx';
-import { UserEaCLicense } from '@fathym/eac/api';
+import { CloudPhaseTypes } from '@o-biotech/common/state';
 
 export type CloudStepsFeaturesProps = StepsFeaturesProps & {
   billingScopes: Record<string, string>;
@@ -45,7 +44,7 @@ export type CloudStepsFeaturesProps = StepsFeaturesProps & {
 
   tenants: Record<string, string>;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 };
 
 export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {

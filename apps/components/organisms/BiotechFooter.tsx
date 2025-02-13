@@ -1,4 +1,4 @@
-import { classSet, Footer, FooterProps } from '@o-biotech/atomic';
+import { classSet, Footer, FooterProps } from '@o-biotech/atomic-design-kit';
 
 export function BiotechFooter(props: FooterProps) {
   return (

@@ -1,6 +1,6 @@
 import { ComponentChildren, JSX } from 'preact';
-import { Action } from '@o-biotech/atomic';
-import { EaCStatus } from '@fathym/eac/api';
+import { Action } from '@o-biotech/atomic-design-kit';
+import { EaCStatus } from '@fathym/eac/steward/status';
 import { DeleteIcon } from '../../../build/iconset/icons/DeleteIcon.tsx';
 
 export const IsIsland = true;

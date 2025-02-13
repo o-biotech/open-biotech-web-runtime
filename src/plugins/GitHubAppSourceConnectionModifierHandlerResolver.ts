@@ -1,9 +1,10 @@
-import { EaCRuntimeHandler, ModifierHandlerResolver } from '@fathym/eac/runtime';
+import { ModifierHandlerResolver } from '@fathym/eac-applications/runtime/modifiers';
 import { establishGitHubAppSourceConnMiddleware } from '../middleware/establishGitHubAppSourceConnMiddleware.ts';
 import {
   GitHubAppSourceConnectionModifierDetails,
   isGitHubAppSourceConnectionModifierDetails,
 } from './GitHubAppSourceConnectionModifierDetails.ts';
+import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
 
 export const GitHubAppSourceConnectionModifierHandlerResolver: ModifierHandlerResolver = {
   Resolve(_ioc, modifier) {

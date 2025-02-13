@@ -1,11 +1,11 @@
 import { redirectRequest } from '@fathym/common';
-import { loadEaCSvc } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
 import { DataStepsFeatures } from '../../../components/organisms/features/DataStepsFeatures.tsx';
-import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
-import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
-import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
+import { DataPhaseTypes, OpenBiotechWebState } from '@o-biotech/common/state';
 
 export const IsIsland = true;
 
@@ -33,7 +33,7 @@ interface DataPageData {
   resGroupLookup: string;
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   DataPageData
 > = {
@@ -42,9 +42,9 @@ export const handler: EaCRuntimeHandlerResult<
       return redirectRequest('/', false, false);
     }
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+    const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>({
       EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
       Clouds: {
         [ctx.State.Cloud.CloudLookup!]: {

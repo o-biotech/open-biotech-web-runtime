@@ -5,9 +5,9 @@ import {
   classSet,
   StepsFeatures,
   StepsFeaturesProps,
-} from '@o-biotech/atomic';
-import { ApplicationsPhaseTypes } from '../../../../src/state/ApplicationsPhaseTypes.ts';
+} from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../styles/actions.tsx';
+import { ApplicationsPhaseTypes } from '@o-biotech/common/state';
 
 export interface ApplicationsStepsFeaturesProps extends StepsFeaturesProps {
   appsPhase?: ApplicationsPhaseTypes;

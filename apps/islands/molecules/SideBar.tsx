@@ -1,12 +1,14 @@
 import { ComponentChildren, JSX } from 'preact';
-import { classSet } from '@o-biotech/atomic';
-import { CloudPhaseTypes } from '../../../src/state/CloudPhaseTypes.ts';
-import { DataPhaseTypes } from '../../../src/state/DataPhaseTypes.ts';
-import { UserEaCRecord } from '@fathym/eac/api';
-import { OpenBiotechEaC } from '../../../src/eac/OpenBiotechEaC.ts';
-import { DevicesPhaseTypes } from '../../../src/state/DevicesPhaseTypes.ts';
-import { SetupPhaseTypes } from '../../../src/state/SetupPhaseTypes.ts';
+import { classSet } from '@o-biotech/atomic-design-kit';
+import { EaCUserRecord } from '@fathym/eac';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 import SideBarMenu from './SideBarMenu.tsx';
+import {
+  CloudPhaseTypes,
+  DataPhaseTypes,
+  DevicesPhaseTypes,
+  SetupPhaseTypes,
+} from '@o-biotech/common/state';
 
 export type SideBarMenuItem = {
   Icon: string;
@@ -39,7 +41,7 @@ export type SideBarProps = {
 
   phase: SetupPhaseTypes;
 
-  userEaCs?: UserEaCRecord[];
+  userEaCs?: EaCUserRecord[];
   // state: OpenBiotechWebState;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 

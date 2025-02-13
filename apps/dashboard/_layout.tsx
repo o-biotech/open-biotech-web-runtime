@@ -1,17 +1,20 @@
 import { merge } from '@fathym/common';
-import { UserEaCRecord } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { BasicLayout } from '@o-biotech/atomic';
+import { EaCUserRecord } from '@fathym/eac';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { BasicLayout } from '@o-biotech/atomic-design-kit';
 import { BiotechHeader } from '../components/organisms/BiotechHeader.tsx';
 import { BiotechFooter } from '../components/organisms/BiotechFooter.tsx';
 import SideBar from '../islands/molecules/SideBar.tsx';
 import { loadOoenBiotechSideBarMenuItems } from '../../src/eac/loadOpenBiotechSideBarMenuItems.tsx';
-import { OpenBiotechEaC } from '../../src/eac/OpenBiotechEaC.ts';
-import { OpenBiotechWebState } from '../../src/state/OpenBiotechWebState.ts';
-import { SetupPhaseTypes } from '../../src/state/SetupPhaseTypes.ts';
-import { CloudPhaseTypes } from '../../src/state/CloudPhaseTypes.ts';
-import { DataPhaseTypes } from '../../src/state/DataPhaseTypes.ts';
-import { DevicesPhaseTypes } from '../../src/state/DevicesPhaseTypes.ts';
+import {
+  CloudPhaseTypes,
+  DataPhaseTypes,
+  DevicesPhaseTypes,
+  OpenBiotechWebState,
+  SetupPhaseTypes,
+} from '@o-biotech/common/state';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 
 interface MainLayoutData {
   CloudLookup?: string;
@@ -30,12 +33,12 @@ interface MainLayoutData {
 
   ResourceGroupLookup?: string;
 
-  UserEaCs?: UserEaCRecord[];
+  UserEaCs?: EaCUserRecord[];
 
   Username: string;
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   MainLayoutData
 > = {

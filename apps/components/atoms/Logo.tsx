@@ -1,5 +1,5 @@
 import { JSX } from 'preact';
-import { classSet } from '@o-biotech/atomic';
+import { classSet } from '@o-biotech/atomic-design-kit';
 
 export type LogoProps = JSX.HTMLAttributes<SVGSVGElement>;
 

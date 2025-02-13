@@ -1,7 +1,8 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCDashboardAsCode } from '@fathym/eac';
-import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
 import {
   Action,
   ActionGroup,
@@ -11,12 +12,13 @@ import {
   HeroStyleTypes,
   Input,
   Select,
-} from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../../../../../src/state/OpenBiotechWebState.ts';
-import { OpenBiotechEaC } from '../../../../../../../src/eac/OpenBiotechEaC.ts';
+} from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../../../../../components/styles/actions.tsx';
 import DeleteAction from '../../../../../../islands/molecules/DeleteAction.tsx';
 import DashboardDisplay from '../../../../../../islands/organisms/data/dashboard-display.tsx';
+import { EaCDashboardAsCode } from '@fathym/eac-iot';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 
 export type EaCIoTDashboardPageData = {
   dashboardOptions: { name: string; lookup: string }[];
@@ -38,7 +40,7 @@ export type EaCIoTDashboardPageData = {
   manageDashboardLookup?: string;
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EaCIoTDashboardPageData
 > = {
@@ -68,9 +70,9 @@ export const handler: EaCRuntimeHandlerResult<
         );
       }
 
-      const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+      const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-      const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+      const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>({
         EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
         Clouds: {
           [iot.CloudLookup!]: {
@@ -162,9 +164,9 @@ export const handler: EaCRuntimeHandlerResult<
       },
     };
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(saveEaC, 60);
+    const commitResp = await eacSvc.EaC.Commit<OpenBiotechEaC>(saveEaC, 60);
 
     const status = await waitForStatus(
       eacSvc,
@@ -192,9 +194,9 @@ export const handler: EaCRuntimeHandlerResult<
 
     const dashboardLookup = ctx.Params.dashboardLookup!;
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const deleteResp = await eacSvc.Delete(
+    const deleteResp = await eacSvc.EaC.Delete(
       {
         EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup,
         IoT: {
@@ -204,7 +206,8 @@ export const handler: EaCRuntimeHandlerResult<
             },
           },
         },
-      },
+        // deno-lint-ignore no-explicit-any
+      } as any,
       false,
       60,
     );

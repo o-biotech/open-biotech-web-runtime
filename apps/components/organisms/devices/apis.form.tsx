@@ -1,5 +1,5 @@
 import { JSX } from 'preact';
-import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
+import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../styles/actions.tsx';
 
 export type APIsFormProps = JSX.HTMLAttributes<HTMLFormElement> & {

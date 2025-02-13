@@ -1,10 +1,9 @@
 import { JSX } from 'preact';
-import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
-import { EaCLicenseAsCode } from '@fathym/eac';
+import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic-design-kit';
+import { EaCLicenseAsCode, EaCUserLicense } from '@fathym/eac-licensing';
 import { callToActionStyles } from '../../styles/actions.tsx';
 import HotFlowInput from '../../../islands/organisms/cloud/iot/hot-flow-input.tsx';
 import Licenses from '../../../islands/organisms/licensing/Licenses.tsx';
-import { UserEaCLicense } from '@fathym/eac/api';
 
 //export const IsIsland = true;
 
@@ -31,7 +30,7 @@ export type CloudIoTFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
 
   stripePublishableKey: string;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 };
 
 export function CloudIoTForm(props: CloudIoTFormProps) {

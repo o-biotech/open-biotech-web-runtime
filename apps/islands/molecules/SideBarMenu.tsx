@@ -1,17 +1,19 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { classSet } from '@o-biotech/atomic';
+import { classSet } from '@o-biotech/atomic-design-kit';
 import { Icon } from '@fathym/atomic-icons/browser';
-import { UserEaCRecord } from '@fathym/eac/api';
+import { EaCUserRecord } from '@fathym/eac';
 import { loadOoenBiotechSideBarSettings } from '../../../src/eac/loadOpenBiotechSideBarMenuItems.tsx';
-import { CloudPhaseTypes } from '../../../src/state/CloudPhaseTypes.ts';
-import { DataPhaseTypes } from '../../../src/state/DataPhaseTypes.ts';
-import { DevicesPhaseTypes } from '../../../src/state/DevicesPhaseTypes.ts';
-import { OpenBiotechEaC } from '../../../src/eac/OpenBiotechEaC.ts';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 import { SideBarMenuItem } from './SideBar.tsx';
-import { SetupPhaseTypes } from '../../../src/state/SetupPhaseTypes.ts';
 import { MenuIcon } from '../../../build/iconset/icons/MenuIcon.tsx';
+import {
+  CloudPhaseTypes,
+  DataPhaseTypes,
+  DevicesPhaseTypes,
+  SetupPhaseTypes,
+} from '@o-biotech/common/state';
+import { IS_BROWSER } from '@fathym/atomic';
 
 export const IsIsland = true;
 
@@ -30,7 +32,7 @@ export type SideBarMenuProps = {
 
   phase: SetupPhaseTypes;
 
-  userEaCs?: UserEaCRecord[];
+  userEaCs?: EaCUserRecord[];
   // state: OpenBiotechWebState;
 } & JSX.HTMLAttributes<HTMLDivElement>;
 

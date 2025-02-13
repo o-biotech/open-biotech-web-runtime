@@ -1,9 +1,9 @@
 import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic';
+import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 import DashboardDisplay from './dashboard-display.tsx';
+import { IS_BROWSER } from '@fathym/atomic';
 
 export const IsIsland = true;
 

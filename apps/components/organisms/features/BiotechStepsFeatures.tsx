@@ -1,7 +1,13 @@
-import { Action, ActionGroup, classSet, FeaturesProps, StepsFeatures } from '@o-biotech/atomic';
+import {
+  Action,
+  ActionGroup,
+  classSet,
+  FeaturesProps,
+  StepsFeatures,
+} from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../styles/actions.tsx';
-import { SetupPhaseTypes } from '../../../../src/state/SetupPhaseTypes.ts';
 import { ChevronRightIcon } from '../../../../build/iconset/icons/ChevronRightIcon.tsx';
+import { SetupPhaseTypes } from '@o-biotech/common/state';
 
 export interface BiotechStepsFeaturesProps extends FeaturesProps {
   setupPhase?: SetupPhaseTypes;

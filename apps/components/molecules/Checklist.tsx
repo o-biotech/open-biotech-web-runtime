@@ -1,5 +1,5 @@
 import { JSX } from 'preact';
-import { Action, ActionStyleTypes, classSet } from '@o-biotech/atomic';
+import { Action, ActionStyleTypes, classSet } from '@o-biotech/atomic-design-kit';
 import { CheckIcon } from '../../../build/iconset/icons/CheckIcon.tsx';
 
 export type ChecklistItem = {

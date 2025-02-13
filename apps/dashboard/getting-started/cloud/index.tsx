@@ -1,18 +1,16 @@
 import { mergeWithArrays, redirectRequest } from '@fathym/common';
-import { EaCLicenseAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
-import {
-  EaCServiceDefinitions,
-  loadEaCAzureSvc,
-  loadEaCSvc,
-  UserEaCLicense,
-} from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
+import { EaCLicenseAsCode, EaCLicenseStripeDetails, EaCUserLicense } from '@fathym/eac-licensing';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { EaCServiceDefinitions } from '@fathym/eac-azure';
+import { loadEaCAzureAPISvc } from '@fathym/eac-azure/steward/clients';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
 import { Location } from 'npm:@azure/arm-subscriptions';
 import CloudConnectHero from '../../../components/organisms/heros/CloudConnectHero.tsx';
 import CloudStepsFeatures from '../../../components/organisms/features/CloudStepsFeatures.tsx';
-import { CloudPhaseTypes } from '../../../../src/state/CloudPhaseTypes.ts';
-import { OpenBiotechEaC } from '../../../../src/eac/OpenBiotechEaC.ts';
-import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
+import { CloudPhaseTypes, OpenBiotechWebState } from '@o-biotech/common/state';
+import { EaCRuntimeContext } from '@fathym/eac/runtime';
 
 //export const IsIsland = true;
 
@@ -49,14 +47,14 @@ interface CloudPageData {
 
   tenants: Record<string, string>;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 }
 
-export const handler: EaCRuntimeHandlerResult<
-  OpenBiotechWebState,
-  CloudPageData
-> = {
-  GET: async (_req, ctx) => {
+export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> = {
+  GET: async (
+    _req,
+    ctx: EaCRuntimeContext<OpenBiotechWebState, CloudPageData, OpenBiotechEaC>,
+  ) => {
     if (!ctx.State.EaC) {
       return redirectRequest('/', false, false);
     }
@@ -85,7 +83,7 @@ export const handler: EaCRuntimeHandlerResult<
 
     const svcCalls: (() => Promise<void>)[] = [];
 
-    const eacAzureSvc = await loadEaCAzureSvc(ctx.State.EaCJWT!);
+    const eacAzureSvc = await loadEaCAzureAPISvc(ctx.State.EaCJWT!);
 
     if (data.cloudLookup) {
       const serviceFiles = [
@@ -110,17 +108,19 @@ export const handler: EaCRuntimeHandlerResult<
       );
 
       svcCalls.push(async () => {
-        const svcDefs = await Promise.all<EaCServiceDefinitions>(svcFileCalls);
+        const svcDefs = await Promise.all<EaCServiceDefinitions>(
+          svcFileCalls,
+        );
 
         const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
 
-        const locationsResp = await eacAzureSvc.CloudLocations(
+        const locationsResp = await eacAzureSvc.Cloud.Locations(
           ctx.State.EaC!.EnterpriseLookup!,
           data.cloudLookup!,
           svcDef,
         );
 
-        await eacAzureSvc.CloudEnsureProviders(
+        await eacAzureSvc.Cloud.EnsureProviders(
           ctx.State.EaC!.EnterpriseLookup!,
           data.cloudLookup!,
           svcDef,
@@ -134,7 +134,7 @@ export const handler: EaCRuntimeHandlerResult<
       const _provider = ctx.Runtime.EaC.Providers!['azure']!;
 
       svcCalls.push(async () => {
-        const tenants = await eacAzureSvc.Tenants(
+        const tenants = await eacAzureSvc.Azure.Tenants(
           ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
@@ -147,7 +147,7 @@ export const handler: EaCRuntimeHandlerResult<
       });
 
       svcCalls.push(async () => {
-        const subs = await eacAzureSvc.Subscriptions(
+        const subs = await eacAzureSvc.Azure.Subscriptions(
           ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
@@ -160,7 +160,7 @@ export const handler: EaCRuntimeHandlerResult<
       });
 
       svcCalls.push(async () => {
-        const billingAccounts = await eacAzureSvc.BillingAccounts(
+        const billingAccounts = await eacAzureSvc.Azure.BillingAccounts(
           ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
@@ -222,9 +222,9 @@ export const handler: EaCRuntimeHandlerResult<
         const sourceKey = `GITHUB://${ctx.State.GitHub!.Username}`;
 
         if (ctx.State.EaC!.SourceConnections![sourceKey]) {
-          const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+          const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-          const eacConnections = await eacSvc.Connections<OpenBiotechEaC>({
+          const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>({
             EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
             SourceConnections: {
               [sourceKey]: {},

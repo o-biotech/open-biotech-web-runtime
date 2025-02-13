@@ -1,12 +1,15 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCIoTAsCode, EaCLicenseAsCode, EaCLicenseStripeDetails } from '@fathym/eac';
-import { EaCStatusProcessingTypes, loadEaCSvc, UserEaCLicense } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
-import { setupEaCIoTFlow } from '../../../../../src/eac/setupEaCIoTFlow.ts';
-import { OpenBiotechEaC } from '../../../../../src/eac/OpenBiotechEaC.ts';
+import { EaCIoTAsCode } from '@fathym/eac-iot';
+import { EaCLicenseAsCode, EaCLicenseStripeDetails, EaCUserLicense } from '@fathym/eac-licensing';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
+import { OpenBiotechEaC, setupEaCIoTFlow } from '@o-biotech/common/utils';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { EaCRuntimeContext } from '@fathym/eac/runtime';
 import ResourceGroupIoTSettings from '../../../../islands/organisms/cloud/iot/res-group-iot-settings.tsx';
-import { OpenBiotechWebState } from '../../../../../src/state/OpenBiotechWebState.ts';
 
 export type EaCIoTSettingsPageData = {
   deviceKeys: Record<string, string>;
@@ -36,14 +39,21 @@ export type EaCIoTSettingsPageData = {
 
   stripePublishableKey: string;
 
-  userLicense?: UserEaCLicense;
+  userLicense?: EaCUserLicense;
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EaCIoTSettingsPageData
 > = {
-  async GET(_, ctx) {
+  async GET(
+    _,
+    ctx: EaCRuntimeContext<
+      OpenBiotechWebState,
+      EaCIoTSettingsPageData,
+      OpenBiotechEaC
+    >,
+  ) {
     const manageIoTLookup = ctx.Params.iotLookup!;
 
     const manageIoT: EaCIoTAsCode = ctx.State.EaC!.IoT![manageIoTLookup]!;
@@ -73,7 +83,7 @@ export const handler: EaCRuntimeHandlerResult<
       userLicense: userLicense,
     };
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
     const connsReq: OpenBiotechEaC = {
       EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
@@ -107,7 +117,7 @@ export const handler: EaCRuntimeHandlerResult<
       }
     }
 
-    const eacConnections = await eacSvc.Connections(connsReq);
+    const eacConnections = await eacSvc.EaC.Connections(connsReq);
 
     if (eacConnections.SourceConnections) {
       const sourceKey = `GITHUB://${ctx.State.GitHub!.Username}`;
@@ -183,11 +193,11 @@ export const handler: EaCRuntimeHandlerResult<
       gitHubUsername,
     );
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(saveEaC, 60);
+    const commitResp = await eacSvc.EaC.Commit<OpenBiotechEaC>(saveEaC, 60);
 
-    const status = await eacSvc.Status(
+    const status = await eacSvc.Status.Get(
       commitResp.EnterpriseLookup,
       commitResp.CommitID,
     );

@@ -5,7 +5,7 @@ import {
   MenuButton,
   MenuButtonProps,
   MenuButtonStyleTypes,
-} from '@o-biotech/atomic';
+} from '@o-biotech/atomic-design-kit';
 import { UserIcon } from '../../../build/iconset/icons/UserIcon.tsx';
 import { LogOutIcon } from '../../../build/iconset/icons/LogOutIcon.tsx';
 

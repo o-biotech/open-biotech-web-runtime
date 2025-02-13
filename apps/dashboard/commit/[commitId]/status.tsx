@@ -1,11 +1,12 @@
 // deno-lint-ignore-file no-explicit-any
 import { useEffect, useState } from 'preact/hooks';
 import { redirectRequest } from '@fathym/common';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
-import { EaCStatus, EaCStatusProcessingTypes, loadEaCSvc } from '@fathym/eac/api';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatus, EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
 import { intlFormatDistance } from 'npm:date-fns';
-import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
 import Redirect from '../../../islands/atoms/Redirect.tsx';
 import { CheckIcon } from '../../../../build/iconset/icons/CheckIcon.tsx';
 import { ErrorIcon } from '../../../../build/iconset/icons/ErrorIcon.tsx';
@@ -23,7 +24,7 @@ interface CommitStatusPageData {
   status: EaCStatus;
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   CommitStatusPageData
 > = {
@@ -34,9 +35,9 @@ export const handler: EaCRuntimeHandlerResult<
 
     const url = new URL(req.url);
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const status: EaCStatus = await eacSvc.Status(entLookup, commitId);
+    const status: EaCStatus = await eacSvc.Status.Get(entLookup, commitId);
 
     const complete = (url.searchParams.get('complete') as string) === 'true';
 
@@ -121,7 +122,7 @@ export default function CommitStatus({
   };
 
   useEffect(() => {
-    if (IS_BROWSER) {
+    if (document) {
       const checkInterval = setInterval(() => {
         fetch(`/api/o-biotech/eac/${Data.commitId}/status`).then(
           (resp: Response) => {

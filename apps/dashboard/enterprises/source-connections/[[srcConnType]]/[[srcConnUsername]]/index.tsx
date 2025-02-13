@@ -1,9 +1,11 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCSourceConnectionAsCode } from '@fathym/eac';
-import { loadEaCSvc, waitForStatus } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../../../../src/state/OpenBiotechWebState.ts';
+import { EaCSourceConnectionAsCode } from '@fathym/eac-sources';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
 import GitHubAccessAction from '../../../../../islands/molecules/GitHubAccessAction.tsx';
 import DeleteAction from '../../../../../islands/molecules/DeleteAction.tsx';
 
@@ -13,7 +15,7 @@ export type EaCSourceConnectionsPageData = {
   manageSrcConnLookup?: string;
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EaCSourceConnectionsPageData
 > = {
@@ -45,15 +47,16 @@ export const handler: EaCRuntimeHandlerResult<
       ? decodeURIComponent(ctx.Params.srcConnLookup)
       : '';
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const deleteResp = await eacSvc.Delete(
+    const deleteResp = await eacSvc.EaC.Delete(
       {
         EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup,
         SourceConnections: {
           [srcConnLookup]: null,
         },
-      },
+        // deno-lint-ignore no-explicit-any
+      } as any,
       false,
       60,
     );

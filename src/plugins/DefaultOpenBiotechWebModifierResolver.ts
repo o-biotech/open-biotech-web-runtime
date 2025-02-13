@@ -1,8 +1,11 @@
-import { EaCModifierAsCode } from '@fathym/eac';
-import { DefaultModifierMiddlewareResolver, ModifierHandlerResolver } from '@fathym/eac/runtime';
 import { IoCContainer } from '@fathym/ioc';
 import { isGitHubAppSourceConnectionModifierDetails } from './GitHubAppSourceConnectionModifierDetails.ts';
 import { isCurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
+import {
+  DefaultModifierMiddlewareResolver,
+  ModifierHandlerResolver,
+} from '@fathym/eac-applications/runtime/modifiers';
+import { EaCModifierAsCode } from '@fathym/eac-applications/modifiers';
 
 export class DefaultOpenBiotechWebModifierResolver implements ModifierHandlerResolver {
   public async Resolve(ioc: IoCContainer, modifier: EaCModifierAsCode) {

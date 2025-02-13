@@ -1,6 +1,7 @@
-import { EaCRuntimeHandler, ModifierHandlerResolver } from '@fathym/eac/runtime';
 import { isCurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
 import { establishCurrentEaCMiddleware } from '../middleware/establishCurrentEaCMiddleware.ts';
+import { ModifierHandlerResolver } from '@fathym/eac-applications/runtime/modifiers';
+import { EaCRuntimeHandler } from '@fathym/eac/runtime/pipelines';
 
 export const CurrentEaCModifierHandlerResolver: ModifierHandlerResolver = {
   Resolve(_ioc, modifier) {

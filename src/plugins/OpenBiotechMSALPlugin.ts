@@ -1,7 +1,10 @@
-import { EaCRuntimeConfig, EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime';
+import { EaCRuntimeConfig } from '@fathym/eac/runtime/config';
+import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/plugins';
 import { MSALPlugin } from '@fathym/msal';
-import { loadOAuth2ClientConfig } from '@fathym/eac/runtime';
 import { createOAuthHelpers } from '@fathym/common/oauth';
+import { loadOAuth2ClientConfig } from '@fathym/eac-applications/runtime/modules';
+import { EverythingAsCode } from '@fathym/eac';
+import { EverythingAsCodeIdentity } from '@fathym/eac-identity';
 
 export default class OpenBiotechMSALPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -11,7 +14,11 @@ export default class OpenBiotechMSALPlugin implements EaCRuntimePlugin {
       Name: 'OpenBiotechMSALPlugin',
       Plugins: [
         new MSALPlugin({
-          async Resolve(ioc, _processor, eac) {
+          async Resolve(
+            ioc,
+            _processor,
+            eac: EverythingAsCode & EverythingAsCodeIdentity,
+          ) {
             const primaryProviderLookup = Object.keys(eac.Providers || {}).find(
               (pl) => eac.Providers![pl].Details!.IsPrimary,
             );

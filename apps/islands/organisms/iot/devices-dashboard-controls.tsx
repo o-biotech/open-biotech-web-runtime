@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-explicit-any
 import { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/eac/runtime/browser';
+import { IconProps, IS_BROWSER } from '@fathym/atomic';
 import { intlFormat } from 'npm:date-fns';
 import {
   Action,
@@ -12,13 +12,12 @@ import {
   InputWrapper,
   numMaxLengthShield,
   SlideToggle,
-} from '@o-biotech/atomic';
-import { EaCDeviceAsCode } from '@fathym/eac';
+} from '@o-biotech/atomic-design-kit';
+import { EaCDeviceAsCode } from '@fathym/eac-iot';
 import HotConnect from './hot-connect.tsx';
-import { ExplorerRequest } from '@fathym/eac/api';
+import { ExplorerRequest } from '@fathym/eac-azure/api';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 import { ChevronDownIcon } from '../../../../build/iconset/icons/ChevronDownIcon.tsx';
-import { IconProps } from '@fathym/atomic-icons/browser';
 
 export const IsIsland = true;
 

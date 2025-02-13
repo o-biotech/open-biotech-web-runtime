@@ -1,10 +1,10 @@
 import { ComponentChildren } from 'preact';
-import { StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic';
+import { StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic-design-kit';
 import { DataFlowForm } from '../data/flow.form.tsx';
 import DataExploreForm from '../../../islands/organisms/data/explore-form.tsx';
-import { DataPhaseTypes } from '../../../../src/state/DataPhaseTypes.ts';
 import { StorageAPIsDisplay } from '../../molecules/StorageAPIsDisplay.tsx';
 import { DataDevelopForm } from '../data/develop.form.tsx';
+import { DataPhaseTypes } from '@o-biotech/common/state';
 
 export const IsIsland = true;
 

@@ -1,8 +1,8 @@
 import { ComponentChildren } from 'preact';
-import { StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic';
+import { StepsFeatures, StepsFeaturesProps } from '@o-biotech/atomic-design-kit';
 import { DeviceForm } from '../devices/device.form.tsx';
 import DevicesDashboardForm from '../devices/dashboards.form.tsx';
-import { DevicesPhaseTypes } from '../../../../src/state/DevicesPhaseTypes.ts';
+import { DevicesPhaseTypes } from '@o-biotech/common/state';
 
 export interface DevicesStepsFeaturesProps extends StepsFeaturesProps {
   cloudLookup: string;

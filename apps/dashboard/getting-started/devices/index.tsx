@@ -1,9 +1,9 @@
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic';
-import { DevicesPhaseTypes } from '../../../../src/state/DevicesPhaseTypes.ts';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
 import { DevicesStepsFeatures } from '../../../components/organisms/features/DevicesStepsFeatures.tsx';
 import { redirectRequest } from '@fathym/common';
-import { OpenBiotechWebState } from '../../../../src/state/OpenBiotechWebState.ts';
+import { DevicesPhaseTypes, OpenBiotechWebState } from '@o-biotech/common/state';
 
 interface DevicesPageData {
   cloudLookup: string;
@@ -17,7 +17,7 @@ interface DevicesPageData {
   resGroupLookup: string;
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   DevicesPageData
 > = {
@@ -45,9 +45,7 @@ export const handler: EaCRuntimeHandlerResult<
   },
 };
 
-export default function Devices({
-  Data,
-}: PageProps<DevicesPageData>) {
+export default function Devices({ Data }: PageProps<DevicesPageData>) {
   return (
     <div>
       <Hero

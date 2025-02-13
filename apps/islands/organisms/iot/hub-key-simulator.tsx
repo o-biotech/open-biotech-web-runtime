@@ -1,6 +1,6 @@
 import { JSX } from 'preact';
 import { useState } from 'preact/hooks';
-import { CopyInput } from '@o-biotech/atomic';
+import { CopyInput } from '@o-biotech/atomic-design-kit';
 import IoTHubKeyConnectionDisplay from './hub-key-connection.tsx';
 import IoTHubDeviceConnectionDisplay from './hub-device-connection.tsx';
 

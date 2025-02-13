@@ -1,8 +1,11 @@
-import { EaCStripeProcessor, EverythingAsCode } from '@fathym/eac';
-import { EaCRuntimeConfig, EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime';
-import * as djwt from 'https://deno.land/x/djwt@v3.0.0/mod.ts';
-import { loadEaCSvc } from '@fathym/eac/api';
+import { EverythingAsCode } from '@fathym/eac';
+import { EaCRuntimeConfig } from '@fathym/eac/runtime/config';
+import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/plugins';
+
+import * as djwt from 'jsr:@zaubrik/djwt@3.0.2';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { IoCContainer } from 'https://deno.land/x/fathym_ioc@v0.0.10/src/ioc/ioc.ts';
+import { EaCStripeProcessor } from '@fathym/eac-applications/processors';
 
 export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -124,9 +127,9 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
 
         const { EnterpriseLookup } = payload as Record<string, string>;
 
-        const eacSvc = await loadEaCSvc(eacApiKey);
+        const eacSvc = await loadEaCStewardSvc(eacApiKey);
 
-        await eacSvc.Commit(
+        await eacSvc.EaC.Commit(
           {
             EnterpriseLookup,
             ...pluginCfg.EaC!,

@@ -1,16 +1,16 @@
 import { JSX } from 'preact';
-import { EaCDeviceAsCode } from '@fathym/eac';
-import { UserEaCRecord } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { EaCManageForm } from '@o-biotech/atomic';
-import { SetupPhaseTypes } from '../../src/state/SetupPhaseTypes.ts';
+import { EaCUserRecord } from '@fathym/eac';
+import { EaCDeviceAsCode } from '@fathym/eac-iot';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { EaCManageForm } from '@o-biotech/atomic-design-kit';
 import CloudConnectHero from '../components/organisms/heros/CloudConnectHero.tsx';
 import ConnectDevicesHero from '../components/organisms/heros/ConnectDevicesHero.tsx';
 import CreateEaCHero from '../components/organisms/heros/CreateEaCHero.tsx';
 import SetupDataHero from '../components/organisms/heros/SetupDataHero.tsx';
 import { BiotechStepsFeatures } from '../components/organisms/features/BiotechStepsFeatures.tsx';
-import { OpenBiotechWebState } from '../../src/state/OpenBiotechWebState.ts';
 import { BiotechDashboard } from '../components/organisms/BiotechDashboard.tsx';
+import { OpenBiotechWebState, SetupPhaseTypes } from '@o-biotech/common/state';
 
 interface HomePageData {
   Devices?: Record<string, EaCDeviceAsCode>;
@@ -21,10 +21,10 @@ interface HomePageData {
 
   SetupPhase: SetupPhaseTypes;
 
-  UserEaCs?: UserEaCRecord[];
+  UserEaCs?: EaCUserRecord[];
 }
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   HomePageData
 > = {

@@ -1,11 +1,18 @@
 import { redirectRequest } from '@fathym/common';
-import { EaCDeviceAsCode } from '@fathym/eac';
-import { EaCStatusProcessingTypes, loadEaCSvc, waitForStatus } from '@fathym/eac/api';
-import { EaCRuntimeHandlerResult, PageProps } from '@fathym/eac/runtime';
-import { DisplayStyleTypes, EaCManageIoTDeviceForm, Hero, HeroStyleTypes } from '@o-biotech/atomic';
-import { OpenBiotechWebState } from '../../../../../../../src/state/OpenBiotechWebState.ts';
-import { OpenBiotechEaC } from '../../../../../../../src/eac/OpenBiotechEaC.ts';
+import { EaCDeviceAsCode } from '@fathym/eac-iot';
+import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
+import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
+import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
+import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import {
+  DisplayStyleTypes,
+  EaCManageIoTDeviceForm,
+  Hero,
+  HeroStyleTypes,
+} from '@o-biotech/atomic-design-kit';
+import { OpenBiotechEaC } from '@o-biotech/common/utils';
 import DeleteAction from '../../../../../../islands/molecules/DeleteAction.tsx';
+import { OpenBiotechWebState } from '@o-biotech/common/state';
 
 export type EaCIoTDevicePageData = {
   entLookup: string;
@@ -17,7 +24,7 @@ export type EaCIoTDevicePageData = {
   manageDeviceLookup?: string;
 };
 
-export const handler: EaCRuntimeHandlerResult<
+export const handler: EaCRuntimeHandlerSet<
   OpenBiotechWebState,
   EaCIoTDevicePageData
 > = {
@@ -70,9 +77,9 @@ export const handler: EaCRuntimeHandlerResult<
       },
     };
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const commitResp = await eacSvc.Commit<OpenBiotechEaC>(saveEaC, 60);
+    const commitResp = await eacSvc.EaC.Commit<OpenBiotechEaC>(saveEaC, 60);
 
     const status = await waitForStatus(
       eacSvc,
@@ -96,9 +103,9 @@ export const handler: EaCRuntimeHandlerResult<
 
     const deviceLookup = ctx.Params.deviceLookup!;
 
-    const eacSvc = await loadEaCSvc(ctx.State.EaCJWT!);
+    const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const deleteResp = await eacSvc.Delete(
+    const deleteResp = await eacSvc.EaC.Delete(
       {
         EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup,
         IoT: {
@@ -108,7 +115,8 @@ export const handler: EaCRuntimeHandlerResult<
             },
           },
         },
-      },
+        // deno-lint-ignore no-explicit-any
+      } as any,
       false,
       60,
     );

@@ -1,5 +1,5 @@
-import { EaCIoTAsCode } from '@fathym/eac';
-import { Action, ActionGroup, ActionStyleTypes } from '@o-biotech/atomic';
+import { EaCIoTAsCode } from '@fathym/eac-iot';
+import { Action, ActionGroup, ActionStyleTypes } from '@o-biotech/atomic-design-kit';
 import { DropOutMenu } from '../../../molecules/DropOutMenu.tsx';
 import { EditIcon } from '../../../../../build/iconset/icons/EditIcon.tsx';
 import { SettingsIcon } from '../../../../../build/iconset/icons/SettingsIcon.tsx';
