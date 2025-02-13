@@ -4,7 +4,7 @@ import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/pl
 
 import * as djwt from 'jsr:@zaubrik/djwt@3.0.2';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
-import { IoCContainer } from 'https://deno.land/x/fathym_ioc@v0.0.10/src/ioc/ioc.ts';
+import { IoCContainer } from '@fathym/ioc';
 import { EaCStripeProcessor } from '@fathym/eac-applications/processors';
 
 export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
