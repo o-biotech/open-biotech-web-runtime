@@ -33,6 +33,8 @@
     "@fathym/code-editor": "jsr:@fathym/code-editor@0.0.22",
     "@fathym/common": "jsr:@fathym/common@0",
     "@fathym/eac": "jsr:@fathym/eac@0.2.35",
+    "@fathym/eac-applications/runtime": "../../fathym-deno/eac-applications/src/runtime/_/.exports.ts",
+    "@fathym/eac-applications/runtime/processors": "../../fathym-deno/eac-applications/src/runtime/processors/.exports.ts",
     "@fathym/eac-applications": "jsr:@fathym/eac-applications@0.0.53",
     "@fathym/eac-azure": "jsr:@fathym/eac-azure@0.0.27",
     "@fathym/eac-deno-kv": "jsr:@fathym/eac-deno-kv@0",

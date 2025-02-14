@@ -1,7 +1,10 @@
 import { EaCAtomicIconsProcessor } from '@fathym/atomic-icons';
 import { FathymAtomicIconsPlugin } from '@fathym/atomic-icons/plugin';
 import { EaCRuntimeConfig } from '@fathym/eac/runtime/config';
-import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/plugins';
+import {
+  EaCRuntimePlugin,
+  EaCRuntimePluginConfig,
+} from '@fathym/eac/runtime/plugins';
 import {
   EaCAPIProcessor,
   EaCDFSProcessor,
@@ -20,7 +23,10 @@ import {
 } from '@fathym/eac-applications/modifiers';
 import { FathymAzureContainerCheckPlugin } from '@fathym/eac-applications/runtime/plugins';
 import { EaCDenoKVDetails } from '@fathym/eac-deno-kv';
-import { EaCAzureADB2CProviderDetails, EaCAzureADProviderDetails } from '@fathym/eac-identity';
+import {
+  EaCAzureADB2CProviderDetails,
+  EaCAzureADProviderDetails,
+} from '@fathym/eac-identity';
 import {
   EaCAzureBlobStorageDistributedFileSystemDetails,
   EaCJSRDistributedFileSystemDetails,
@@ -158,9 +164,15 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               CacheControl: {
                 'text\\/html': `private, max-age=${60 * 5}`,
                 'image\\/': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application\\/javascript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application\\/typescript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'text\\/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'application\\/javascript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
+                'application\\/typescript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
+                'text\\/css': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
               },
             } as EaCDFSProcessor,
           },
@@ -177,37 +189,51 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                   IconMap: {
                     add: 'https://api.iconify.design/gg:add.svg',
                     begin: 'https://api.iconify.design/fe:beginner.svg',
-                    check: 'https://api.iconify.design/lets-icons:check-fill.svg',
-                    'chevron-down': 'https://api.iconify.design/mdi:chevron-down.svg',
+                    check:
+                      'https://api.iconify.design/lets-icons:check-fill.svg',
+                    'chevron-down':
+                      'https://api.iconify.design/mdi:chevron-down.svg',
                     'chevron-right':
                       'https://api.iconify.design/material-symbols:chevron-right-rounded.svg',
                     'connected-devices':
                       'https://api.iconify.design/material-symbols:cast-connected-outline.svg',
                     copy: 'https://api.iconify.design/solar:copy-outline.svg',
-                    delete: 'https://api.iconify.design/material-symbols-light:delete.svg',
+                    delete:
+                      'https://api.iconify.design/material-symbols-light:delete.svg',
                     'device-telemetry':
                       'https://api.iconify.design/material-symbols:query-stats.svg',
                     edit: 'https://api.iconify.design/mdi:edit.svg',
                     'emulated-device':
                       'https://api.iconify.design/material-symbols:android-find-my-device-outline.svg',
-                    error: 'https://api.iconify.design/material-symbols:error.svg',
-                    loading: 'https://api.iconify.design/line-md:loading-alt-loop.svg',
+                    error:
+                      'https://api.iconify.design/material-symbols:error.svg',
+                    loading:
+                      'https://api.iconify.design/line-md:loading-alt-loop.svg',
                     'log-out': 'https://api.iconify.design/ic:sharp-logout.svg',
                     menu: 'https://api.iconify.design/ci:hamburger.svg',
-                    notification: 'https://api.iconify.design/mdi:notifications.svg',
-                    renew: 'https://api.iconify.design/material-symbols:autorenew.svg',
-                    settings: 'https://api.iconify.design/material-symbols-light:settings.svg',
+                    notification:
+                      'https://api.iconify.design/mdi:notifications.svg',
+                    renew:
+                      'https://api.iconify.design/material-symbols:autorenew.svg',
+                    settings:
+                      'https://api.iconify.design/material-symbols-light:settings.svg',
                     sync: 'https://api.iconify.design/ic:baseline-sync.svg',
                     user: 'https://api.iconify.design/material-symbols:account-circle-full.svg',
                     Clouds: 'https://api.iconify.design/ic:baseline-cloud.svg',
-                    Details: 'https://api.iconify.design/clarity:details-solid.svg',
-                    Handlers: 'https://api.iconify.design/fluent:protocol-handler-16-filled.svg',
+                    Details:
+                      'https://api.iconify.design/clarity:details-solid.svg',
+                    Handlers:
+                      'https://api.iconify.design/fluent:protocol-handler-16-filled.svg',
                     IoT: 'https://api.iconify.design/fluent:iot-20-filled.svg',
-                    SourceConnections: 'https://api.iconify.design/mdi:connection.svg',
-                    DevOpsActions: 'https://api.iconify.design/fluent-mdl2:set-action.svg',
+                    SourceConnections:
+                      'https://api.iconify.design/mdi:connection.svg',
+                    DevOpsActions:
+                      'https://api.iconify.design/fluent-mdl2:set-action.svg',
                     Secrets: 'https://api.iconify.design/la:user-secret.svg',
-                    Sources: 'https://api.iconify.design/mdi:source-repository.svg',
-                    GettingStarted: 'https://api.iconify.design/mdi:cast-tutorial.svg',
+                    Sources:
+                      'https://api.iconify.design/mdi:source-repository.svg',
+                    GettingStarted:
+                      'https://api.iconify.design/mdi:cast-tutorial.svg',
                   },
                 },
                 Generate: true,
@@ -218,7 +244,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           dashboard: {
             Details: {
               Name: 'Dashboard Site',
-              Description: 'The dashboard site to be used for the marketing of the project',
+              Description:
+                'The dashboard site to be used for the marketing of the project',
             },
             ModifierResolvers: {
               baseHref: {
@@ -253,9 +280,15 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               CacheControl: {
                 'text\\/html': `private, max-age=${60 * 5}`,
                 'image\\/': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application\\/javascript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'application\\/typescript': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
-                'text\\/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'application\\/javascript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
+                'application\\/typescript': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
+                'text\\/css': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
               },
             } as EaCDFSProcessor,
           },
@@ -295,7 +328,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           oauthAzure: {
             Details: {
               Name: 'OAuth GitHub App',
-              Description: 'The site for use in OAuth workflows for a user against GitHub.',
+              Description:
+                'The site for use in OAuth workflows for a user against GitHub.',
             },
             ModifierResolvers: {
               currentEaC: { Priority: 9000 },
@@ -308,7 +342,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
           oauthGitHub: {
             Details: {
               Name: 'OAuth GitHub App',
-              Description: 'The site for use in OAuth workflows for a user against GitHub.',
+              Description:
+                'The site for use in OAuth workflows for a user against GitHub.',
             },
             ModifierResolvers: {
               currentEaC: { Priority: 9000 },
@@ -350,7 +385,9 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               ConfigPath: './tailwind.config.ts',
               StylesTemplatePath: './apps/tailwind/styles.css',
               CacheControl: {
-                'text\\/css': `public, max-age=${60 * 60 * 24 * 365}, immutable`,
+                'text\\/css': `public, max-age=${
+                  60 * 60 * 24 * 365
+                }, immutable`,
               },
             } as EaCTailwindProcessor,
           },
@@ -439,14 +476,16 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'BaseHREF',
               Name: 'Base HREF',
-              Description: 'Adjusts the base HREF of a response based on configureation.',
+              Description:
+                'Adjusts the base HREF of a response based on configureation.',
             } as EaCBaseHREFModifierDetails,
           },
           currentEaC: {
             Details: {
               Type: 'CurrentEaC',
               Name: 'OAuth',
-              Description: 'Used to restrict user access to various applications.',
+              Description:
+                'Used to restrict user access to various applications.',
             } as CurrentEaCModifierDetails,
           },
           jwtValidate: {
@@ -460,7 +499,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'KeepAlive',
               Name: 'Deno KV Cache',
-              Description: 'Lightweight cache to use that stores data in a DenoKV database.',
+              Description:
+                'Lightweight cache to use that stores data in a DenoKV database.',
               KeepAlivePath: '/_eac/alive',
             } as EaCKeepAliveModifierDetails,
           },
@@ -468,7 +508,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'OAuth',
               Name: 'OAuth',
-              Description: 'Used to restrict user access to various applications.',
+              Description:
+                'Used to restrict user access to various applications.',
               ProviderLookup: 'adb2c',
               SignInPath: '/oauth/signin',
             } as EaCOAuthModifierDetails,
@@ -486,7 +527,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'OAuth',
               Name: 'OAuth GitHub',
-              Description: 'Used to restrict user access to various applications.',
+              Description:
+                'Used to restrict user access to various applications.',
               ProviderLookup: 'o-biotech-github-app',
               SignInPath: '/github/oauth/signin',
             } as EaCOAuthModifierDetails,
@@ -495,7 +537,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'GitHubAppSourceConn',
               Name: 'OAuth GitHub Callback',
-              Description: 'Used to restrict user access to various applications.',
+              Description:
+                'Used to restrict user access to various applications.',
               ProviderLookup: 'o-biotech-github-app',
               OAuthDatabaseLookup: 'oauth',
             } as GitHubAppSourceConnectionModifierDetails,
@@ -514,7 +557,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'Stripe',
               Name: 'Stripe',
-              Description: 'Stripe middleware for including stripe js on every page.',
+              Description:
+                'Stripe middleware for including stripe js on every page.',
               IncludeScript: true,
             } as EaCStripeModifierDetails,
           },
@@ -522,7 +566,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'Tracing',
               Name: 'Tracing',
-              Description: 'Lightweight cache to use that stores data in a DenoKV database.',
+              Description:
+                'Lightweight cache to use that stores data in a DenoKV database.',
               TraceRequest: true,
               TraceResponse: true,
             } as EaCTracingModifierDetails,
@@ -533,7 +578,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             DatabaseLookup: 'oauth',
             Details: {
               Name: 'Azure ADB2C OAuth Provider',
-              Description: 'The provider used to connect with our azure adb2c instance',
+              Description:
+                'The provider used to connect with our azure adb2c instance',
               ClientID: Deno.env.get('AZURE_ADB2C_CLIENT_ID')!,
               ClientSecret: Deno.env.get('AZURE_ADB2C_CLIENT_SECRET')!,
               Scopes: ['openid', Deno.env.get('AZURE_ADB2C_CLIENT_ID')!],
@@ -613,7 +659,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
       {
         Name: 'GitHubAppSourceConnectionModifierDetails',
         Type: pluginConfig.IoC!.Symbol('ModifierHandlerResolver'),
-      },
+      }
     );
 
     pluginConfig.IoC!.Register(DefaultOpenBiotechWebProcessorHandlerResolver, {
