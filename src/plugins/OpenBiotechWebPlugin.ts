@@ -15,9 +15,11 @@ import {
   EaCDenoKVDatabaseDetails,
   EaCDFSProcessor,
   EaCESMDistributedFileSystem,
+  EaCGoogleTagMgrModifierDetails,
   EaCJWTValidationModifierDetails,
   EaCKeepAliveModifierDetails,
   EaCLocalDistributedFileSystem,
+  EaCMSAppInsightsModifierDetails,
   EaCOAuthModifierDetails,
   EaCOAuthProcessor,
   EaCPreactAppProcessor,
@@ -79,6 +81,12 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             ModifierResolvers: {
               keepAlive: {
                 Priority: 5000,
+              },
+              googleTag: {
+                Priority: 5000
+              },
+              msAppInsights: {
+                Priority: 5000
               },
               oauth: {
                 Priority: 10000,
@@ -241,7 +249,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             },
             ModifierResolvers: {
               baseHref: {
-                Priority: 10000,
+                Priority: 11000,
               },
               currentEaC: { Priority: 9000 },
             },
@@ -456,6 +464,14 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Description: 'Used to restrict user access to various applications.',
             } as CurrentEaCModifierDetails,
           },
+          googleTag: {
+            Details: {
+              Type: 'GoogleTagMgr',
+              Name: 'Google Tag Manager',
+              Description: 'Adds code to pages to support Google Analytics and other actions',
+              GoogleID: Deno.env.get('GOOGLE_TAGS_ID')!,
+            } as EaCGoogleTagMgrModifierDetails,
+          },
           jwtValidate: {
             Details: {
               Type: 'JWTValidation',
@@ -470,6 +486,14 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Description: 'Lightweight cache to use that stores data in a DenoKV database.',
               KeepAlivePath: '/_eac/alive',
             } as EaCKeepAliveModifierDetails,
+          },
+          msAppInsights: {
+            Details: {
+              Type: 'MSAppInsights',
+              Name: 'Microsoft Application Insights',
+              Description: 'Adds code to pages to support Microsoft Azure Application Insights and other actions',
+              InstrumentationKey: Deno.env.get('APP_INSIGHTS_INSTRUMENTATION_KEY')!,
+            } as EaCMSAppInsightsModifierDetails,
           },
           oauth: {
             Details: {

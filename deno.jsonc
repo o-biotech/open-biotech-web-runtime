@@ -25,7 +25,7 @@
     "@fathym/common": "https://deno.land/x/fathym_common@v0.0.185/mod.ts",
     "@fathym/common/oauth": "https://deno.land/x/fathym_common@v0.0.185/oauth.ts",
     // "@fathym/eac": "../../fathym-deno/everything-as-code/mod.ts",
-    "@fathym/eac": "https://deno.land/x/fathym_everything_as_code@v0.0.415/mod.ts",
+    "@fathym/eac": "jsr:@fathym/eac-applications@0.0.61-analytics",
     // "@fathym/eac/": "../../fathym-deno/everything-as-code/",
     "@fathym/eac/": "https://deno.land/x/fathym_everything_as_code@v0.0.415/",
     "@fathym/eac/azure": "https://deno.land/x/fathym_everything_as_code@v0.0.415/azure.ts",
