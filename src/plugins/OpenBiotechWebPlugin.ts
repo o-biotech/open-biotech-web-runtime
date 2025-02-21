@@ -27,7 +27,7 @@ import {
   EaCStripeModifierDetails,
   EaCTailwindProcessor,
   EaCTracingModifierDetails,
-} from '@fathym/eac';
+} from '../../../../fathym-deno/eac-applications/src/runtime/modifiers/.exports.ts';
 import { IoCContainer } from '@fathym/ioc';
 import { EaCMSALProcessor } from '@fathym/msal';
 import { DefaultOpenBiotechWebProcessorHandlerResolver } from './DefaultOpenBiotechWebProcessorHandlerResolver.ts';
@@ -82,7 +82,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               keepAlive: {
                 Priority: 5000,
               },
-              googleTag: {
+              googleTagMgr: {
                 Priority: 5000
               },
               msAppInsights: {
@@ -464,7 +464,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Description: 'Used to restrict user access to various applications.',
             } as CurrentEaCModifierDetails,
           },
-          googleTag: {
+          googleTagMgr: {
             Details: {
               Type: 'GoogleTagMgr',
               Name: 'Google Tag Manager',
