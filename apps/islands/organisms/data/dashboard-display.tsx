@@ -2,7 +2,7 @@ import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { Action, ActionStyleTypes } from '@o-biotech/atomic-design-kit';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
-import { IS_BROWSER } from '@fathym/atomic';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 
 export const IsIsland = true;
 

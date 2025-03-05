@@ -1,6 +1,6 @@
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { OpenBiotechWebState } from '@o-biotech/common/state';
 import { Display, DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
 import InviteTeamMemberForm from '../../islands/organisms/team/invite-team-member.tsx';

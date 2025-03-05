@@ -1,7 +1,7 @@
 import { merge } from '@fathym/common';
 import { EaCUserRecord } from '@fathym/eac';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { BasicLayout } from '@o-biotech/atomic-design-kit';
 import { BiotechHeader } from '../components/organisms/BiotechHeader.tsx';
 import { BiotechFooter } from '../components/organisms/BiotechFooter.tsx';
@@ -107,8 +107,7 @@ export default function MainLayout({
         <link
           href='https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap'
           rel='stylesheet'
-        >
-        </link>
+        />
 
         <link
           rel='stylesheet'

@@ -1,9 +1,10 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { JSX } from 'preact';
 import { useRef, useState } from 'preact/hooks';
 import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
 import DashboardDisplay from './dashboard-display.tsx';
-import { IS_BROWSER } from '@fathym/atomic';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 
 export const IsIsland = true;
 

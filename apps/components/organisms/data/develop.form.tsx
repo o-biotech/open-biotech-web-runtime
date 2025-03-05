@@ -1,3 +1,4 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { JSX } from 'preact';
 import { Action, ActionGroup, classSet, Input } from '@o-biotech/atomic-design-kit';
 import { callToActionStyles } from '../../styles/actions.tsx';

@@ -1,6 +1,6 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
-import { IS_BROWSER } from '@fathym/atomic';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 import { Action, CopyInput } from '@o-biotech/atomic-design-kit';
 import { RenewIcon } from '../../../../build/iconset/icons/RenewIcon.tsx';
 import { ChevronDownIcon } from '../../../../build/iconset/icons/ChevronDownIcon.tsx';

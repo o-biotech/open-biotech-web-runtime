@@ -1,7 +1,8 @@
 // deno-lint-ignore-file no-explicit-any
 import { JSX } from 'preact';
 import { useEffect, useRef, useState } from 'preact/hooks';
-import { IconProps, IS_BROWSER } from '@fathym/atomic';
+import { IconProps } from '@o-biotech/atomic-design-kit';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 import { intlFormat } from 'npm:date-fns';
 import {
   Action,
@@ -250,7 +251,7 @@ ${customFilter}`;
 
             <InputWrapper
               text='rows'
-              isNumber={true}
+              isNumber
               class='w-full mt-2 md:flex-1 md:w-auto md:mt-auto hidden peer-checked:block ml-2 after:leading-[34px]'
             >
               <Input
@@ -289,7 +290,7 @@ ${customFilter}`;
 
             <InputWrapper
               text='sec'
-              isNumber={true}
+              isNumber
               class='w-full mt-2 md:flex-1 md:w-auto md:mt-auto hidden peer-checked:block ml-2 after:leading-[34px]'
             >
               <Input

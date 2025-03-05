@@ -1,8 +1,9 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { redirectRequest } from '@fathym/common';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import {
   Action,
   ActionGroup,
@@ -272,8 +273,8 @@ export default function EaCIoTDashboard({
 
                 <Select id='dashboardLookup' name='dashboardLookup' required>
                   <option>-- Select Dashboard --</option>
-                  {Data.dashboardOptions.map((d) => {
-                    return <option value={d.lookup}>{d.name}</option>;
+                  {Data.dashboardOptions.map((d, i) => {
+                    return <option key={i} value={d.lookup}>{d.name}</option>;
                   })}
                 </Select>
               </div>

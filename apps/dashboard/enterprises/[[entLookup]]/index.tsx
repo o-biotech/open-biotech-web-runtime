@@ -3,7 +3,7 @@ import { EaCUserRecord, EverythingAsCode } from '@fathym/eac';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCStatusProcessingTypes, waitForStatus } from '@fathym/eac/steward/status';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { EaCManageForm, EnterpriseManagementItem } from '@o-biotech/atomic-design-kit';
 import { OpenBiotechWebState } from '@o-biotech/common/state';
 import CreateEaCHero from '../../../components/organisms/heros/CreateEaCHero.tsx';
@@ -129,7 +129,7 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
         entLookup={Data.manageEaC?.EnterpriseLookup}
         entName={Data.manageEaC?.Details?.Name || undefined}
         entDescription={Data.manageEaC?.Details?.Description || undefined}
-        hideTitle={true}
+        hideTitle
       />
 
       {Data.enterprises?.length > 0 && (

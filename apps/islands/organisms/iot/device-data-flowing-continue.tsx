@@ -1,7 +1,8 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { Action, ActionGroup, classSet } from '@o-biotech/atomic-design-kit';
 import DeviceDataFlowing from './device-data-flowing.tsx';
 import { callToActionStyles } from '../../../components/styles/actions.tsx';
-import { IconProps } from '@fathym/atomic';
+import { IconProps } from '@o-biotech/atomic-design-kit';
 
 export const IsIsland = true;
 

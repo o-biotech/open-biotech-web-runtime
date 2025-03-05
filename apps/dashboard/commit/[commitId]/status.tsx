@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'preact/hooks';
 import { redirectRequest } from '@fathym/common';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCStatus, EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
 import { intlFormatDistance } from 'npm:date-fns';

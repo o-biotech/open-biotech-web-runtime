@@ -1,3 +1,4 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { EaCIoTAsCode } from '@fathym/eac-iot';
 import { Action, ActionGroup, ActionStyleTypes } from '@o-biotech/atomic-design-kit';
 import { DropOutMenu } from '../../../molecules/DropOutMenu.tsx';

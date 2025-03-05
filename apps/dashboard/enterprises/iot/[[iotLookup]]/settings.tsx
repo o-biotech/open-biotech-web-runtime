@@ -4,7 +4,7 @@ import { EaCLicenseAsCode, EaCLicenseStripeDetails, EaCUserLicense } from '@fath
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCStatusProcessingTypes } from '@fathym/eac/steward/status';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { DisplayStyleTypes, Hero, HeroStyleTypes } from '@o-biotech/atomic-design-kit';
 import { OpenBiotechEaC, setupEaCIoTFlow } from '@o-biotech/common/utils';
 import { OpenBiotechWebState } from '@o-biotech/common/state';

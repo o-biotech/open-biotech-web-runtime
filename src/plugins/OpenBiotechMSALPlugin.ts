@@ -1,5 +1,5 @@
-import { EaCRuntimeConfig } from '@fathym/eac/runtime/config';
-import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/plugins';
+import { EaCRuntimeConfig, EaCRuntimePluginConfig } from '@fathym/eac/runtime/config';
+import { EaCRuntimePlugin } from '@fathym/eac/runtime/plugins';
 import { MSALPlugin } from '@fathym/msal';
 import { createOAuthHelpers } from '@fathym/common/oauth';
 import { loadOAuth2ClientConfig } from '@fathym/eac-applications/runtime/modules';

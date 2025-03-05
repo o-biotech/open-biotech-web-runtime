@@ -1,8 +1,9 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { JSX } from 'preact';
 import { EaCUserRecord } from '@fathym/eac';
 import { EaCDeviceAsCode } from '@fathym/eac-iot';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { EaCManageForm } from '@o-biotech/atomic-design-kit';
 import CloudConnectHero from '../components/organisms/heros/CloudConnectHero.tsx';
 import ConnectDevicesHero from '../components/organisms/heros/ConnectDevicesHero.tsx';
@@ -59,7 +60,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
       <EaCManageForm
         action='/api/o-biotech/eac'
         data-eac-bypass-base
-        hideTitle={true}
+        hideTitle
       />
     );
   } else {
@@ -134,7 +135,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
         <div class='md:flex-1 md:pr-[10rem]'>
           <h2 class='text-3xl font-bold'>{explainerData.Title}</h2>
 
-          {explainerData.Descriptions.map((desc) => <p class='text-lg my-2'>{desc}</p>)}
+          {explainerData.Descriptions.map((desc, i) => <p key={i} class='text-lg my-2'>{desc}</p>)}
         </div>
 
         <div class='md:flex-1'>

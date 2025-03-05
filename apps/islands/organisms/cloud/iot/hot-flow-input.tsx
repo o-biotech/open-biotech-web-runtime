@@ -36,8 +36,8 @@ export default function HotFlowInput(props: HotFlowInputProps) {
           <Select id='gitHubOrg' name='gitHubOrg' required>
             <option value=''>-- Select an organization --</option>
 
-            {props.organizations?.map((org) => {
-              return <option value={org}>{org}</option>;
+            {props.organizations?.map((org, i) => {
+              return <option key={i} value={org}>{org}</option>;
             })}
           </Select>
 

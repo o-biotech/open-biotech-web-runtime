@@ -55,8 +55,8 @@ export default function IoTHubKeyConnectionDisplay(
           ref={selectRef}
           onChange={onKeyChange}
         >
-          {keyLookups.map((keyLookup) => {
-            return <option value={keyLookup}>{keyLookup}</option>;
+          {keyLookups.map((keyLookup, i) => {
+            return <option key={i} value={keyLookup}>{keyLookup}</option>;
           })}
         </Select>
 

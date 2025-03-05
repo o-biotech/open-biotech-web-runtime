@@ -1,6 +1,7 @@
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { classSet } from '@o-biotech/atomic-design-kit';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 import { Icon } from '@fathym/atomic-icons/browser';
 import { EaCUserRecord } from '@fathym/eac';
 import { loadOoenBiotechSideBarSettings } from '../../../src/eac/loadOpenBiotechSideBarMenuItems.tsx';
@@ -13,7 +14,6 @@ import {
   DevicesPhaseTypes,
   SetupPhaseTypes,
 } from '@o-biotech/common/state';
-import { IS_BROWSER } from '@fathym/atomic';
 
 export const IsIsland = true;
 

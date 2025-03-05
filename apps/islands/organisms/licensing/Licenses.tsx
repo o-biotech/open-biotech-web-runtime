@@ -1,3 +1,4 @@
+// deno-lint-ignore-file jsx-no-useless-fragment
 import { JSX } from 'preact';
 import { useEffect, useState } from 'preact/hooks';
 import { EaCLicenseAsCode, EaCUserLicense } from '@fathym/eac-licensing';

@@ -1,6 +1,6 @@
 import { EverythingAsCode } from '@fathym/eac';
-import { EaCRuntimeConfig } from '@fathym/eac/runtime/config';
-import { EaCRuntimePlugin, EaCRuntimePluginConfig } from '@fathym/eac/runtime/plugins';
+import { EaCRuntimeConfig, EaCRuntimePluginConfig } from '@fathym/eac/runtime/config';
+import { EaCRuntimePlugin } from '@fathym/eac/runtime/plugins';
 
 import * as djwt from 'jsr:@zaubrik/djwt@3.0.2';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';

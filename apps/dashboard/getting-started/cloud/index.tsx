@@ -4,7 +4,7 @@ import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { EaCRuntimeHandlerSet } from '@fathym/eac/runtime/pipelines';
 import { EaCServiceDefinitions } from '@fathym/eac-azure';
 import { loadEaCAzureAPISvc } from '@fathym/eac-azure/steward/clients';
-import { PageProps } from '@fathym/eac-applications/runtime/preact';
+import { PageProps } from '@fathym/eac-applications/preact';
 import { Location } from 'npm:@azure/arm-subscriptions';
 import CloudConnectHero from '../../../components/organisms/heros/CloudConnectHero.tsx';
 import CloudStepsFeatures from '../../../components/organisms/features/CloudStepsFeatures.tsx';

@@ -28,7 +28,7 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
         ctx.State.Username!,
       );
 
-      eac = await eacSvc.EaC.Get(currentEntLookup.value);
+      eac = await eacSvc.EaC.Get();
 
       ctx.State.UserEaCs = await eacSvc.EaC.ListForUser(parentEntLookup);
     } else {
@@ -47,7 +47,7 @@ export function establishCurrentEaCMiddleware(): EaCRuntimeHandler<OpenBiotechWe
           ctx.State.Username!,
         );
 
-        eac = await eacSvc.EaC.Get(ctx.State.UserEaCs[0].EnterpriseLookup);
+        eac = await eacSvc.EaC.Get();
       }
     }
 

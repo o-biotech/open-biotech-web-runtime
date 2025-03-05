@@ -17,5 +17,6 @@ export default function Redirect(props: RedirectProps) {
     }
   }, props.interval);
 
+  // deno-lint-ignore jsx-no-useless-fragment
   return <></>;
 }

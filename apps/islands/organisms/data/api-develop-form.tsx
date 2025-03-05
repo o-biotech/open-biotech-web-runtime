@@ -1,7 +1,7 @@
 import { JSX } from 'preact';
 import { CopyInput } from '@o-biotech/atomic-design-kit';
+import { IS_BROWSER } from '@o-biotech/atomic-design-kit/browser';
 import { LoadingIcon } from '../../../../build/iconset/icons/LoadingIcon.tsx';
-import { IS_BROWSER } from '@fathym/atomic';
 
 export const IsIsland = true;
 

@@ -38,5 +38,6 @@ export default function Theme(_props: ThemeProps) {
     });
   }, []);
 
+  // deno-lint-ignore jsx-no-useless-fragment
   return <></>;
 }

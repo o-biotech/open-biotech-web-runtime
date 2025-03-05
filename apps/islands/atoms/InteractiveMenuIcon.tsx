@@ -1,4 +1,4 @@
-import { IconProps } from '@fathym/atomic';
+import { IconProps } from '@o-biotech/atomic-design-kit';
 import { MenuIcon } from '../../../build/iconset/icons/MenuIcon.tsx';
 
 export const IsIsland = true;
