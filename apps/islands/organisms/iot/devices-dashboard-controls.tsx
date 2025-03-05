@@ -377,7 +377,7 @@ ${customFilter}`;
       )}
 
       <div class='flex-1 flex flex-row p-2'>
-        <div class='flex-none w-40 underline'>Device ID</div>
+        <div class='flex-1 w-40 underline'>Device ID</div>
 
         <div class='flex-1 underline'>Processed At</div>
 
@@ -418,7 +418,7 @@ ${customFilter}`;
                 class='flex-1 flex flex-wrap items-center p-2'
                 key={uniqueKey}
               >
-                <div class='flex-none w-40'>{dd.DeviceID}</div>
+                <div class='flex-1 w-40'>{dd.DeviceID}</div>
 
                 <div class='flex-1'>{enqueuedTime}</div>
 
@@ -436,9 +436,9 @@ ${customFilter}`;
                 </label>
 
                 <div
-                  class={`hidden peer-checked:block w-full m-2 p-2 shadow shadow-inner bg-gray-200 dark:bg-gray-700`}
+                  class={`hidden peer-checked:block w-full m-2 p-2 shadow shadow-inner bg-gray-200 dark:bg-gray-700 overflow-auto`}
                 >
-                  <pre>{rawData}</pre>
+                  <pre class='whitespace-pre-wrap break-all max-w-full overflow-auto'>{rawData}</pre>
                 </div>
               </div>
             );
@@ -453,7 +453,7 @@ ${customFilter}`;
   const rawDeviceDisplay = (
     <div class='h-full relative overflow-hidden'>
       <div class='h-full relative overflow-auto'>
-        <pre>{JSON.stringify(deviceData, null, 2)}</pre>
+        <pre class='whitespace-pre-wrap break-all max-w-full overflow-auto'>{JSON.stringify(deviceData, null, 2)}</pre>
       </div>
     </div>
   );

@@ -84,7 +84,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
                 See this API in action in the 'Payloads' tab in the device data dashboard.
               </p>
 
-              <Action class='mt-2 text-center' href='/'>
+              <Action class='mt-2 text-center' href='/dashboard'>
                 Dashboard
               </Action>
             </div>
@@ -108,7 +108,7 @@ export function StorageAPIsDisplay(props: StorageAPIsDisplayProps) {
                 See this API in action in the 'Streaming' tab in the device data dashboard.
               </p>
 
-              <Action class='mt-2 text-center' href='/?tab=streaming'>
+              <Action class='mt-2 text-center' href='/dashboard?tab=streaming'>
                 Dashboard
               </Action>
             </div>
