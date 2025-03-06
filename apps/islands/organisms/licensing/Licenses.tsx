@@ -96,7 +96,7 @@ export default function Licenses(props: LicensesProps) {
 
     setLoading(true);
 
-    const resp = await fetch('/api/o-biotech/licensing/subscribe', {
+    const resp = await fetch('/dashboard/api/o-biotech/licensing/subscribe', {
       method: 'POST',
       body: JSON.stringify({
         LicenseLookup: props.licLookup,

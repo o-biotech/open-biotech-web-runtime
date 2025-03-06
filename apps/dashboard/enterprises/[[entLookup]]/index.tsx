@@ -36,7 +36,7 @@ export const handler: EaCRuntimeHandlerSet<
 
       const eacSvc = await loadEaCStewardSvc(jwtResp.Token);
 
-      manageEaC = await eacSvc.EaC.Get(manageEaCLookup);
+      manageEaC = await eacSvc.EaC.Get();
 
       if (!manageEaC?.EnterpriseLookup) {
         return redirectRequest('/dashboard/enterprises', false, false);
@@ -77,7 +77,7 @@ export const handler: EaCRuntimeHandlerSet<
 
     const username = ctx.State.Username;
 
-    const jwt = await parentEaCSvc.EaC.JWT(eac.EnterpriseLookup, username);
+    const jwt = await parentEaCSvc.EaC.JWT(eac.EnterpriseLookup!, username);
 
     const eacSvc = await loadEaCStewardSvc(jwt.Token);
 
@@ -124,7 +124,7 @@ export default function Enterprises({ Data }: PageProps<EnterprisesPageData>) {
       />
 
       <EaCManageForm
-        action='/api/o-biotech/eac'
+        action='./api/o-biotech/eac'
         data-eac-bypass-base
         entLookup={Data.manageEaC?.EnterpriseLookup}
         entName={Data.manageEaC?.Details?.Name || undefined}

@@ -69,7 +69,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.CALZ:
       currentForm = (
         <CloudCALZForm
-          action='/api/o-biotech/eac/clouds/resource-groups'
+          action='./api/o-biotech/eac/clouds/resource-groups'
           data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
@@ -81,7 +81,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Infrastucture:
       currentForm = (
         <CloudIoTForm
-          action='/api/o-biotech/eac/clouds/iot-infrastructure'
+          action='./api/o-biotech/eac/clouds/iot-infrastructure'
           data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}

@@ -58,22 +58,26 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Priority: 500,
             },
             ResolverConfigs: {
-              azure: {
-                Hostname: 'open-biotech-web-runtime.azurewebsites.net',
-              },
-              dev: {
+              'localhost': {
                 Hostname: 'localhost',
                 Port: config.Server.port || 8000,
               },
-              dev2: {
+              '127.0.0.1': {
                 Hostname: '127.0.0.1',
                 Port: config.Server.port || 8000,
               },
-              eac: {
-                Hostname: 'openbiotech.co',
+              'host.docker.internal': {
+                Hostname: 'host.docker.internal',
+                Port: config.Server.port || 8000,
               },
-              runtime: {
-                Hostname: 'runtime.openbiotech.co',
+              'open-biotech.fathym.com': {
+                Hostname: 'open-biotech.fathym.com',
+              },
+              'www.openbiotech.co': {
+                Hostname: 'www.openbiotech.co',
+              },
+              'open-biotech-web-runtime.azurewebsites.net': {
+                Hostname: 'open-biotech-web-runtime.azurewebsites.net',
               },
             },
             ModifierResolvers: {
@@ -134,8 +138,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 IsTriggerSignIn: true,
               },
               oBiotechEaCApi: {
-                PathPattern: '/api/o-biotech/eac*',
-                Priority: 200,
+                PathPattern: '/dashboard/api/o-biotech/eac*',
+                Priority: 300,
                 IsPrivate: true,
               },
               tailwind: {
@@ -360,7 +364,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             Details: {
               Type: 'AzureBlobStorage',
               Container: 'deployments',
-              FileRoot: './o-biotech/public-web-about/latest/',
+              FileRoot: 'o-biotech/public-web-about/latest',
               DefaultFile: 'index.html',
               ConnectionString: Deno.env.get('AZURE_STORAGE_CONNECTION_STRING'),
               // WorkerPath: import.meta.resolve(

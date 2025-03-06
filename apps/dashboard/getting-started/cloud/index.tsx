@@ -115,16 +115,11 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
         const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
 
         const locationsResp = await eacAzureSvc.Cloud.Locations(
-          ctx.State.EaC!.EnterpriseLookup!,
           data.cloudLookup!,
           svcDef,
         );
 
-        await eacAzureSvc.Cloud.EnsureProviders(
-          ctx.State.EaC!.EnterpriseLookup!,
-          data.cloudLookup!,
-          svcDef,
-        );
+        await eacAzureSvc.Cloud.EnsureProviders(data.cloudLookup!, svcDef);
 
         data.locations = locationsResp.Locations;
       });
@@ -135,7 +130,6 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
 
       svcCalls.push(async () => {
         const tenants = await eacAzureSvc.Azure.Tenants(
-          ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
 
@@ -148,7 +142,6 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
 
       svcCalls.push(async () => {
         const subs = await eacAzureSvc.Azure.Subscriptions(
-          ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
 
@@ -161,7 +154,6 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
 
       svcCalls.push(async () => {
         const billingAccounts = await eacAzureSvc.Azure.BillingAccounts(
-          ctx.State.EaC!.EnterpriseLookup!,
           ctx.State.Cloud.AzureAccessToken!,
         );
 
@@ -224,12 +216,14 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
         if (ctx.State.EaC!.SourceConnections![sourceKey]) {
           const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-          const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>({
-            EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
-            SourceConnections: {
-              [sourceKey]: {},
+          const eacConnections = await eacSvc.EaC.Connections<OpenBiotechEaC>(
+            {
+              EnterpriseLookup: ctx.State.EaC!.EnterpriseLookup!,
+              SourceConnections: {
+                [sourceKey]: {},
+              },
             },
-          });
+          );
 
           if (eacConnections.SourceConnections) {
             data.organizations = Object.keys(
