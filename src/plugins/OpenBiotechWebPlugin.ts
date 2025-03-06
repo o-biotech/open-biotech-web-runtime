@@ -111,8 +111,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 Priority: 100,
               },
               licensingApi: {
-                PathPattern: '/api/o-biotech/licensing/*',
-                Priority: 200,
+                PathPattern: '/dashboard/api/o-biotech/licensing/*',
+                Priority: 300,
                 IsPrivate: true,
               },
               msal: {
