@@ -36,6 +36,7 @@ import { CurrentEaCModifierHandlerResolver } from './CurrentEaCModifierHandlerRe
 import { CurrentEaCModifierDetails } from './CurrentEaCModifierDetails.ts';
 import OpenBiotechMSALPlugin from './OpenBiotechMSALPlugin.ts';
 import OpenBiotechLicensingPlugin from './OpenBiotechLicensingPlugin.ts';
+import { TempGitHubEaCOAuthProcessorHandlerResolver } from './TempGitHubEaCOAuthProcessorHandlerResolver.ts';
 
 export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -624,6 +625,11 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
         Type: pluginConfig.IoC!.Symbol('ModifierHandlerResolver'),
       },
     );
+
+    pluginConfig.IoC!.Register(() => TempGitHubEaCOAuthProcessorHandlerResolver, {
+      Name: "EaCOAuthProcessor",
+      Type: pluginConfig.IoC!.Symbol("ProcessorHandlerResolver"),
+    });
 
     pluginConfig.IoC!.Register(DefaultOpenBiotechWebProcessorHandlerResolver, {
       Type: pluginConfig.IoC!.Symbol('ProcessorHandlerResolver'),

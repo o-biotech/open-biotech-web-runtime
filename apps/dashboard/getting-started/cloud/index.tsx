@@ -83,49 +83,49 @@ export const handler: EaCRuntimeHandlerSet<OpenBiotechWebState, CloudPageData> =
 
     const svcCalls: (() => Promise<void>)[] = [];
 
-    const eacAzureSvc = await loadEaCAzureAPISvc(ctx.State.EaCJWT!);
-
-    if (data.cloudLookup) {
-      const serviceFiles = [
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/services.jsonc',
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/api/services.jsonc',
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/services.jsonc',
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold-assignments/services.jsonc',
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/hot/services.jsonc',
-        'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/warm/services.jsonc',
-      ];
-
-      const svcFileCalls: Promise<EaCServiceDefinitions>[] = serviceFiles.map(
-        (sf) => {
-          return new Promise((resolve) => {
-            fetch(sf).then((fileResp) => {
-              fileResp.json().then((response) => {
-                resolve(response);
+    if (ctx.State.Cloud.AzureAccessToken) {
+      const eacAzureSvc = await loadEaCAzureAPISvc(ctx.State.EaCJWT!);
+  
+      if (data.cloudLookup) {
+        const serviceFiles = [
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/services.jsonc',
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/api/services.jsonc',
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold/services.jsonc',
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/cold-assignments/services.jsonc',
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/hot/services.jsonc',
+          'https://raw.githubusercontent.com/lowcodeunit/infrastructure/master/templates/o-biotech/iot/ref-arch/warm/services.jsonc',
+        ];
+  
+        const svcFileCalls: Promise<EaCServiceDefinitions>[] = serviceFiles.map(
+          (sf) => {
+            return new Promise((resolve) => {
+              fetch(sf).then((fileResp) => {
+                fileResp.json().then((response) => {
+                  resolve(response);
+                });
               });
             });
-          });
-        },
-      );
-
-      svcCalls.push(async () => {
-        const svcDefs = await Promise.all<EaCServiceDefinitions>(
-          svcFileCalls,
+          },
         );
-
-        const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
-
-        const locationsResp = await eacAzureSvc.Cloud.Locations(
-          data.cloudLookup!,
-          svcDef,
-        );
-
-        await eacAzureSvc.Cloud.EnsureProviders(data.cloudLookup!, svcDef);
-
-        data.locations = locationsResp.Locations;
-      });
-    }
-
-    if (ctx.State.Cloud.AzureAccessToken) {
+  
+        svcCalls.push(async () => {
+          const svcDefs = await Promise.all<EaCServiceDefinitions>(
+            svcFileCalls,
+          );
+  
+          const svcDef = mergeWithArrays<EaCServiceDefinitions>(...svcDefs);
+  
+          const locationsResp = await eacAzureSvc.Cloud.Locations(
+            data.cloudLookup!,
+            svcDef,
+          );
+  
+          await eacAzureSvc.Cloud.EnsureProviders(data.cloudLookup!, svcDef);
+  
+          data.locations = locationsResp.Locations;
+        });
+      }
+  
       const _provider = ctx.Runtime.EaC.Providers!['azure']!;
 
       svcCalls.push(async () => {

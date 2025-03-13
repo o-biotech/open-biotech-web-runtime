@@ -1,11 +1,15 @@
 import { EverythingAsCode } from '@fathym/eac';
-import { EaCRuntimeConfig, EaCRuntimePluginConfig } from '@fathym/eac/runtime/config';
+import {
+  EaCRuntimeConfig,
+  EaCRuntimePluginConfig,
+} from '@fathym/eac/runtime/config';
 import { EaCRuntimePlugin } from '@fathym/eac/runtime/plugins';
 
 import * as djwt from 'jsr:@zaubrik/djwt@3.0.2';
 import { loadEaCStewardSvc } from '@fathym/eac/steward/clients';
 import { IoCContainer } from '@fathym/ioc';
 import { EaCStripeProcessor } from '@fathym/eac-applications/processors';
+import { loadEaCLicensingSvc } from '@fathym/eac-licensing/clients';
 
 export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
   constructor() {}
@@ -25,6 +29,19 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
               Type: 'Stripe',
               DatabaseLookup: 'o-biotech',
               LicenseLookup: 'o-biotech',
+              HandleSubscription: async (entLookup, username, licLookup, planLookup, priceLookup) => {
+                const parentEaCSvc = await loadEaCLicensingSvc();
+
+                const licSubRes = await parentEaCSvc.License.Subscription(
+                  entLookup,
+                  username,
+                  licLookup,
+                  planLookup,
+                  priceLookup
+                );
+
+                return licSubRes;
+              },
             } as EaCStripeProcessor,
           },
         },
@@ -117,7 +134,7 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
   public async Build(
     _eac: EverythingAsCode,
     _ioc: IoCContainer,
-    pluginCfg?: EaCRuntimePluginConfig,
+    pluginCfg?: EaCRuntimePluginConfig
   ): Promise<void> {
     const eacApiKey = Deno.env.get('EAC_API_KEY');
 
@@ -134,11 +151,11 @@ export default class OpenBiotechLicensingPlugin implements EaCRuntimePlugin {
             EnterpriseLookup,
             ...pluginCfg.EaC!,
           },
-          600,
+          600
         );
       } catch (_err) {
         console.error(
-          'Unable to update EaC Licensing, falling back to local config.',
+          'Unable to update EaC Licensing, falling back to local config.'
         );
       }
     }
