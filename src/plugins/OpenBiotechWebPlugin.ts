@@ -61,15 +61,15 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
             ResolverConfigs: {
               'localhost': {
                 Hostname: 'localhost',
-                Port: config.Server.port || 8000,
+                Port: config.Servers![0].port || 8000,
               },
               '127.0.0.1': {
                 Hostname: '127.0.0.1',
-                Port: config.Server.port || 8000,
+                Port: config.Servers![0].port || 8000,
               },
               'host.docker.internal': {
                 Hostname: 'host.docker.internal',
-                Port: config.Server.port || 8000,
+                Port: config.Servers![0].port || 8000,
               },
               'open-biotech.fathym.com': {
                 Hostname: 'open-biotech.fathym.com',
