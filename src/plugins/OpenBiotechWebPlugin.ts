@@ -1,7 +1,9 @@
 import { EaCAtomicIconsProcessor } from '@fathym/atomic-icons';
 import { FathymAtomicIconsPlugin } from '@fathym/atomic-icons/plugin';
+import { EverythingAsCode } from '@fathym/eac';
 import { EaCRuntimeConfig, EaCRuntimePluginConfig } from '@fathym/eac/runtime/config';
 import { EaCRuntimePlugin } from '@fathym/eac/runtime/plugins';
+import { EverythingAsCodeApplications } from '@fathym/eac-applications';
 import {
   EaCAPIProcessor,
   EaCDFSProcessor,
@@ -19,7 +21,7 @@ import {
   EaCTracingModifierDetails,
 } from '@fathym/eac-applications/modifiers';
 import { FathymAzureContainerCheckPlugin } from '@fathym/eac-applications/runtime/plugins';
-import { EaCDenoKVDetails } from '@fathym/eac-deno-kv';
+import { EaCDenoKVDetails, EverythingAsCodeDenoKV } from '@fathym/eac-deno-kv';
 import { EaCAzureADB2CProviderDetails, EaCAzureADProviderDetails } from '@fathym/eac-identity';
 import {
   EaCAzureBlobStorageDistributedFileSystemDetails,
@@ -42,7 +44,9 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
   constructor() {}
 
   public Setup(config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
-    const pluginConfig: EaCRuntimePluginConfig = {
+    const pluginConfig: EaCRuntimePluginConfig<
+      EverythingAsCode & EverythingAsCodeApplications & EverythingAsCodeDenoKV
+    > = {
       Name: 'OpenBiotechWebPlugin',
       Plugins: [
         new FathymAzureContainerCheckPlugin(),
