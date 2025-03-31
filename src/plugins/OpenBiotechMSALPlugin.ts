@@ -4,13 +4,20 @@ import { MSALPlugin } from '@fathym/msal';
 import { createOAuthHelpers } from '@fathym/common/oauth';
 import { loadOAuth2ClientConfig } from '@fathym/eac-applications/runtime/modules';
 import { EverythingAsCode } from '@fathym/eac';
+import { EverythingAsCodeApplications } from '@fathym/eac-applications';
+import { EverythingAsCodeDenoKV } from '@fathym/eac-deno-kv';
 import { EverythingAsCodeIdentity } from '@fathym/eac-identity';
 
 export default class OpenBiotechMSALPlugin implements EaCRuntimePlugin {
   constructor() {}
 
   public Setup(_config: EaCRuntimeConfig): Promise<EaCRuntimePluginConfig> {
-    const pluginConfig: EaCRuntimePluginConfig = {
+    const pluginConfig: EaCRuntimePluginConfig<
+      & EverythingAsCode
+      & EverythingAsCodeApplications
+      & EverythingAsCodeDenoKV
+      & EverythingAsCodeIdentity      
+    > = {
       Name: 'OpenBiotechMSALPlugin',
       Plugins: [
         new MSALPlugin({
