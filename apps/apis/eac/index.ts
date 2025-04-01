@@ -5,6 +5,7 @@ import { EaCStatusProcessingTypes, waitForStatusWithFreshJwt } from '@fathym/eac
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime/pipelines';
 import { OpenBiotechEaC } from '@o-biotech/common/utils';
 import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { loadEaCActuators } from '../../../configs/eac-actuators.config.ts';
 
 export default {
   GET(_req, ctx) {
@@ -20,6 +21,7 @@ export default {
         Name: formData.get('name') as string,
         Description: formData.get('description') as string,
       },
+      Actuators: loadEaCActuators(),
     };
 
     const parentEaCSvc = await loadEaCStewardSvc();

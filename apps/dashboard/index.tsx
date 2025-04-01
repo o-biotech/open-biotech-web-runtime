@@ -58,7 +58,7 @@ export default function Index({ Data }: PageProps<HomePageData>) {
 
     initialSteps = (
       <EaCManageForm
-        action='/api/o-biotech/eac'
+        action='/dashboard/api/o-biotech/eac'
         data-eac-bypass-base
         hideTitle
       />
