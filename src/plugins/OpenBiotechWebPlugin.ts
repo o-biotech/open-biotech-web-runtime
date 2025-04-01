@@ -242,6 +242,8 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
                 ['local:apps/components', ['tsx']],
                 ['local:apps/dashboard', ['tsx']],
                 ['local:apps/islands', ['tsx']],
+                ['jsr:@fathym/atomic', ['tsx']],
+                ['jsr:@fathym/atomic-design-kit', ['tsx']],
                 ['jsr:@o-biotech/atomic-design-kit', ['tsx']],
               ],
             } as EaCPreactAppProcessor,
