@@ -54,9 +54,9 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Connect:
       currentForm = (
         <ConnectAzure
-          cloudAction='/api/o-biotech/eac/clouds'
+          cloudAction='/dashboard/api/o-biotech/eac/clouds'
           oauthAction='/azure/oauth/signin'
-          subAction='/api/o-biotech/eac/clouds/subs'
+          subAction='/dashboard/api/o-biotech/eac/clouds/subs'
           class='px-4'
           isConnected={props.isAzureConnected}
           billingScopes={props.billingScopes}
