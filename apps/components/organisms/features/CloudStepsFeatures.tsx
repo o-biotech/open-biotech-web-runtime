@@ -81,7 +81,7 @@ export default function CloudStepsFeatures(props: CloudStepsFeaturesProps) {
     case CloudPhaseTypes.Infrastucture:
       currentForm = (
         <CloudIoTForm
-          action='./api/o-biotech/eac/clouds/iot-infrastructure'
+          action='/dashboard/api/o-biotech/eac/clouds/iot-infrastructure'
           data-eac-bypass-base
           class='px-4'
           cloudLookup={props.cloudLookup!}
