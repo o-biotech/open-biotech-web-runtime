@@ -3,6 +3,8 @@ import { classSet, Input } from '@o-biotech/atomic-design-kit';
 import IoTHubKeySimulatorDisplay from '../../../islands/organisms/iot/hub-key-simulator.tsx';
 import DeviceDataFlowingContinue from '../../../islands/organisms/iot/device-data-flowing-continue.tsx';
 
+export const IsIsland = true;
+
 export type DataFlowFormProps = JSX.HTMLAttributes<HTMLFormElement> & {
   deviceKeys: Record<string, string>;
 
@@ -17,7 +19,7 @@ export function DataFlowForm(props: DataFlowFormProps) {
   return (
     <form
       method='POST'
-      action='/api/o-biotech/eac/data/flow'
+      action='/dashboard/api/o-biotech/eac/data/flow'
       data-eac-bypass-base
       {...props}
       class={classSet(

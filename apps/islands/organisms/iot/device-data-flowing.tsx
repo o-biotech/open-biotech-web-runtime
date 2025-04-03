@@ -45,11 +45,9 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
         },
       });
 
-      const data = await response.json();
+      const respJson = await response.json();
 
-      const json = JSON.parse(data);
-
-      const primaryResult = json.tables?.find(
+      const primaryResult = respJson.tables?.find(
         (t: any) => t.name === 'PrimaryResult',
       ).data;
 
