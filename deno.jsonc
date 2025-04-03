@@ -40,7 +40,7 @@
     "@fathym/eac-deno-kv": "jsr:@fathym/eac-deno-kv@0.0.14",
     "@fathym/eac-identity": "jsr:@fathym/eac-identity@0.0.13",
     "@fathym/eac-iot": "jsr:@fathym/eac-iot@0.0.19",
-    "@fathym/eac-licensing": "jsr:@fathym/eac-licensing@0.0.28",
+    "@fathym/eac-licensing": "jsr:@fathym/eac-licensing@0.0.29",
     "@fathym/eac-sources": "jsr:@fathym/eac-sources@0.0.16",
     "@fathym/ioc": "jsr:@fathym/ioc@0.0.14",
     "@fathym/msal": "jsr:@fathym/msal@0.0.48",
