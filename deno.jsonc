@@ -48,7 +48,7 @@
     "@lezer/highlight": "npm:@lezer/highlight@1.2.1",
     "@luca/cases": "jsr:@luca/cases@1.0.0",
     "@o-biotech/atomic-design-kit": "jsr:@o-biotech/atomic-design-kit@0.0.403",
-    "@o-biotech/common": "jsr:@o-biotech/common@0.0.14",
+    "@o-biotech/common": "jsr:@o-biotech/common@0.0.17",
     // "@o-biotech/common/utils": "../open-biotech-reference-architecture/src/utils/.exports.ts",
     "preact": "npm:preact@10.20.1",
     "@std/assert": "jsr:@std/assert@1.0.6",
