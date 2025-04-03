@@ -4,12 +4,12 @@ import { EverythingAsCodeApplications } from '@fathym/eac-applications';
 import { EaCGitHubAppProviderDetails, EverythingAsCodeIdentity, isEaCAzureADB2CProviderDetails, isEaCAzureADProviderDetails, isEaCGitHubAppProviderDetails, isEaCOAuthProviderDetails } from '@fathym/eac-identity';
 import { EverythingAsCode } from '@fathym/eac';
 import { EaCOAuthProcessor, isEaCOAuthProcessor } from '@fathym/eac-applications/processors';
-import { DenoKVOAuth, UserOAuthConnection } from '../../../../fathym-deno/eac-applications/src/runtime/modules/.deps.ts';
 import { loadOAuth2ClientConfig } from '@fathym/eac-applications/runtime/modules';
-import { oAuthRequest } from '@fathym/common/oauth';
+import { oAuthRequest, UserOAuthConnection } from '@fathym/common/oauth';
 import { djwt } from '@fathym/common';
 import { EaCSourceConnectionDetails } from 'jsr:@fathym/eac-sources@0.0.14';
 import { loadOctokit } from 'jsr:@fathym/eac-sources@0.0.14/utils';
+import * as DenoKVOAuth from "jsr:@deno/kv-oauth@0.11.0";
 
 
 export const TempGitHubEaCOAuthProcessorHandlerResolver: ProcessorHandlerResolver<
