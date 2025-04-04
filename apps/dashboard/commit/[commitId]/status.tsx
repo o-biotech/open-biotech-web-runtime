@@ -29,7 +29,7 @@ export const handler: EaCRuntimeHandlerSet<
   CommitStatusPageData
 > = {
   GET: async (req, ctx) => {
-    const entLookup = ctx.State.EaC!.EnterpriseLookup!;
+    const _entLookup = ctx.State.EaC!.EnterpriseLookup!;
 
     const commitId = ctx.Params.commitId!;
 
@@ -37,7 +37,7 @@ export const handler: EaCRuntimeHandlerSet<
 
     const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const status: EaCStatus = await eacSvc.Status.Get(entLookup, commitId);
+    const status: EaCStatus = await eacSvc.Status.Get(commitId);
 
     const complete = (url.searchParams.get('complete') as string) === 'true';
 
@@ -123,8 +123,9 @@ export default function CommitStatus({
 
   useEffect(() => {
     if (document) {
+      debugger;
       const checkInterval = setInterval(() => {
-        fetch(`/api/o-biotech/eac/${Data.commitId}/status`).then(
+        fetch(`/dashboard/api/o-biotech/eac/${Data.commitId}/status`).then(
           (resp: Response) => {
             resp.json().then((status) => {
               setStatus(status);

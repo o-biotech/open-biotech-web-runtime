@@ -9,7 +9,6 @@ export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
     const commitId = ctx.Params.commitId!;
 
     const status = await eacSvc.Status.Get(
-      ctx.State.EaC!.EnterpriseLookup!,
       commitId,
     );
 

@@ -16,7 +16,7 @@ export const handler: EaCRuntimeHandlerSet<
   GET: async (_req, ctx) => {
     const eacSvc = await loadEaCStewardSvc(ctx.State.EaCJWT!);
 
-    const users = await eacSvc.Users.List(ctx.State.EaC!.EnterpriseLookup!);
+    const users = await eacSvc.Users.List();
 
     const data: TeamsPageData = {
       members: users.map((user) => user.Username),

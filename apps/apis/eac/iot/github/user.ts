@@ -1,6 +1,7 @@
 import { EaCGitHubAppProviderDetails } from '@fathym/eac-identity';
 import { EaCRuntimeHandlers } from '@fathym/eac/runtime/pipelines';
 import { OpenBiotechWebState } from '@o-biotech/common/state';
+import { loadOctokit } from '@fathym/eac-sources/utils';
 
 export const handler: EaCRuntimeHandlers<OpenBiotechWebState> = {
   async GET(_req, ctx) {
