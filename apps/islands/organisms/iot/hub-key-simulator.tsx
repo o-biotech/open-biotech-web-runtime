@@ -55,12 +55,12 @@ export default function IoTHubKeySimulatorDisplay(
     : '';
 
   return (
-    <>
-      <IoTHubKeyConnectionDisplay
+    <div>
+      {/* <IoTHubKeyConnectionDisplay
         class='px-3'
         iotHubKeys={props.iotHubKeys}
         keyChanged={onKeyChange}
-      />
+      /> */}
 
       <div class='w-full mb-8'>
         <label
@@ -74,11 +74,11 @@ export default function IoTHubKeySimulatorDisplay(
       </div>
 
       <div class='w-full'>
-        <IoTHubDeviceConnectionDisplay
+        {/* <IoTHubDeviceConnectionDisplay
           deviceKeys={props.deviceKeys}
           deviceChanged={onDeviceChange}
           resGroupLookup={props.resGroupLookup}
-        />
+        /> */}
       </div>
 
       <div class='w-full my-4'>
@@ -96,6 +96,6 @@ export default function IoTHubKeySimulatorDisplay(
 
         <CopyInput id='simCmd' name='simCmd' type='text' value={simCmd} />
       </div>
-    </>
+    </div>
   );
 }

@@ -123,7 +123,6 @@ export default function CommitStatus({
 
   useEffect(() => {
     if (document) {
-      debugger;
       const checkInterval = setInterval(() => {
         fetch(`/dashboard/api/o-biotech/eac/${Data.commitId}/status`).then(
           (resp: Response) => {

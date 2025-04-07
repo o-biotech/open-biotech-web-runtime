@@ -19,13 +19,15 @@ export type DeviceDataFlowingProps = {
 export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
   const renewIcon = (
     <>
-      {props.waitingText && <div class='font-bold text-lg'>{props.waitingText}</div>}
+      {props.waitingText && (
+        <div class="font-bold text-lg">{props.waitingText}</div>
+      )}
 
       <RenewIcon
         {...props}
         class={classSet(
           ['-:w-6 -:h-6 -:text-blue-500 -:animate-spin -:inline-block -:m-4'],
-          props,
+          props
         )}
       />
     </>
@@ -48,7 +50,7 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
       const respJson = await response.json();
 
       const primaryResult = respJson.tables?.find(
-        (t: any) => t.name === 'PrimaryResult',
+        (t: any) => t.name === 'PrimaryResult'
       ).data;
 
       const hasData = primaryResult?.length > 0;
@@ -73,10 +75,12 @@ export default function DeviceDataFlowing(props: DeviceDataFlowingProps) {
 
   // console.log(props.children);
 
-  return <>{hasDeviceData ? props.children : renewIcon}</>;
-  // <>
-  //   <div class={!hasDeviceData ? 'hidden' : ''}>{props.children}</div>
+  // return <>{hasDeviceData ? props.children : renewIcon}</>;
+  return (
+    <>
+      <div class={!hasDeviceData ? 'hidden' : ''}>{props.children}</div>
 
-  //   <div class={hasDeviceData ? 'hidden' : ''}>{renewIcon}</div>
-  // </>
+      <div class={hasDeviceData ? 'hidden' : ''}>{renewIcon}</div>
+    </>
+  );
 }

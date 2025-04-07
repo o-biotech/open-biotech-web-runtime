@@ -15,7 +15,7 @@ export function APIsForm(props: APIsFormProps) {
   return (
     <form
       method='post'
-      action='/api/o-biotech/eac/iot/data-apis'
+      action='/dashboard/api/o-biotech/eac/iot/data-apis'
       data-eac-bypass-base
       {...props}
       class={classSet(
