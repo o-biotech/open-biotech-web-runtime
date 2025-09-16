@@ -7,8 +7,8 @@ import { EaCOAuthProcessor, isEaCOAuthProcessor } from '@fathym/eac-applications
 import { loadOAuth2ClientConfig } from '@fathym/eac-applications/runtime/modules';
 import { oAuthRequest, UserOAuthConnection } from '@fathym/common/oauth';
 import { djwt } from '@fathym/common';
-import { EaCSourceConnectionDetails } from 'jsr:@fathym/eac-sources@0.0.14';
-import { loadOctokit } from 'jsr:@fathym/eac-sources@0.0.14/utils';
+import { EaCSourceConnectionDetails } from 'jsr:@fathym/eac-sources@0.0.24';
+import { loadOctokit } from 'jsr:@fathym/eac-sources@0.0.24/utils';
 import * as DenoKVOAuth from "jsr:@deno/kv-oauth@0.11.0";
 
 
