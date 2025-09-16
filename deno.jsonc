@@ -44,7 +44,7 @@
     "@fathym/eac-sources": "jsr:@fathym/eac-sources@0.0.24",
     "@fathym/ioc": "jsr:@fathym/ioc@0.0.14",
     "@fathym/msal": "jsr:@fathym/msal@0.0.54",
-    "@fathym/synaptic": "jsr:@fathym/synaptic@0.0.218",
+    "@fathym/synaptic": "jsr:@fathym/synaptic@0.0.290",
     "@lezer/highlight": "npm:@lezer/highlight@1.2.1",
     "@luca/cases": "jsr:@luca/cases@1.0.0",
     "@o-biotech/atomic-design-kit": "jsr:@o-biotech/atomic-design-kit@0.0.406",
