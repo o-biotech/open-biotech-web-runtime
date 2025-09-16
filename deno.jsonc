@@ -29,7 +29,7 @@
   "imports": {
     "@fathym/atomic": "jsr:@fathym/atomic@0.0.184",
     "@fathym/atomic-design-kit": "jsr:@fathym/atomic-design-kit@0.0.241",
-    "@fathym/atomic-icons": "jsr:@fathym/atomic-icons@0.0.84",
+    "@fathym/atomic-icons": "jsr:@fathym/atomic-icons@0.0.101",
     "@fathym/code-editor": "jsr:@fathym/code-editor@0.0.25",
     "@fathym/common": "jsr:@fathym/common@0.2.184",
     "@fathym/eac": "jsr:@fathym/eac@0.2.122",
