@@ -280,7 +280,7 @@ export default class OpenBiotechWebPlugin implements EaCRuntimePlugin {
               Config: {
                 MSALSignInOptions: {
                   Scopes: [
-                    'https://management.core.windows.net//user_impersonation',
+                    'https://management.azure.com/user_impersonation',
                   ],
                   RedirectURI: '/azure/oauth/callback',
                   SuccessRedirect: '/cloud',
