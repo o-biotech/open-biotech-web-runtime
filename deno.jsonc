@@ -36,7 +36,7 @@
     "@fathym/eac-applications": "jsr:@fathym/eac-applications@0.0.191",
     // "@fathym/eac-applications/runtime": "../../fathym-deno/eac-applications/src/runtime/_/.exports.ts",
     // "@fathym/eac-applications/runtime/processors": "../../fathym-deno/eac-applications/src/runtime/processors/.exports.ts",
-    "@fathym/eac-azure": "jsr:@fathym/eac-azure@0.0.109",
+    "@fathym/eac-azure": "jsr:@fathym/eac-azure@0.0.110",
     "@fathym/eac-deno-kv": "jsr:@fathym/eac-deno-kv@0.0.23",
     "@fathym/eac-identity": "jsr:@fathym/eac-identity@0.0.26",
     "@fathym/eac-iot": "jsr:@fathym/eac-iot@0.0.25",
